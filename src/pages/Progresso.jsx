@@ -1,10 +1,11 @@
 import { useProgress } from '../context/ProgressContext'
-import { MODULES } from '../data/modules'
+import { useModules } from '../context/ModulesContext'
 import './Dashboard.css'
 import './Progresso.css'
 
 export default function Progresso() {
   const { isTaskDone, isModuleDone, isModuleUnlocked } = useProgress()
+  const { modules: MODULES } = useModules()
 
   const totalTasks = MODULES.reduce((acc, m) => acc + m.tasks.length, 0)
   const doneTasks = MODULES.reduce(

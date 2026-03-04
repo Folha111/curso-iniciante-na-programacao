@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import { ModulesProvider } from './context/ModulesContext'
 import { ProgressProvider } from './context/ProgressContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import ProtectedAdminRoute from './components/ProtectedAdminRoute'
@@ -42,6 +43,7 @@ function Home() {
 export default function App() {
   return (
     <AuthProvider>
+      <ModulesProvider>
       <ProgressProvider>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -71,6 +73,7 @@ export default function App() {
           </Route>
         </Routes>
       </ProgressProvider>
+      </ModulesProvider>
     </AuthProvider>
   )
 }

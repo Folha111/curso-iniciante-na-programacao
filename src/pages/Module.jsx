@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { MODULES } from '../data/modules'
 import { useProgress } from '../context/ProgressContext'
+import { useModules } from '../context/ModulesContext'
+import { useAuth } from '../context/AuthContext'
 import QuizTask from '../components/tasks/QuizTask'
 import CodeTask from '../components/tasks/CodeTask'
 import './Module.css'
@@ -57,6 +58,8 @@ export default function Module() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { isTaskDone, isModuleDone, isModuleUnlocked } = useProgress()
+  const { modules: MODULES } = useModules()
+  const { user } = useAuth()
 
   const mod = MODULES.find((m) => m.id === id)
 
@@ -118,8 +121,8 @@ export default function Module() {
               <button
                 className="module-page__topnav-btn"
                 onClick={() => navigate(`/modulo/${nextMod.id}`)}
-                disabled={!allDone}
-                title={!allDone ? 'Conclua este módulo primeiro' : ''}
+                disabled={!(user?.role === 'admin' || allDone)}
+                title={!(user?.role === 'admin' || allDone) ? 'Conclua este módulo primeiro' : ''}
               >
                 {nextMod.title} →
               </button>

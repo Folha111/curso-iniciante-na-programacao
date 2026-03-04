@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback } from 'react'
-import { MODULES } from '../data/modules'
+import { useModules } from './ModulesContext'
+import { useAuth } from './AuthContext'
 
 const ProgressContext = createContext(null)
 
@@ -32,6 +33,8 @@ function saveToStorage(completed) {
 }
 
 export function ProgressProvider({ children }) {
+  const { modules } = useModules()
+  const { user } = useAuth()
   const [completed, setCompleted] = useState(loadFromStorage)
 
   const completeTask = useCallback((moduleId, taskId) => {
@@ -54,25 +57,31 @@ export function ProgressProvider({ children }) {
 
   const isModuleDone = useCallback(
     (moduleId) => {
-      const mod = MODULES.find((m) => m.id === moduleId)
+      const mod = modules.find((m) => m.id === moduleId)
       if (!mod) return false
       return mod.tasks.every((t) => completed[moduleId]?.has(t.id))
     },
-    [completed]
+    [completed, modules]
   )
 
   const isModuleUnlocked = useCallback(
     (moduleId) => {
-      const index = MODULES.findIndex((m) => m.id === moduleId)
+      if (user?.role === 'admin') return true
+      const index = modules.findIndex((m) => m.id === moduleId)
       if (index === 0) return true
-      const prev = MODULES[index - 1]
+      const prev = modules[index - 1]
       return isModuleDone(prev.id)
     },
-    [isModuleDone]
+    [isModuleDone, modules, user]
   )
 
+  function resetProgress() {
+    localStorage.removeItem('course_progress')
+    setCompleted({})
+  }
+
   return (
-    <ProgressContext.Provider value={{ completed, completeTask, isTaskDone, isModuleDone, isModuleUnlocked }}>
+    <ProgressContext.Provider value={{ completed, completeTask, isTaskDone, isModuleDone, isModuleUnlocked, resetProgress }}>
       {children}
     </ProgressContext.Provider>
   )

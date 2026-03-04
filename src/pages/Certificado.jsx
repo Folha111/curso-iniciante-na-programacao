@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-
 import { useProgress } from '../context/ProgressContext'
-import { MODULES } from '../data/modules'
+import { useModules } from '../context/ModulesContext'
 import './Certificado.css'
 
 export default function Certificado() {
   const navigate = useNavigate()
   const { user } = useAuth()
   const { isModuleDone } = useProgress()
+  const { modules: MODULES } = useModules()
 
-  const allDone = MODULES.every((m) => isModuleDone(m.id))
+  const allDone = user?.role === 'admin' || MODULES.every((m) => isModuleDone(m.id))
   const doneCount = MODULES.filter((m) => isModuleDone(m.id)).length
 
   return (

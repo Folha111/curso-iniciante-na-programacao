@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { useProgress } from '../context/ProgressContext'
-import { MODULES } from '../data/modules'
+import { useModules } from '../context/ModulesContext'
 import './Modulos.css'
 
 export default function Modulos() {
   const navigate = useNavigate()
   const { isTaskDone, isModuleDone, isModuleUnlocked } = useProgress()
+  const { modules: MODULES } = useModules()
 
   const totalTasks = MODULES.reduce((acc, m) => acc + m.tasks.length, 0)
   const doneTasks = MODULES.reduce(
