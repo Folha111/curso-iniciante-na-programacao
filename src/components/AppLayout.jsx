@@ -75,6 +75,16 @@ export default function AppLayout() {
                 Quiz
               </Link>
             </li>
+            {user?.role === 'admin' && (
+              <li className={`dash__nav-item ${location.pathname === '/admin' ? 'dash__nav-item--active' : ''}`}>
+                <Link to="/admin" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit', textDecoration: 'none', width: '100%' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
+                  </svg>
+                  Admin
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
 

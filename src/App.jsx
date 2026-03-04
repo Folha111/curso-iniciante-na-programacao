@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ProgressProvider } from './context/ProgressContext'
 import ProtectedRoute from './components/ProtectedRoute'
+import ProtectedAdminRoute from './components/ProtectedAdminRoute'
 import AppLayout from './components/AppLayout'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -19,6 +20,7 @@ import Quiz from './pages/Quiz'
 import Modulos from './pages/Modulos'
 import Progresso from './pages/Progresso'
 import Certificado from './pages/Certificado'
+import Admin from './pages/Admin'
 
 function Home() {
   return (
@@ -58,6 +60,14 @@ export default function App() {
             <Route path="/certificado" element={<Certificado />} />
             <Route path="/jogos" element={<Games />} />
             <Route path="/quiz" element={<Quiz />} />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedAdminRoute>
+                  <Admin />
+                </ProtectedAdminRoute>
+              }
+            />
           </Route>
         </Routes>
       </ProgressProvider>
