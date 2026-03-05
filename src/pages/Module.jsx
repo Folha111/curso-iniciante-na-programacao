@@ -4,6 +4,8 @@ import { useModules } from '../context/ModulesContext'
 import { useAuth } from '../context/AuthContext'
 import QuizTask from '../components/tasks/QuizTask'
 import CodeTask from '../components/tasks/CodeTask'
+import FillTask from '../components/tasks/FillTask'
+import TypeTask from '../components/tasks/TypeTask'
 import './Module.css'
 
 function renderInline(text) {
@@ -160,6 +162,10 @@ export default function Module() {
               isTaskVisible(i) ? (
                 task.type === 'quiz' ? (
                   <QuizTask key={task.id} task={task} moduleId={mod.id} index={i} />
+                ) : task.type === 'fill' ? (
+                  <FillTask key={task.id} task={task} moduleId={mod.id} index={i} />
+                ) : task.type === 'type' ? (
+                  <TypeTask key={task.id} task={task} moduleId={mod.id} index={i} />
                 ) : (
                   <CodeTask key={task.id} task={task} moduleId={mod.id} index={i} />
                 )
