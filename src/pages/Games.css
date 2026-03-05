@@ -817,3 +817,126 @@
     font-size: 18px;
   }
 }
+
+/* ─── QuizCronometrado ──────────────────────────────────────────────────────── */
+
+.quiz-cron-ready {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.quiz-cron-ready__icon {
+  font-size: 56px;
+}
+
+.quiz-cron-ready__title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-dark, #0f172a);
+}
+
+.quiz-cron-ready__rules {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--color-gray, #64748b);
+  text-align: left;
+}
+
+.quiz-cron-ready__rules li {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 16px;
+}
+
+.quiz-cron-timer-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.quiz-cron-timer-bar__fill {
+  height: 100%;
+  background: #22c55e;
+  border-radius: 4px;
+  transition: width 1s linear, background 0.3s;
+}
+
+.quiz-cron-timer-bar--danger .quiz-cron-timer-bar__fill {
+  background: #ef4444;
+}
+
+.quiz-cron-timer {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.quiz-cron-timer--danger {
+  color: #ef4444;
+  animation: quiz-cron-pulse 0.6s infinite alternate;
+}
+
+@keyframes quiz-cron-pulse {
+  from { opacity: 1; }
+  to { opacity: 0.6; }
+}
+
+.quiz-cron-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+@media (max-width: 500px) {
+  .quiz-cron-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quiz-cron-option {
+  background: rgba(255,255,255,0.85);
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  text-align: left;
+}
+
+.quiz-cron-option:hover:not(:disabled) {
+  border-color: #6366f1;
+  background: #eef2ff;
+}
+
+.quiz-cron-option--correct {
+  background: #f0fdf4;
+  border-color: #86efac;
+  color: #15803d;
+}
+
+.quiz-cron-option--wrong {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}

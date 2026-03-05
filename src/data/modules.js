@@ -272,6 +272,19 @@ A tag \`<img>\` não tem fechamento (é uma tag vazia).`,
         hint: 'É uma tag de apenas uma letra, abreviação de "anchor" (âncora).',
         explanation: 'A tag <a> (âncora) cria links. O atributo href define o destino. Ex: <a href="url">texto</a>',
       },
+      {
+        id: 'task-8',
+        type: 'bug',
+        title: 'Corrija o link quebrado',
+        description: 'A tag de fechamento do link abaixo está incorreta. Encontre e corrija o erro!',
+        buggyCode: '<a href="https://google.com">Clique aqui<a>',
+        validate: (doc) => {
+          const a = doc.querySelector('a')
+          return a !== null && a.getAttribute('href') !== null
+        },
+        successMessage: 'Correto! A tag </a> (com barra) fecha o link corretamente.',
+        hint: 'Tags de fechamento precisam de uma barra /. A tag de fechamento correta é </a>, não <a>.',
+      },
     ],
   },
   {
@@ -411,6 +424,18 @@ Sem essa estrutura básica, o navegador ainda tenta mostrar a página, mas pode 
         placeholder: 'Digite o nome da tag...',
         hint: 'Tudo que o usuário vê na tela fica dentro desta tag.',
         explanation: 'A tag <body> contém todo o conteúdo visível: textos, imagens, botões. O <head> fica com os metadados invisíveis.',
+      },
+      {
+        id: 'task-8',
+        type: 'bug',
+        title: 'Estrutura HTML incompleta',
+        description: 'O documento HTML abaixo está faltando a tag <code>&lt;body&gt;</code>. Adicione-a no lugar correto!',
+        buggyCode: '<!DOCTYPE html>\n<html lang="pt-BR">\n  <head>\n    <title>Minha Página</title>\n  </head>\n  <h1>Olá, Mundo!</h1>\n  <p>Bem-vindo ao meu site.</p>\n</html>',
+        validate: (doc) => {
+          return doc.querySelector('body') !== null && doc.querySelector('h1') !== null
+        },
+        successMessage: 'Correto! O <body> envolve todo o conteúdo visível da página.',
+        hint: 'O <body> deve estar logo após o </head>. Envolva o <h1> e o <p> dentro de <body>...</body>.',
       },
     ],
   },
@@ -582,6 +607,22 @@ div {
         placeholder: 'nome da propriedade',
         hint: 'É a propriedade mais básica do CSS para texto. Em inglês: cor.',
         explanation: 'A propriedade "color" define a cor do texto. Não confunda com "background-color" que muda o fundo.',
+      },
+      {
+        id: 'task-8',
+        type: 'bug',
+        title: 'CSS com ponto-e-vírgula faltando',
+        description: 'O CSS abaixo tem uma propriedade sem ponto-e-vírgula no final. Encontre e corrija!',
+        buggyCode: '<style>\n  p {\n    color: red\n    font-size: 18px;\n    font-weight: bold;\n  }\n</style>\n<p>Texto de teste</p>',
+        validate: (doc) => {
+          const p = doc.querySelector('p')
+          if (!p) return false
+          const style = doc.querySelector('style')
+          if (!style) return false
+          return style.textContent.includes('color: red;')
+        },
+        successMessage: 'Correto! Toda declaração CSS precisa terminar com ponto-e-vírgula.',
+        hint: 'Em CSS, cada propriedade deve terminar com ; (ponto-e-vírgula). Verifique a linha com "color: red".',
       },
     ],
   },
@@ -758,6 +799,20 @@ Valores comuns para \`justify-content\`:
         hint: 'É diferente de margin (que é espaço externo). Pense no estofamento de uma caixa.',
         explanation: 'padding é o espaço interno (dentro da borda). margin é o espaço externo (entre elementos). É a diferença entre "respiração interna" e "distância entre vizinhos".',
       },
+      {
+        id: 'task-8',
+        type: 'bug',
+        title: 'Flexbox com valor errado',
+        description: 'O CSS abaixo usa o valor errado para <code>display</code>. O valor <code>flexbox</code> não existe — o correto é <code>flex</code>. Corrija!',
+        buggyCode: '<style>\n  .container {\n    display: flexbox;\n    gap: 10px;\n  }\n</style>\n<div class="container">\n  <p>Item 1</p>\n  <p>Item 2</p>\n</div>',
+        validate: (doc) => {
+          const style = doc.querySelector('style')
+          if (!style) return false
+          return style.textContent.includes('display: flex') && !style.textContent.includes('display: flexbox')
+        },
+        successMessage: 'Correto! O valor correto é "flex", não "flexbox".',
+        hint: 'O valor da propriedade display para ativar o Flexbox é simplesmente "flex". "flexbox" não é um valor válido.',
+      },
     ],
   },
   {
@@ -911,6 +966,24 @@ console.log(typeof 42)        // "number"
         placeholder: 'método completo',
         hint: 'Ele começa com "console" seguido de ponto e o nome do método.',
         explanation: 'console.log() é a ferramenta mais usada para depuração. Abre as DevTools do navegador (F12) e você verá tudo que foi logado.',
+      },
+      {
+        id: 'task-8',
+        type: 'bug',
+        title: 'Declaração de variável com maiúscula',
+        description: 'O JavaScript abaixo usa <code>Let</code> com L maiúsculo — isso causa um erro! Corrija para que a variável seja declarada corretamente.',
+        buggyCode: '<script>\n  Let nome = "Maria";\n  document.write(nome);\n</script>',
+        validate: (doc) => {
+          const scripts = doc.querySelectorAll('script')
+          for (const s of scripts) {
+            if (s.textContent.includes('let nome') || s.textContent.includes('const nome') || s.textContent.includes('var nome')) {
+              return true
+            }
+          }
+          return false
+        },
+        successMessage: 'Correto! Em JavaScript as palavras-chave são case-sensitive: "let" (minúsculo) é o correto.',
+        hint: 'JavaScript é case-sensitive. "Let" com L maiúsculo não é reconhecido. Use "let" em minúsculo.',
       },
     ],
   },
@@ -1077,6 +1150,24 @@ document.getElementById('resultado').textContent = classificar(8)
         hint: 'São dois caracteres iguais. É o operador mais restritivo.',
         explanation: '&& é o operador lógico "E". Retorna true apenas se AMBAS as condições forem verdadeiras. O operador "OU" é ||.',
       },
+      {
+        id: 'task-8',
+        type: 'bug',
+        title: 'Comparação com atribuição',
+        description: 'O código abaixo usa <code>=</code> (atribuição) em vez de <code>===</code> (comparação) dentro do if. Corrija!',
+        buggyCode: '<script>\n  let idade = 18;\n  if (idade = 18) {\n    document.write("Maior de idade");\n  } else {\n    document.write("Menor de idade");\n  }\n</script>',
+        validate: (doc) => {
+          const scripts = doc.querySelectorAll('script')
+          for (const s of scripts) {
+            if (s.textContent.includes('===') || s.textContent.includes('==')) {
+              return true
+            }
+          }
+          return false
+        },
+        successMessage: 'Correto! Use === para comparar valores. = é apenas para atribuição.',
+        hint: 'Dentro de condições (if), use === para comparar. Um único = é atribuição e sempre retorna verdadeiro.',
+      },
     ],
   },
   {
@@ -1238,6 +1329,24 @@ O próximo passo é praticar cada vez mais. Todo grande desenvolvedor começou e
         placeholder: 'propriedade',
         hint: 'É diferente de .textContent. Os inputs têm uma propriedade específica para o valor digitado.',
         explanation: '.value é a propriedade que retorna o conteúdo digitado em inputs e textareas. Para outros elementos (p, h1, div), usa-se .textContent ou .innerHTML.',
+      },
+      {
+        id: 'task-7',
+        type: 'bug',
+        title: 'addEventListener com typo',
+        description: 'O código abaixo tem um erro de digitação no método <code>addEventListener</code>. Encontre e corrija!',
+        buggyCode: '<button id="btn">Clique aqui</button>\n<p id="msg"></p>\n<script>\n  const btn = document.getElementById("btn");\n  btn.addEventListner("click", function() {\n    document.getElementById("msg").textContent = "Clicado!";\n  });\n</script>',
+        validate: (doc) => {
+          const scripts = doc.querySelectorAll('script')
+          for (const s of scripts) {
+            if (s.textContent.includes('addEventListener')) {
+              return true
+            }
+          }
+          return false
+        },
+        successMessage: 'Correto! O método correto é addEventListener (com "Event" completo).',
+        hint: 'O método está escrito como "addEventListner" — falta a letra "e" em "Listener". O correto é addEventListener.',
       },
     ],
   },

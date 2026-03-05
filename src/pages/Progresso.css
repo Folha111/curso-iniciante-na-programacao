@@ -227,3 +227,17 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 480px) {
+  .prog {
+    padding: var(--space-5) var(--space-3);
+  }
+
+  .prog__title {
+    font-size: var(--text-xl);
+  }
+
+  .prog__module {
+    padding: var(--space-4) var(--space-4);
+  }
+}

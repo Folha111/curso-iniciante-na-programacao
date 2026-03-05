@@ -1,0 +1,214 @@
+.bug-task {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid #fca5a5;
+  border-radius: 14px;
+  padding: 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.bug-task--fixed {
+  border-color: #bbf7d0;
+}
+
+.bug-task__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.bug-task__num {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-gray-light, #94a3b8);
+}
+
+.bug-task__badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ef4444;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 2px 8px;
+  letter-spacing: 0.05em;
+}
+
+.bug-task__done-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+.bug-task__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-dark, #0f172a);
+  margin-bottom: 6px;
+}
+
+.bug-task__desc {
+  font-size: 14px;
+  color: var(--color-gray, #64748b);
+  margin-bottom: 12px;
+  line-height: 1.65;
+}
+
+.bug-task__desc code {
+  background: var(--color-bg-alt, #f1f5f9);
+  border: 1px solid var(--color-border, #e2e8f0);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-indigo, #6366f1);
+}
+
+.bug-task__warning {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c2410c;
+  margin-bottom: 14px;
+}
+
+.bug-task__editor-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+  height: 220px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--color-border, #e2e8f0);
+}
+
+@media (max-width: 700px) {
+  .bug-task__editor-area {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+.bug-task__pane {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bug-task__pane-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray-light, #94a3b8);
+  background: var(--color-bg, #f8fafc);
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--color-border, #e2e8f0);
+}
+
+.bug-task__pane:first-child .bug-task__pane-label {
+  border-right: 1px solid var(--color-border, #e2e8f0);
+}
+
+.bug-task__textarea {
+  flex: 1;
+  background: #1a0a0a;
+  border: none;
+  color: #fca5a5;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.65;
+  padding: 14px;
+  resize: none;
+  outline: none;
+  tab-size: 2;
+}
+
+.bug-task--fixed .bug-task__textarea {
+  background: var(--color-dark, #0f172a);
+  color: #e2e8f0;
+}
+
+.bug-task__pane:first-child {
+  border-right: 1px solid var(--color-border, #e2e8f0);
+}
+
+.bug-task__preview {
+  flex: 1;
+  border: none;
+  background: #fff;
+  min-height: 160px;
+}
+
+.bug-task__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.bug-task__btn {
+  font-size: 13px;
+  padding: 8px 16px;
+}
+
+.bug-task__hint-btn {
+  background: transparent;
+  border: 1.5px solid var(--color-border, #e2e8f0);
+  color: var(--color-gray, #64748b);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.bug-task__hint-btn:hover {
+  border-color: #94a3b8;
+  color: var(--color-dark, #0f172a);
+}
+
+.bug-task__hint {
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #92400e;
+  margin-bottom: 10px;
+  line-height: 1.65;
+}
+
+.bug-task__feedback {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bug-task__feedback--success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+.bug-task__feedback--error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+}

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import './Games.css'
 
@@ -865,6 +865,176 @@ function AcharOErro({ onBack }) {
   )
 }
 
+// ─── QuizCronometrado ─────────────────────────────────────────────────────────
+
+const TIMED_QUIZ_QUESTIONS = [
+  { question: 'Qual tag cria um parágrafo?', options: ['<div>', '<p>', '<span>', '<text>'], correct: 1 },
+  { question: 'Qual atributo define o destino de um link?', options: ['src', 'alt', 'href', 'id'], correct: 2 },
+  { question: 'Qual tag cria um título principal (maior)?', options: ['<h6>', '<title>', '<h1>', '<header>'], correct: 2 },
+  { question: 'Qual tag cria uma lista NÃO ordenada?', options: ['<ol>', '<ul>', '<li>', '<list>'], correct: 1 },
+  { question: 'Qual propriedade CSS muda a cor do texto?', options: ['background', 'font-color', 'text-color', 'color'], correct: 3 },
+  { question: 'Qual valor de display ativa o Flexbox?', options: ['block', 'inline', 'flex', 'grid-flex'], correct: 2 },
+  { question: 'Qual propriedade CSS cria espaço INTERNO?', options: ['margin', 'gap', 'padding', 'border'], correct: 2 },
+  { question: 'Qual propriedade CSS cria espaço EXTERNO?', options: ['padding', 'margin', 'gap', 'offset'], correct: 1 },
+  { question: 'Em JavaScript, qual palavra declara uma variável que pode mudar?', options: ['const', 'var', 'let', 'def'], correct: 2 },
+  { question: 'Qual operador verifica igualdade ESTRITA em JS?', options: ['=', '==', '===', '!=='], correct: 2 },
+  { question: 'Como se escreve um comentário em HTML?', options: ['// texto', '/* texto */', '<!-- texto -->', '# texto'], correct: 2 },
+  { question: 'Qual tag insere uma imagem?', options: ['<image>', '<img>', '<pic>', '<src>'], correct: 1 },
+  { question: 'Qual propriedade CSS controla o tamanho da fonte?', options: ['text-size', 'font-size', 'font', 'size'], correct: 1 },
+  { question: 'Como se declara uma constante em JavaScript?', options: ['let', 'var', 'const', 'fix'], correct: 2 },
+  { question: 'Qual método JS seleciona um elemento pelo ID?', options: ['querySelector', 'getElement', 'getElementById', 'findById'], correct: 2 },
+  { question: 'Qual tag HTML cria um botão clicável?', options: ['<click>', '<input>', '<btn>', '<button>'], correct: 3 },
+  { question: 'Qual propriedade CSS arredonda bordas?', options: ['border-style', 'border-radius', 'corner-radius', 'round'], correct: 1 },
+  { question: 'O que faz o console.log() em JavaScript?', options: ['Exibe na tela', 'Salva um arquivo', 'Imprime no console', 'Cria um elemento'], correct: 2 },
+  { question: 'Qual tag semântica representa o rodapé da página?', options: ['<bottom>', '<footer>', '<end>', '<base>'], correct: 1 },
+  { question: 'Qual evento JS é disparado ao clicar em um elemento?', options: ['hover', 'focus', 'click', 'submit'], correct: 2 },
+]
+
+function QuizCronometrado({ onBack }) {
+  const [phase, setPhase] = useState('ready')
+  const [timeLeft, setTimeLeft] = useState(60)
+  const [currentQ, setCurrentQ] = useState(0)
+  const [score, setScore] = useState(0)
+  const [selected, setSelected] = useState(null)
+  const [answered, setAnswered] = useState(false)
+  const questions = useMemo(() => shuffle(TIMED_QUIZ_QUESTIONS), [])
+  const intervalRef = useRef(null)
+
+  useEffect(() => {
+    if (phase !== 'playing') return
+    intervalRef.current = setInterval(() => {
+      setTimeLeft((t) => {
+        if (t <= 1) {
+          clearInterval(intervalRef.current)
+          setPhase('done')
+          return 0
+        }
+        return t - 1
+      })
+    }, 1000)
+    return () => clearInterval(intervalRef.current)
+  }, [phase])
+
+  function startGame() {
+    setPhase('playing')
+    setTimeLeft(60)
+    setCurrentQ(0)
+    setScore(0)
+    setSelected(null)
+    setAnswered(false)
+  }
+
+  function handleSelect(optIdx) {
+    if (answered) return
+    setSelected(optIdx)
+    setAnswered(true)
+    const correct = optIdx === questions[currentQ].correct
+    if (correct) setScore((s) => s + 1)
+    setTimeout(() => {
+      const next = currentQ + 1
+      if (next >= questions.length) {
+        clearInterval(intervalRef.current)
+        setPhase('done')
+      } else {
+        setCurrentQ(next)
+        setSelected(null)
+        setAnswered(false)
+      }
+    }, 800)
+  }
+
+  const mins = String(Math.floor(timeLeft / 60)).padStart(2, '0')
+  const secs = String(timeLeft % 60).padStart(2, '0')
+  const timePct = (timeLeft / 60) * 100
+  const timerDanger = timeLeft < 15
+
+  if (phase === 'ready') {
+    return (
+      <div className="game-play">
+        <div className="game-play__topbar">
+          <button className="game-play__back" onClick={onBack}>← Sair</button>
+        </div>
+        <div className="quiz-cron-ready">
+          <div className="quiz-cron-ready__icon">⏱</div>
+          <h2 className="quiz-cron-ready__title">Quiz Relâmpago</h2>
+          <ul className="quiz-cron-ready__rules">
+            <li>⏱ Você tem <strong>60 segundos</strong></li>
+            <li>📋 {questions.length} perguntas de HTML, CSS e JS</li>
+            <li>✅ Responda o máximo que puder</li>
+            <li>⚡ Quanto mais rápido, mais questões!</li>
+          </ul>
+          <button className="btn btn--primary" style={{ fontSize: '15px', padding: '12px 32px' }} onClick={startGame}>
+            Iniciar desafio →
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (phase === 'done') {
+    const pct = Math.round((score / questions.length) * 100)
+    const answeredCount = currentQ + (answered ? 1 : 0)
+    return (
+      <div className="game-result">
+        <div className="game-result__emoji">{pct >= 80 ? '⚡' : pct >= 50 ? '⏱' : '📚'}</div>
+        <h2 className="game-result__title">Tempo esgotado!</h2>
+        <p className="game-result__score">{score} de {answeredCount} perguntas</p>
+        <p className="game-result__msg">
+          {pct >= 80 ? 'Incrível! Você é muito rápido e preciso!' : pct >= 50 ? 'Bom desempenho! Continue praticando.' : 'Continue estudando — velocidade vem com a prática!'}
+        </p>
+        <div className="game-result__actions">
+          <button className="btn btn--primary" onClick={startGame}>Jogar novamente</button>
+          <button className="btn btn--ghost" onClick={onBack}>Voltar</button>
+        </div>
+      </div>
+    )
+  }
+
+  const q = questions[currentQ]
+
+  return (
+    <div className="game-play">
+      <div className="game-play__topbar">
+        <button className="game-play__back" onClick={onBack}>← Sair</button>
+        <span className="game-play__score-label">Acertos: <strong>{score}</strong></span>
+      </div>
+
+      <div className={`quiz-cron-timer-bar ${timerDanger ? 'quiz-cron-timer-bar--danger' : ''}`}>
+        <div className="quiz-cron-timer-bar__fill" style={{ width: `${timePct}%` }} />
+      </div>
+
+      <div className={`quiz-cron-timer ${timerDanger ? 'quiz-cron-timer--danger' : ''}`}>
+        {mins}:{secs}
+      </div>
+
+      <p className="game-play__count">{currentQ + 1} / {questions.length}</p>
+      <p className="game-tag__hint" style={{ fontSize: '16px', fontWeight: 600, color: '#0f172a', marginBottom: '16px' }}>
+        {q.question}
+      </p>
+
+      <div className="quiz-cron-options">
+        {q.options.map((opt, i) => {
+          let cls = 'quiz-cron-option'
+          if (answered) {
+            if (i === q.correct) cls += ' quiz-cron-option--correct'
+            else if (i === selected) cls += ' quiz-cron-option--wrong'
+          }
+          return (
+            <button
+              key={i}
+              className={cls}
+              onClick={() => handleSelect(i)}
+              disabled={answered}
+            >
+              {opt}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 // ─── Hub ─────────────────────────────────────────────────────────────────────
 
 const GAME_LIST = [
@@ -872,6 +1042,7 @@ const GAME_LIST = [
   { id: 'scramble', title: 'Palavra Embaralhada', description: 'As letras de uma tag estão fora de ordem. Você consegue reorganizá-las?', icon: '🔤', color: '#06b6d4', component: PalavraEmbaralhada },
   { id: 'typing', title: 'Digitação de Código', description: 'Digite trechos de HTML com precisão. Precisa de 90% de acerto para passar!', icon: '⌨️', color: '#f43f5e', component: DigitacaoVeloz },
   { id: 'bug', title: 'Achar o Erro', description: 'Um trecho de código tem um bug. Clique na linha errada antes que ela te engane!', icon: '🐛', color: '#f59e0b', component: AcharOErro },
+  { id: 'quiz-cronometrado', title: 'Quiz Relâmpago', description: '60 segundos, quantas perguntas de HTML, CSS e JS você consegue acertar?', icon: '⏱', color: '#f59e0b', component: QuizCronometrado },
 ]
 
 export default function Games() {
