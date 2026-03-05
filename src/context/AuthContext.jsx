@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useMemo, useCallback } from 'react'
 
 const USERS = [
   { email: 'bernardosch.borba@hotmail.com', password: '123456', name: 'Bernardo', role: 'admin' },
@@ -31,9 +31,12 @@ export function AuthProvider({ children }) {
 
   const [usersData, setUsersData] = useState(loadUsersFromStorage)
 
-  const users = usersData.map(({ password: _password, ...rest }) => rest)
+  const users = useMemo(
+    () => usersData.map(({ password: _password, ...rest }) => rest),
+    [usersData]
+  )
 
-  function login(email, password) {
+  const login = useCallback((email, password) => {
     const currentUsers = loadUsersFromStorage()
     const found = currentUsers.find((u) => u.email === email && u.password === password)
     if (found) {
@@ -43,45 +46,52 @@ export function AuthProvider({ children }) {
       return true
     }
     return false
-  }
+  }, [])
 
-  function logout() {
+  const logout = useCallback(() => {
     localStorage.removeItem('user')
     setUser(null)
-  }
+  }, [])
 
-  function addUser(userData) {
+  const addUser = useCallback((userData) => {
     setUsersData((prev) => {
       const next = [...prev, userData]
       localStorage.setItem('users_data', JSON.stringify(next))
       return next
     })
-  }
+  }, [])
 
-  function removeUser(email) {
+  const removeUser = useCallback((email) => {
     setUsersData((prev) => {
       const next = prev.filter((u) => u.email !== email)
       localStorage.setItem('users_data', JSON.stringify(next))
       return next
     })
-  }
+  }, [])
 
-  function updateUserRole(email, role) {
+  const updateUserRole = useCallback((email, role) => {
     setUsersData((prev) => {
       const next = prev.map((u) => (u.email === email ? { ...u, role } : u))
       localStorage.setItem('users_data', JSON.stringify(next))
-      // Also update current session if it's the logged-in user
-      if (user && user.email === email) {
-        const updatedUser = { ...user, role }
-        localStorage.setItem('user', JSON.stringify(updatedUser))
-        setUser(updatedUser)
-      }
       return next
     })
-  }
+    setUser((prev) => {
+      if (prev && prev.email === email) {
+        const updated = { ...prev, role }
+        localStorage.setItem('user', JSON.stringify(updated))
+        return updated
+      }
+      return prev
+    })
+  }, [])
+
+  const value = useMemo(
+    () => ({ user, login, logout, users, addUser, removeUser, updateUserRole }),
+    [user, login, logout, users, addUser, removeUser, updateUserRole]
+  )
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, users, addUser, removeUser, updateUserRole }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   )

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useMemo } from 'react'
+import { createContext, useContext, useState, useMemo, useCallback } from 'react'
 import { MODULES as STATIC_MODULES } from '../data/modules'
 
 const ModulesContext = createContext(null)
@@ -49,73 +49,69 @@ export function ModulesProvider({ children }) {
     return [...staticMerged, ...newModules]
   }, [overrides, extraTasks, newModules])
 
-  function updateModuleMeta(moduleId, fields) {
+  const updateModuleMeta = useCallback((moduleId, fields) => {
     setOverrides((prev) => {
       const next = { ...prev, [moduleId]: { ...(prev[moduleId] || {}), ...fields } }
       localStorage.setItem('modules_overrides', JSON.stringify(next))
       return next
     })
-  }
+  }, [])
 
-  function addTaskToModule(moduleId, task) {
+  const addTaskToModule = useCallback((moduleId, task) => {
     setExtraTasks((prev) => {
       const existing = prev[moduleId] || []
       const next = { ...prev, [moduleId]: [...existing, task] }
       localStorage.setItem('modules_extra_tasks', JSON.stringify(next))
       return next
     })
-  }
+  }, [])
 
-  function removeExtraTask(moduleId, taskId) {
+  const removeExtraTask = useCallback((moduleId, taskId) => {
     setExtraTasks((prev) => {
       const existing = prev[moduleId] || []
       const next = { ...prev, [moduleId]: existing.filter((t) => t.id !== taskId) }
       localStorage.setItem('modules_extra_tasks', JSON.stringify(next))
       return next
     })
-  }
+  }, [])
 
-  function addModule(moduleData) {
+  const addModule = useCallback((moduleData) => {
     setNewModules((prev) => {
       const next = [...prev, moduleData]
       localStorage.setItem('modules_new', JSON.stringify(next))
       return next
     })
-  }
+  }, [])
 
-  function removeModule(moduleId) {
+  const removeModule = useCallback((moduleId) => {
     setNewModules((prev) => {
       const next = prev.filter((m) => m.id !== moduleId)
       localStorage.setItem('modules_new', JSON.stringify(next))
       return next
     })
-  }
+  }, [])
 
-  function resetModules() {
+  const resetModules = useCallback(() => {
     localStorage.removeItem('modules_overrides')
     localStorage.removeItem('modules_extra_tasks')
     localStorage.removeItem('modules_new')
     setOverrides({})
     setExtraTasks({})
     setNewModules([])
-  }
+  }, [])
 
-  const isStaticModule = (moduleId) => STATIC_MODULES.some((m) => m.id === moduleId)
+  const isStaticModule = useCallback(
+    (moduleId) => STATIC_MODULES.some((m) => m.id === moduleId),
+    []
+  )
+
+  const value = useMemo(
+    () => ({ modules, updateModuleMeta, addTaskToModule, removeExtraTask, addModule, removeModule, resetModules, isStaticModule, extraTasks }),
+    [modules, updateModuleMeta, addTaskToModule, removeExtraTask, addModule, removeModule, resetModules, isStaticModule, extraTasks]
+  )
 
   return (
-    <ModulesContext.Provider
-      value={{
-        modules,
-        updateModuleMeta,
-        addTaskToModule,
-        removeExtraTask,
-        addModule,
-        removeModule,
-        resetModules,
-        isStaticModule,
-        extraTasks,
-      }}
-    >
+    <ModulesContext.Provider value={value}>
       {children}
     </ModulesContext.Provider>
   )
