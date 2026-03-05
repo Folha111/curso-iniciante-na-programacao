@@ -25,6 +25,12 @@ export default function Navbar() {
           <li><a href="#curriculum" onClick={() => setMenuOpen(false)}>Conteúdo</a></li>
           <li><a href="#for-whom" onClick={() => setMenuOpen(false)}>Para quem</a></li>
           <li><a href="#testimonials" onClick={() => setMenuOpen(false)}>Depoimentos</a></li>
+          <li className="navbar__links-mobile-cta">
+            <Link to="/login" onClick={() => setMenuOpen(false)} className="navbar__mobile-login">Entrar</Link>
+            <a href="#cta" onClick={() => setMenuOpen(false)} className="btn btn--primary navbar__mobile-signup">
+              Começar grátis
+            </a>
+          </li>
         </ul>
 
         <div className="navbar__actions">

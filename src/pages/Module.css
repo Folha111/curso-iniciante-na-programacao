@@ -359,6 +359,70 @@
   color: #16a34a;
 }
 
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .module-page {
+    padding: 24px 12px 80px;
+  }
+
+  .module-page__topnav {
+    margin-bottom: 20px;
+  }
+
+  .module-page__topnav-modules {
+    flex-wrap: wrap;
+  }
+
+  .module-page__topnav-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .module-page__header {
+    padding: 24px 20px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+  }
+
+  .module-page__header-deco-num {
+    font-size: 90px;
+  }
+
+  .module-page__title {
+    font-size: 22px;
+  }
+
+  .module-page__desc {
+    font-size: 14px;
+  }
+
+  .module-page__content {
+    padding: 22px 18px;
+    border-radius: 12px;
+  }
+
+  .module-content__h2 {
+    font-size: 17px;
+  }
+
+  .module-content__p {
+    font-size: 14px;
+  }
+
+  .module-content__pre {
+    padding: 14px 16px;
+    border-radius: 8px;
+  }
+
+  .module-content__pre code {
+    font-size: 12px;
+  }
+
+  .module-page__task-locked {
+    padding: 14px 16px;
+  }
+}
+
 /* ---- Error ---- */
 .module-error {
   min-height: 100vh;

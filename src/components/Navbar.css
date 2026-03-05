@@ -143,6 +143,11 @@
 .navbar__burger--open span:nth-child(2) { opacity: 0; }
 .navbar__burger--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+/* Mobile CTA row inside links — hidden on desktop */
+.navbar__links-mobile-cta {
+  display: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .navbar__burger {
@@ -162,6 +167,9 @@
     gap: 0;
     border-bottom: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
+    max-height: calc(100vh - var(--navbar-height));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .navbar__links--open {
@@ -180,5 +188,39 @@
 
   .navbar__actions {
     display: none;
+  }
+
+  /* Show login + CTA inside the mobile dropdown */
+  .navbar__links-mobile-cta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4) 0 var(--space-2);
+    border-bottom: none !important;
+  }
+
+  .navbar__mobile-login {
+    display: block;
+    padding: var(--space-3) var(--space-4);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius);
+    text-align: center;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-gray);
+    text-decoration: none;
+  }
+
+  .navbar__mobile-login:hover {
+    color: var(--color-dark);
+    border-color: var(--color-gray-light);
+  }
+
+  .navbar__mobile-signup {
+    display: block;
+    text-align: center;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm);
+    text-decoration: none;
   }
 }
