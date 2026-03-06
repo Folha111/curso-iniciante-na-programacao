@@ -7,7 +7,7 @@ import './Dashboard.css'
 export default function Dashboard() {
   const { user } = useAuth()
   const navigate = useNavigate()
-  const { isTaskDone, isModuleDone, isModuleUnlocked, xp, streak, badges, reviewQueue } = useProgress()
+  const { isTaskDone, isModuleDone, isModuleUnlocked, xp, streak, badges, reviewQueue, weeklyXp, weeklyGoal } = useProgress()
   const { modules: MODULES } = useModules()
 
   const totalTasks = MODULES.reduce((acc, m) => acc + m.tasks.length, 0)
@@ -20,6 +20,7 @@ export default function Dashboard() {
 
   const nextModule = MODULES.find((m) => isModuleUnlocked(m.id) && !isModuleDone(m.id))
   const unlockedBadges = badges.filter((b) => b.unlocked)
+  const weekPct = weeklyGoal > 0 ? Math.min(100, Math.round((weeklyXp / weeklyGoal) * 100)) : 0
 
   return (
     <main className="dash__main">
@@ -85,10 +86,34 @@ export default function Dashboard() {
         </section>
       )}
 
+      {/* Weekly Goal */}
+      <section className="dash__weekly">
+        <div className="dash__weekly-header">
+          <h2 className="dash__section-title">Meta semanal</h2>
+          <Link to="/perfil" className="dash__badges-link">Configurar →</Link>
+        </div>
+        <div className="dash__weekly-card">
+          <div className="dash__weekly-info">
+            <span className="dash__weekly-icon">🎯</span>
+            <div>
+              <p className="dash__weekly-label">{weeklyXp} / {weeklyGoal} XP esta semana</p>
+              <p className="dash__weekly-sub">{weekPct >= 100 ? 'Meta atingida!' : `Faltam ${weeklyGoal - weeklyXp} XP para sua meta`}</p>
+            </div>
+            <span className="dash__weekly-pct">{weekPct}%</span>
+          </div>
+          <div className="dash__weekly-bar">
+            <div className="dash__weekly-fill" style={{ width: `${weekPct}%` }} />
+          </div>
+        </div>
+      </section>
+
       {/* Review queue */}
       {reviewQueue.length > 0 && (
         <section className="dash__review">
-          <h2 className="dash__section-title">Fila de Revisão</h2>
+          <div className="dash__badges-header">
+            <h2 className="dash__section-title">Fila de Revisão</h2>
+            <Link to="/revisao" className="dash__badges-link">Iniciar sessão →</Link>
+          </div>
           <p className="dash__review-sub">Tarefas onde você errou — vale a pena rever:</p>
           <div className="dash__review-list">
             {reviewQueue.slice(0, 3).map((item) => (

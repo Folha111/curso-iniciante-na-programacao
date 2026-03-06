@@ -795,6 +795,42 @@
   line-height: 1.6;
 }
 
+/* ---- Completar Tag ---- */
+.completar-code {
+  background: #0f172a;
+  border-radius: 12px;
+  padding: 20px 24px;
+  overflow-x: auto;
+}
+
+.completar-code__text {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: #94a3b8;
+  white-space: pre;
+  line-height: 1.7;
+}
+
+.completar-code__blank {
+  display: inline-block;
+  background: rgba(99, 102, 241, 0.3);
+  border: 2px dashed #6366f1;
+  border-radius: 6px;
+  color: #a5b4fc;
+  padding: 0 10px;
+  min-width: 48px;
+  text-align: center;
+}
+
+.completar-hint {
+  font-size: 13px;
+  color: #64748b;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 600px) {
   .games-grid {

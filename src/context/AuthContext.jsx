@@ -85,9 +85,27 @@ export function AuthProvider({ children }) {
     })
   }, [])
 
+  const updateUser = useCallback((updates) => {
+    setUsersData((prev) => {
+      const next = prev.map((u) =>
+        u.email === JSON.parse(localStorage.getItem('user') || '{}').email
+          ? { ...u, ...updates }
+          : u
+      )
+      localStorage.setItem('users_data', JSON.stringify(next))
+      return next
+    })
+    setUser((prev) => {
+      if (!prev) return prev
+      const updated = { ...prev, ...updates }
+      localStorage.setItem('user', JSON.stringify(updated))
+      return updated
+    })
+  }, [])
+
   const value = useMemo(
-    () => ({ user, login, logout, users, addUser, removeUser, updateUserRole }),
-    [user, login, logout, users, addUser, removeUser, updateUserRole]
+    () => ({ user, login, logout, users, addUser, removeUser, updateUserRole, updateUser }),
+    [user, login, logout, users, addUser, removeUser, updateUserRole, updateUser]
   )
 
   return (

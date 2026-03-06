@@ -1035,6 +1035,241 @@ function QuizCronometrado({ onBack }) {
   )
 }
 
+// ─── CompletarTag ─────────────────────────────────────────────────────────────
+
+const COMPLETAR_DESAFIOS = [
+  { template: '<___ href="#">Link</a>',              answer: 'a',          hint: 'Tag de âncora/link' },
+  { template: '<h___>Título Principal</h1>',          answer: '1',          hint: 'Maior nível de título' },
+  { template: '<___>Parágrafo de texto</p>',          answer: 'p',          hint: 'Tag de parágrafo' },
+  { template: '<img ___ ="foto.jpg" alt="Foto">',     answer: 'src',        hint: 'Atributo de source/fonte' },
+  { template: '<___ type="button">Enviar</button>',   answer: 'button',     hint: 'Elemento clicável interativo' },
+  { template: '<ul>\n  <___>Item</li>\n</ul>',        answer: 'li',         hint: 'Item de lista' },
+  { template: '.___ { color: red; }',                 answer: 'classe',     hint: 'Seletor de classe CSS começa com ponto' },
+  { template: 'h1 { ___: blue; }',                    answer: 'color',      hint: 'Propriedade de cor do texto' },
+  { template: 'p { font-___: 18px; }',                answer: 'size',       hint: 'Tamanho da fonte' },
+  { template: '.box { ___: 16px; }',                  answer: 'padding',    hint: 'Espaço interno' },
+  { template: '.box { ___: 24px; }',                  answer: 'margin',     hint: 'Espaço externo' },
+  { template: '.flex { display: ___; }',              answer: 'flex',       hint: 'Valor para layout flexível' },
+  { template: 'let ___ = "Maria"',                    answer: 'nome',       hint: 'Nome de variável (qualquer nome válido)' },
+  { template: '___ PI = 3.14',                        answer: 'const',      hint: 'Palavra-chave para constante' },
+  { template: 'if (x ___ 10) { ... }',               answer: '===',        hint: 'Operador de igualdade estrita' },
+  { template: 'console.___(valor)',                   answer: 'log',        hint: 'Método para imprimir no console' },
+]
+
+function CompletarTag({ onBack }) {
+  const questions = useMemo(() => shuffle(COMPLETAR_DESAFIOS).slice(0, 10), [])
+  const [current, setCurrent] = useState(0)
+  const [input, setInput] = useState('')
+  const [feedback, setFeedback] = useState(null)
+  const [score, setScore] = useState(0)
+  const [done, setDone] = useState(false)
+  const [showHint, setShowHint] = useState(false)
+
+  const q = questions[current]
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    if (!input.trim() || feedback) return
+    const correct = input.trim().toLowerCase() === q.answer.toLowerCase()
+    setFeedback(correct ? 'correct' : 'wrong')
+    if (correct) setScore((s) => s + 1)
+    setTimeout(() => {
+      setFeedback(null)
+      setInput('')
+      setShowHint(false)
+      if (current + 1 >= questions.length) setDone(true)
+      else setCurrent((c) => c + 1)
+    }, 1000)
+  }
+
+  function restart() {
+    setCurrent(0); setInput(''); setFeedback(null); setScore(0); setDone(false); setShowHint(false)
+  }
+
+  if (done) {
+    const pct = Math.round((score / questions.length) * 100)
+    return (
+      <div className="game-result">
+        <div className="game-result__emoji">{pct >= 80 ? '✏️' : pct >= 50 ? '📝' : '📖'}</div>
+        <h2 className="game-result__title">Resultado</h2>
+        <p className="game-result__score">{score} / {questions.length}</p>
+        <p className="game-result__msg">
+          {pct >= 80 ? 'Excelente! Você domina a sintaxe!' : pct >= 50 ? 'Bom! Continue praticando.' : 'Revise os fundamentos e tente de novo!'}
+        </p>
+        <div className="game-result__actions">
+          <button className="btn btn--primary" onClick={restart}>Jogar de novo</button>
+          <button className="btn btn--ghost" onClick={onBack}>Voltar</button>
+        </div>
+      </div>
+    )
+  }
+
+  const parts = q.template.split('___')
+
+  return (
+    <div className="game-play">
+      <div className="game-play__topbar">
+        <button className="game-play__back" onClick={onBack}>← Sair</button>
+        <span className="game-play__score-label">Pontos: <strong>{score}</strong></span>
+      </div>
+      <div className="game-play__progress-bar">
+        <div className="game-play__progress-fill" style={{ width: `${(current / questions.length) * 100}%` }} />
+      </div>
+      <p className="game-play__count">{current + 1} / {questions.length}</p>
+
+      <p className="game-play__question">Complete o código abaixo:</p>
+
+      <div className="completar-code">
+        <code className="completar-code__text">
+          {parts[0]}
+          <span className="completar-code__blank">___</span>
+          {parts[1] || ''}
+        </code>
+      </div>
+
+      {showHint && (
+        <p className="completar-hint">💡 {q.hint}</p>
+      )}
+
+      <form className="scramble-form" onSubmit={handleSubmit}>
+        <input
+          className={`scramble-input ${feedback === 'correct' ? 'scramble-input--correct' : feedback === 'wrong' ? 'scramble-input--wrong' : ''}`}
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Digite o que falta..."
+          autoFocus
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          disabled={!!feedback}
+        />
+        <div className="scramble-actions">
+          <button type="submit" className="btn btn--primary" disabled={!input.trim() || !!feedback}>
+            Confirmar
+          </button>
+          <button type="button" className="btn btn--ghost" onClick={() => setShowHint(true)} disabled={showHint || !!feedback}>
+            Dica
+          </button>
+        </div>
+      </form>
+      {feedback && (
+        <p className={`vom-feedback ${feedback === 'correct' ? 'vom-feedback--right' : 'vom-feedback--wrong'}`}>
+          {feedback === 'correct' ? '✓ Correto!' : `✗ Era: ${q.answer}`}
+        </p>
+      )}
+    </div>
+  )
+}
+
+// ─── CSS VerdadeOuMito ────────────────────────────────────────────────────────
+
+const CSS_VERDADE_MITO = [
+  { statement: 'CSS significa Cascading Style Sheets.', correct: true },
+  { statement: 'A propriedade "color" altera a cor do FUNDO de um elemento.', correct: false },
+  { statement: 'Para arredondar bordas em CSS usa-se "border-radius".', correct: true },
+  { statement: '"padding" cria espaço EXTERNO entre elementos.', correct: false },
+  { statement: '"margin" cria espaço EXTERNO entre elementos.', correct: true },
+  { statement: 'display: flexbox é o valor correto para ativar o Flexbox.', correct: false },
+  { statement: 'display: flex transforma o elemento em um flex container.', correct: true },
+  { statement: '"font-size: bold" deixa o texto em negrito.', correct: false },
+  { statement: '"font-weight: bold" deixa o texto em negrito.', correct: true },
+  { statement: 'text-align: center centraliza o texto horizontalmente.', correct: true },
+  { statement: 'Seletores de classe CSS começam com "#".', correct: false },
+  { statement: 'Seletores de ID CSS começam com "#".', correct: true },
+  { statement: '"background-color" define a cor de fundo de um elemento.', correct: true },
+  { statement: 'justify-content funciona em qualquer elemento HTML.', correct: false },
+  { statement: 'gap define o espaço entre itens em um flex ou grid container.', correct: true },
+  { statement: 'opacity: 0 torna um elemento invisível mas ainda ocupa espaço.', correct: true },
+  { statement: 'display: none remove o elemento da página sem deletá-lo do HTML.', correct: true },
+  { statement: 'A unidade "em" é sempre igual a 16px.', correct: false },
+  { statement: 'position: fixed faz o elemento ficar fixo na tela ao rolar a página.', correct: true },
+  { statement: 'CSS inline tem a menor especificidade de todas as formas de aplicar CSS.', correct: false },
+]
+
+function CSSVerdadeMito({ onBack }) {
+  const questions = useMemo(() => shuffle(CSS_VERDADE_MITO).slice(0, 12), [])
+  const [current, setCurrent] = useState(0)
+  const [score, setScore] = useState(0)
+  const [feedback, setFeedback] = useState(null)
+  const [done, setDone] = useState(false)
+
+  const q = questions[current]
+
+  function handleAnswer(answer) {
+    if (feedback !== null) return
+    const correct = answer === q.correct
+    setFeedback(correct ? 'correct' : 'wrong')
+    if (correct) setScore((s) => s + 1)
+    setTimeout(() => {
+      setFeedback(null)
+      if (current + 1 >= questions.length) setDone(true)
+      else setCurrent((c) => c + 1)
+    }, 1100)
+  }
+
+  function restart() { setCurrent(0); setScore(0); setFeedback(null); setDone(false) }
+
+  if (done) {
+    const pct = Math.round((score / questions.length) * 100)
+    return (
+      <div className="game-result">
+        <div className="game-result__emoji">{pct >= 80 ? '🎨' : pct >= 50 ? '💅' : '📚'}</div>
+        <h2 className="game-result__title">Resultado CSS</h2>
+        <p className="game-result__score">{score} / {questions.length}</p>
+        <p className="game-result__msg">
+          {pct >= 80 ? 'Você manda no CSS!' : pct >= 50 ? 'Bom! Algumas propriedades merecem atenção.' : 'Revise as propriedades CSS básicas e tente de novo!'}
+        </p>
+        <div className="game-result__actions">
+          <button className="btn btn--primary" onClick={restart}>Jogar de novo</button>
+          <button className="btn btn--ghost" onClick={onBack}>Voltar</button>
+        </div>
+      </div>
+    )
+  }
+
+  const answered = feedback !== null
+
+  return (
+    <div className="game-play">
+      <div className="game-play__topbar">
+        <button className="game-play__back" onClick={onBack}>← Sair</button>
+        <span className="game-play__score-label">Pontos: <strong>{score}</strong></span>
+      </div>
+      <div className="game-play__progress-bar">
+        <div className="game-play__progress-fill" style={{ width: `${(current / questions.length) * 100}%` }} />
+      </div>
+      <p className="game-play__count">{current + 1} / {questions.length}</p>
+      <p className="game-play__count" style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>CSS — Verdade ou Mito?</p>
+
+      <p className="game-play__question game-play__question--vom">&ldquo;{q.statement}&rdquo;</p>
+
+      <div className="vom-btns">
+        <button
+          className={`vom-btn vom-btn--true ${answered && q.correct === true ? 'vom-btn--correct' : answered && q.correct !== true && feedback === 'wrong' ? 'vom-btn--wrong' : ''}`}
+          onClick={() => handleAnswer(true)}
+          disabled={answered}
+        >
+          Verdade
+        </button>
+        <button
+          className={`vom-btn vom-btn--false ${answered && q.correct === false ? 'vom-btn--correct' : answered && q.correct !== false && feedback === 'wrong' ? 'vom-btn--wrong' : ''}`}
+          onClick={() => handleAnswer(false)}
+          disabled={answered}
+        >
+          Mito
+        </button>
+      </div>
+
+      {answered && (
+        <p className={`vom-feedback ${feedback === 'correct' ? 'vom-feedback--right' : 'vom-feedback--wrong'}`}>
+          {feedback === 'correct' ? '✓ Correto!' : `✗ Era ${q.correct ? 'Verdade' : 'Mito'}!`}
+        </p>
+      )}
+    </div>
+  )
+}
+
 // ─── Hub ─────────────────────────────────────────────────────────────────────
 
 const GAME_LIST = [
@@ -1043,6 +1278,8 @@ const GAME_LIST = [
   { id: 'typing', title: 'Digitação de Código', description: 'Digite trechos de HTML com precisão. Precisa de 90% de acerto para passar!', icon: '⌨️', color: '#f43f5e', component: DigitacaoVeloz },
   { id: 'bug', title: 'Achar o Erro', description: 'Um trecho de código tem um bug. Clique na linha errada antes que ela te engane!', icon: '🐛', color: '#f59e0b', component: AcharOErro },
   { id: 'quiz-cronometrado', title: 'Quiz Relâmpago', description: '60 segundos, quantas perguntas de HTML, CSS e JS você consegue acertar?', icon: '⏱', color: '#f59e0b', component: QuizCronometrado },
+  { id: 'completar-tag', title: 'Completar o Código', description: 'Veja o código com uma lacuna e preencha o que está faltando. HTML, CSS e JS!', icon: '✏️', color: '#10b981', component: CompletarTag },
+  { id: 'css-vom', title: 'CSS: Verdade ou Mito?', description: 'Afirmações sobre CSS — você sabe distinguir o que é verdade do que é mito?', icon: '🎨', color: '#8b5cf6', component: CSSVerdadeMito },
 ]
 
 export default function Games() {

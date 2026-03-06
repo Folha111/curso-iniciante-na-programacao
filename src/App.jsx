@@ -25,6 +25,8 @@ import Certificado from './pages/Certificado'
 import Admin from './pages/Admin'
 import Conquistas from './pages/Conquistas'
 import Leaderboard from './pages/Leaderboard'
+import Perfil from './pages/Perfil'
+import Revisao from './pages/Revisao'
 
 function Home() {
   return (
@@ -68,6 +70,8 @@ export default function App() {
                 <Route path="/quiz" element={<Quiz />} />
                 <Route path="/conquistas" element={<Conquistas />} />
                 <Route path="/ranking" element={<Leaderboard />} />
+                <Route path="/perfil" element={<Perfil />} />
+                <Route path="/revisao" element={<Revisao />} />
                 <Route
                   path="/admin"
                   element={
