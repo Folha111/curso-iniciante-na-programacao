@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
@@ -84,6 +85,7 @@ export default function Certificado() {
   const { user } = useAuth()
   const { isModuleDone } = useProgress()
   const { modules: MODULES } = useModules()
+  const [copied, setCopied] = useState(false)
 
   const allDone = user?.role === 'admin' || MODULES.every((m) => isModuleDone(m.id))
   const doneCount = MODULES.filter((m) => isModuleDone(m.id)).length
@@ -92,20 +94,44 @@ export default function Certificado() {
     window.print()
   }
 
+  function handleShare() {
+    const text = `🎓 Concluí o curso Iniciante em Desenvolvimento Web!\n\nAluno: ${user.name}\nMódulos: ${MODULES.length}\nTarefas: ${MODULES.reduce((a, m) => a + m.tasks.length, 0)}\nData: ${ISSUE_DATE}\n\n#HTML #CSS #JavaScript #WebDev`
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 3000)
+      })
+    }
+  }
+
   return (
     <div className="cert">
       {allDone ? (
         <>
           <div className="cert__header no-print">
             <h1 className="cert__title">Seu Certificado</h1>
-            <button className="cert__download-btn" onClick={handleDownload}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-              Baixar PDF
-            </button>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button className="cert__share-btn" onClick={handleShare}>
+                {copied ? (
+                  <>✓ Copiado!</>
+                ) : (
+                  <>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+                    Compartilhar
+                  </>
+                )}
+              </button>
+              <button className="cert__download-btn" onClick={handleDownload}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Baixar PDF
+              </button>
+            </div>
           </div>
 
           <CertificateDoc user={user} modules={MODULES} />

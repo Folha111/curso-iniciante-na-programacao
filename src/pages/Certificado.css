@@ -22,6 +22,25 @@
   letter-spacing: -0.02em;
 }
 
+.cert__share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #6366f1;
+  border: 1.5px solid #6366f1;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cert__share-btn:hover {
+  background: rgba(99, 102, 241, 0.08);
+}
+
 .cert__download-btn {
   display: inline-flex;
   align-items: center;

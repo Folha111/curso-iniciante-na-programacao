@@ -76,6 +76,96 @@
   --navbar-height: 68px;
 }
 
+/* ============================================
+   Dark Mode
+   ============================================ */
+
+[data-theme="dark"] {
+  --color-bg: #111827;
+  --color-bg-alt: #1f2937;
+  --color-border: #374151;
+  --color-gray: #9ca3af;
+  --color-gray-light: #6b7280;
+}
+
+[data-theme="dark"] body {
+  background: var(--color-bg);
+  color: #f9fafb;
+}
+
+/* Main page areas */
+[data-theme="dark"] .dash__main,
+[data-theme="dark"] .prog,
+[data-theme="dark"] .games-page,
+[data-theme="dark"] .cert,
+[data-theme="dark"] .conquistas,
+[data-theme="dark"] .leaderboard {
+  background: var(--color-bg);
+  color: #f9fafb;
+}
+
+/* Cards and surfaces */
+[data-theme="dark"] .dash__stat-card,
+[data-theme="dark"] .dash__next-card,
+[data-theme="dark"] .dash__modules,
+[data-theme="dark"] .dash__module-row,
+[data-theme="dark"] .dash__review-card,
+[data-theme="dark"] .dash__badge-chip,
+[data-theme="dark"] .prog__summary-card,
+[data-theme="dark"] .prog__module,
+[data-theme="dark"] .leaderboard__list,
+[data-theme="dark"] .leaderboard__row,
+[data-theme="dark"] .conquistas__stat,
+[data-theme="dark"] .conquistas__badge,
+[data-theme="dark"] .module-page__notes,
+[data-theme="dark"] .module-page__comments,
+[data-theme="dark"] .quiz-task,
+[data-theme="dark"] .code-task,
+[data-theme="dark"] .fill-task,
+[data-theme="dark"] .type-task,
+[data-theme="dark"] .bug-task,
+[data-theme="dark"] .drag-task {
+  background: var(--color-bg-alt);
+  border-color: var(--color-border);
+}
+
+/* Text colors */
+[data-theme="dark"] .dash__welcome,
+[data-theme="dark"] .dash__section-title,
+[data-theme="dark"] .dash__next-title,
+[data-theme="dark"] .dash__module-row-title,
+[data-theme="dark"] .dash__stat-value,
+[data-theme="dark"] .prog__title,
+[data-theme="dark"] .prog__module-title,
+[data-theme="dark"] .conquistas__title,
+[data-theme="dark"] .conquistas__badge-name,
+[data-theme="dark"] .conquistas__stat-value,
+[data-theme="dark"] .leaderboard__title,
+[data-theme="dark"] .leaderboard__name,
+[data-theme="dark"] .quiz-task__question,
+[data-theme="dark"] .code-task__title,
+[data-theme="dark"] .fill-task__title,
+[data-theme="dark"] .drag-task__title,
+[data-theme="dark"] .module-page__notes-area,
+[data-theme="dark"] .module-page__comment-input,
+[data-theme="dark"] .module-page__comment-author {
+  color: #f9fafb;
+}
+
+/* Notes/comment inputs dark */
+[data-theme="dark"] .module-page__notes-area,
+[data-theme="dark"] .module-page__comment-input {
+  background: #111827;
+  border-color: var(--color-border);
+  color: #e5e7eb;
+}
+
+/* Sidebar stays dark always */
+[data-theme="dark"] .dash__sidebar {
+  background: #0d1117;
+  border-right: 1px solid #1f2937;
+}
+
 /* ---- Reset ---- */
 *, *::before, *::after {
   box-sizing: border-box;

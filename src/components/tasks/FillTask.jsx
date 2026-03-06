@@ -8,7 +8,7 @@ function parseCode(code) {
 }
 
 export default function FillTask({ task, moduleId, index }) {
-  const { isTaskDone, completeTask } = useProgress()
+  const { isTaskDone, completeTask, trackWrong } = useProgress()
   const alreadyDone = isTaskDone(moduleId, task.id)
 
   const blankCount = (task.code.match(/\{\{blank\}\}/g) || []).length
@@ -45,6 +45,7 @@ export default function FillTask({ task, moduleId, index }) {
     const allCorrect = checks.every(Boolean)
     setResult(allCorrect ? 'success' : 'error')
     if (allCorrect) completeTask(moduleId, task.id)
+    else trackWrong(moduleId, task.id)
   }
 
   let blankIdx = 0

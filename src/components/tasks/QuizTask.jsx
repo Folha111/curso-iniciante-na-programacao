@@ -3,7 +3,7 @@ import { useProgress } from '../../context/ProgressContext'
 import './QuizTask.css'
 
 export default function QuizTask({ task, moduleId, index }) {
-  const { isTaskDone, completeTask } = useProgress()
+  const { isTaskDone, completeTask, trackWrong } = useProgress()
   const alreadyDone = isTaskDone(moduleId, task.id)
 
   const [selected, setSelected] = useState(alreadyDone ? task.correct : null)
@@ -21,6 +21,8 @@ export default function QuizTask({ task, moduleId, index }) {
     setSubmitted(true)
     if (selected === task.correct) {
       completeTask(moduleId, task.id)
+    } else {
+      trackWrong(moduleId, task.id)
     }
   }
 
