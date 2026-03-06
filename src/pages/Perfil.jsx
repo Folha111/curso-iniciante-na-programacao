@@ -15,6 +15,23 @@ export default function Perfil() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [saveMsg, setSaveMsg] = useState(null)
 
+  function handleAvatarChange(e) {
+    const file = e.target.files[0]
+    if (!file) return
+    if (file.size > 2 * 1024 * 1024) {
+      setSaveMsg({ type: 'error', text: 'A imagem deve ter no máximo 2MB.' })
+      setTimeout(() => setSaveMsg(null), 3000)
+      return
+    }
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+      updateUser({ avatar: ev.target.result })
+      setSaveMsg({ type: 'success', text: 'Foto atualizada!' })
+      setTimeout(() => setSaveMsg(null), 3000)
+    }
+    reader.readAsDataURL(file)
+  }
+
   const unlockedBadges = badges.filter((b) => b.unlocked)
   const doneModules = modules.filter((m) => isModuleDone(m.id)).length
   const totalTasks = modules.reduce((acc, m) => acc + m.tasks.length, 0)
@@ -49,7 +66,19 @@ export default function Perfil() {
     <main className="perfil">
       {/* Header */}
       <div className="perfil__header">
-        <div className="perfil__avatar">{user.name[0].toUpperCase()}</div>
+        <label className="perfil__avatar" title="Clique para alterar a foto">
+          {user.avatar
+            ? <img src={user.avatar} alt="Foto de perfil" className="perfil__avatar-img" />
+            : user.name[0].toUpperCase()
+          }
+          <span className="perfil__avatar-overlay">📷</span>
+          <input
+            type="file"
+            accept="image/*"
+            className="perfil__avatar-input"
+            onChange={handleAvatarChange}
+          />
+        </label>
         <div className="perfil__info">
           <h1 className="perfil__name">{user.name}</h1>
           <p className="perfil__email">{user.email}</p>

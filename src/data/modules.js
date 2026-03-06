@@ -746,8 +746,260 @@ Todo bom programador pensa nos casos inválidos antes de escrever uma linha de c
     ],
   },
   {
-    id: 'modulo-2',
+    id: 'modulo-vscode',
     number: '03',
+    stageId: 'curioso',
+    stage: 'Introdução',
+    title: 'VSCode: seu editor de código',
+    description: 'Instale e configure o editor de código mais usado do mundo e aprenda a se virar nele como um dev.',
+    color: '#0ea5e9',
+    context: `## O que é um editor de código?
+
+Um **editor de código** é o programa onde você escreve seu código. É a ferramenta mais usada no dia a dia de qualquer desenvolvedor.
+
+Você poderia escrever HTML num bloco de notas qualquer — mas um editor de código oferece:
+
+- **Realce de sintaxe** — o código fica colorido, facilitando a leitura
+- **Autocompletar** — sugestões enquanto você digita
+- **Detecção de erros** — avisa quando algo está errado antes de você rodar
+- **Terminal integrado** — você não precisa sair do editor para executar comandos
+- **Extensões** — funcionalidades extras instaláveis em segundos
+
+## Por que o VSCode?
+
+O **Visual Studio Code** (VSCode) é o editor mais popular do mundo entre desenvolvedores. Em pesquisas da Stack Overflow, mais de 70% dos devs usam o VSCode.
+
+Criado pela Microsoft, ele é:
+
+- **Gratuito** e open source
+- **Leve** — abre rápido e não trava
+- **Multiplataforma** — funciona no Windows, Mac e Linux
+- **Extremamente extensível** — há milhares de extensões disponíveis
+
+## Baixando e instalando
+
+### Passo 1 — Acesse o site oficial
+
+Acesse **code.visualstudio.com** — o site detecta automaticamente o seu sistema operacional e sugere o download correto.
+
+### Passo 2 — Baixe o instalador
+
+Clique no botão grande de download. O instalador tem cerca de 100MB.
+
+### Passo 3 — Instale
+
+**Windows:**
+Execute o arquivo \`.exe\` baixado. Avance clicando em "Next" em tudo. Quando aparecer a tela de opções adicionais, marque **"Add to PATH"** e **"Open with Code"** — esses dois facilitam muito o uso depois.
+
+**Mac:**
+Abra o arquivo \`.dmg\` baixado. Arraste o ícone do VSCode para a pasta **Aplicativos**. Depois, abra o VSCode pela primeira vez, pressione \`Cmd+Shift+P\`, digite **"shell command"** e selecione **"Install 'code' command in PATH"** — isso permite abrir o VSCode pelo terminal com o comando \`code .\`.
+
+**Linux:**
+No site oficial há instruções específicas para cada distribuição. No Ubuntu/Debian, baixe o \`.deb\` e instale com \`sudo dpkg -i arquivo.deb\`.
+
+### Passo 4 — Abra o VSCode
+
+Após instalar, abra o VSCode. Você vai ver a tela de boas-vindas.
+
+## Conhecendo a interface
+
+Ao abrir o VSCode pela primeira vez, você vai ver estas áreas principais:
+
+### Barra lateral esquerda (Activity Bar)
+
+Ícones para alternar entre os painéis principais:
+
+- **Explorer** (ícone de arquivos) — onde você vê e gerencia seus arquivos
+- **Search** (lupa) — busca dentro dos arquivos do projeto
+- **Source Control** (ícone Git) — controle de versão com Git
+- **Extensions** (blocos) — instalar extensões
+
+### Painel lateral (Side Bar)
+
+Fica à direita da Activity Bar. Quando você clica em Explorer, aqui aparecem os seus arquivos e pastas.
+
+### Editor (área central)
+
+Onde você escreve o código. Você pode abrir várias abas ao mesmo tempo. Cada aba mostra um arquivo.
+
+### Terminal integrado
+
+Na parte de baixo. Abra com **Ctrl+\`** (ou Ctrl+J). É um terminal completo — você não precisa abrir o terminal do sistema separadamente.
+
+### Barra de status (rodapé)
+
+A barra azul no rodapé mostra informações como: linguagem do arquivo atual, linha/coluna do cursor, erros e avisos.
+
+## Criando e abrindo projetos
+
+A forma correta de trabalhar no VSCode é **abrir uma pasta**, não um arquivo solto.
+
+### Como abrir uma pasta
+
+1. Crie uma pasta no seu computador (ex: \`meu-projeto\` na Área de Trabalho)
+2. No VSCode: **File → Open Folder** (ou \`Ctrl+K Ctrl+O\`)
+3. Selecione a pasta que criou
+4. Pronto — você vê a pasta no Explorer lateral
+
+### Como criar um arquivo novo
+
+Com a pasta aberta, no Explorer lateral:
+- Clique no ícone de **novo arquivo** (ou clique com botão direito → New File)
+- Digite o nome com extensão: \`index.html\`, \`style.css\`, \`script.js\`
+
+### Atalho para criar arquivo rapidamente
+
+Use **Ctrl+N** para criar um arquivo novo sem nome. Depois salve com **Ctrl+S** e dê um nome a ele.
+
+## Atalhos essenciais
+
+Atalhos economizam horas de trabalho. Aprenda estes agora e use sempre.
+
+> **Windows usa \`Ctrl\`. Mac usa \`Cmd\` (⌘).** Exceto onde indicado, troque Ctrl por Cmd no Mac.
+
+| Ação | Windows | Mac |
+|------|---------|-----|
+| Salvar arquivo | \`Ctrl+S\` | \`Cmd+S\` |
+| Desfazer | \`Ctrl+Z\` | \`Cmd+Z\` |
+| Refazer | \`Ctrl+Shift+Z\` | \`Cmd+Shift+Z\` |
+| Copiar | \`Ctrl+C\` | \`Cmd+C\` |
+| Colar | \`Ctrl+V\` | \`Cmd+V\` |
+| Recortar linha | \`Ctrl+X\` | \`Cmd+X\` |
+| Comentar linha | \`Ctrl+/\` | \`Cmd+/\` |
+| Buscar no arquivo | \`Ctrl+F\` | \`Cmd+F\` |
+| Buscar e substituir | \`Ctrl+H\` | \`Cmd+H\` |
+| Abrir arquivo por nome | \`Ctrl+P\` | \`Cmd+P\` |
+| Paleta de comandos | \`Ctrl+Shift+P\` | \`Cmd+Shift+P\` |
+| Abrir/fechar terminal | \`Ctrl+\`\` | \`Ctrl+\`\` |
+| Mover linha | \`Alt+↑/↓\` | \`Option+↑/↓\` |
+| Selecionar próxima igual | \`Ctrl+D\` | \`Cmd+D\` |
+
+## Extensões indispensáveis
+
+As extensões transformam o VSCode num ambiente profissional. Para instalar: clique em **Extensions** na barra lateral (ou \`Ctrl+Shift+X\`), pesquise o nome e clique em **Install**.
+
+### Live Server
+
+**O que faz:** cria um servidor local e atualiza o browser automaticamente toda vez que você salva um arquivo.
+
+**Como usar:** com o arquivo \`index.html\` aberto, clique no botão **"Go Live"** que aparece na barra de status (rodapé azul). Uma aba vai abrir no browser. Salve qualquer arquivo com \`Ctrl+S\` e o browser atualiza sozinho.
+
+**Por que usar:** sem o Live Server, você precisa recarregar o browser manualmente toda vez. Com ele, é igual a essa plataforma — você vê o resultado na hora.
+
+### Prettier — Code Formatter
+
+**O que faz:** formata seu código automaticamente — indentação correta, ponto-e-vírgula, espaços.
+
+**Como usar:** depois de instalar, pressione \`Ctrl+Shift+P\`, digite "Format Document" e Enter. Pode também configurar para formatar ao salvar.
+
+### Auto Rename Tag
+
+**O que faz:** quando você renomeia uma tag HTML de abertura, ele renomeia automaticamente a tag de fechamento.
+
+**Exemplo:** você muda \`<div>\` para \`<section>\` e o \`</div>\` vira \`</section>\` sozinho.
+
+### Indent Rainbow
+
+**O que faz:** colore cada nível de indentação com uma cor diferente. Facilita muito a leitura de código HTML e CSS com muitos níveis de aninhamento.
+
+## Emmet — superpower do VSCode
+
+O **Emmet** já vem integrado no VSCode e permite gerar código HTML rapidamente com atalhos.
+
+### Exemplos de Emmet em arquivos HTML:
+
+- Digite \`!\` + \`Tab\` → gera o esqueleto HTML completo
+- Digite \`div\` + \`Tab\` → \`<div></div>\`
+- Digite \`div.container\` + \`Tab\` → \`<div class="container"></div>\`
+- Digite \`ul>li*5\` + \`Tab\` → uma \`<ul>\` com 5 \`<li>\` dentro
+- Digite \`h1+p+p\` + \`Tab\` → um \`<h1>\` seguido de dois \`<p>\`
+
+Esses atalhos economizam muito tempo quando você está escrevendo HTML.
+
+## Configurações úteis
+
+Acesse as configurações com **Ctrl+,** (vírgula). Algumas configurações recomendadas:
+
+- **Auto Save** → mude para \`afterDelay\` para salvar automaticamente
+- **Font Size** → aumente se o texto estiver pequeno (recomendado: 14 ou 16)
+- **Word Wrap** → \`on\` para não ter scroll horizontal
+- **Format On Save** → \`true\` se tiver o Prettier instalado
+
+## O terminal integrado
+
+O terminal do VSCode é um terminal completo. Você pode:
+
+- Abrir com **Ctrl+\`**
+- Usar qualquer comando do sistema (\`ls\`, \`cd\`, \`mkdir\` no Mac/Linux; \`dir\`, \`cd\` no Windows)
+- Rodar scripts Node.js diretamente
+- Usar o Git
+
+**Por que usar o terminal integrado?** Porque você não perde foco — editor e terminal ficam na mesma janela.
+
+## Dicas de produtividade
+
+- **Divida a tela:** arraste uma aba para o lado para ver dois arquivos ao mesmo tempo (\`index.html\` e \`style.css\` lado a lado)
+- **Minimize o Side Bar:** pressione \`Ctrl+B\` para esconder/mostrar o painel lateral e ter mais espaço para o código
+- **Zen Mode:** \`Ctrl+K Z\` remove tudo da tela exceto o editor — ótimo para foco total
+- **Multi-cursor:** segure \`Alt\` e clique em vários pontos para editar em múltiplos lugares ao mesmo tempo`,
+    tasks: [
+      {
+        id: 'task-1',
+        type: 'quiz',
+        question: 'Qual é a forma correta de abrir um projeto no VSCode?',
+        options: [
+          'Abrir apenas o arquivo index.html com duplo clique',
+          'Abrir a pasta inteira do projeto (File → Open Folder)',
+          'Criar um novo arquivo em branco toda vez',
+          'Arrastar um arquivo solto para o ícone do VSCode',
+        ],
+        correct: 1,
+        explanation: 'Sempre abra a pasta do projeto inteiro no VSCode (File → Open Folder). Assim ele vê todos os arquivos juntos, o autocompletar funciona entre arquivos e extensões como o Live Server funcionam corretamente.',
+      },
+      {
+        id: 'task-2',
+        type: 'fill',
+        title: 'Atalhos essenciais — Windows e Mac',
+        description: 'Complete os atalhos. No Windows use Ctrl, no Mac use Cmd:',
+        code: '// Salvar o arquivo:\nWindows: {{blank}} + S\nMac:     {{blank}} + S\n\n// Abrir o terminal integrado:\nWindows e Mac: {{blank}} + `\n\n// Comentar uma linha:\nWindows: Ctrl + {{blank}}\nMac:     Cmd  + {{blank}}',
+        blanks: ['Ctrl', 'Cmd', 'Ctrl', '/', '/'],
+        hint: 'A tecla principal muda entre SO, mas a letra da ação é sempre a mesma. Terminal usa Ctrl nos dois.',
+        successMessage: 'Ótimo! Esses são os atalhos que você vai usar todos os dias.',
+      },
+      {
+        id: 'task-3',
+        type: 'quiz',
+        question: 'O que a extensão Live Server faz?',
+        options: [
+          'Faz o deploy do site na internet automaticamente',
+          'Corrige erros de HTML e CSS',
+          'Abre o site no browser e atualiza sozinho toda vez que você salva',
+          'Sincroniza o código com o GitHub',
+        ],
+        correct: 2,
+        explanation: 'O Live Server cria um servidor local e recarrega o browser automaticamente ao salvar (Ctrl+S / Cmd+S). Sem ele você precisa apertar F5 no browser manualmente depois de cada mudança.',
+      },
+      {
+        id: 'task-4',
+        type: 'drag',
+        title: 'Ordene: primeiros passos no VSCode',
+        description: 'Coloque os passos na ordem correta para criar e ver seu primeiro projeto:',
+        blocks: [
+          'Criar uma pasta para o projeto no computador',
+          'Abrir o VSCode e usar File → Open Folder',
+          'Criar o arquivo index.html dentro da pasta',
+          'Instalar a extensão Live Server',
+          'Clicar em Go Live na barra de status',
+          'Editar o HTML, salvar com Ctrl+S (ou Cmd+S) e ver no browser',
+        ],
+        hint: 'Primeiro crie a pasta, abra no VSCode, crie o arquivo, configure o Live Server e comece a codar.',
+        successMessage: 'Esse é o fluxo que você vai repetir em todo projeto novo. Guarde bem!',
+      },
+    ],
+  },
+  {
+    id: 'modulo-2',
+    number: '04',
     stageId: 'aprendiz',
     stage: 'Iniciante',
     title: 'HTML: primeiros elementos',
@@ -1252,7 +1504,7 @@ HTML5 introduziu tags que descrevem o **significado** do conteúdo, não só a a
 <footer>   <!-- rodapé -->
 \`\`\`
 
-Antes, tudo era `<div>`. Com tags semânticas, o código fica mais legível e os mecanismos de busca (Google) entendem melhor o conteúdo.
+Antes, tudo era \`<div>\`. Com tags semânticas, o código fica mais legível e os mecanismos de busca (Google) entendem melhor o conteúdo.
 
 ## Comentários em HTML
 

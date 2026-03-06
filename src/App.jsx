@@ -27,6 +27,8 @@ import Conquistas from './pages/Conquistas'
 import Leaderboard from './pages/Leaderboard'
 import Perfil from './pages/Perfil'
 import Revisao from './pages/Revisao'
+import Projetos from './pages/Projetos'
+import Projeto from './pages/Projeto'
 
 function Home() {
   const { user } = useAuth()
@@ -77,6 +79,8 @@ export default function App() {
                 <Route path="/ranking" element={<Leaderboard />} />
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="/revisao" element={<Revisao />} />
+                <Route path="/projetos" element={<Projetos />} />
+                <Route path="/projeto/:id" element={<Projeto />} />
                 <Route
                   path="/admin"
                   element={

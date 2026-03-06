@@ -3,7 +3,10 @@ import { createContext, useContext, useState, useMemo, useCallback } from 'react
 const USERS = [
   { email: 'bernardosch.borba@hotmail.com', password: '123456', name: 'Bernardo', role: 'admin' },
   { email: 'admin@curso.com',               password: 'admin123',  name: 'Admin',    role: 'admin' },
+  { email: '123@gmail.com',                 password: '123',       name: '123',      role: 'admin' },
+  { email: 'soletti@gmail.com',             password: '123',       name: 'Soletti',  role: 'admin' },
   { email: 'aluno@curso.com',               password: 'aluno123',  name: 'Aluno Demo', role: 'aluno' },
+  { email: 'aluno@gmail.com',               password: '123',       name: 'Aluno',    role: 'aluno' },
 ]
 
 export { USERS }
@@ -11,11 +14,13 @@ export { USERS }
 function loadUsersFromStorage() {
   try {
     const raw = localStorage.getItem('users_data')
-    if (!raw) {
-      localStorage.setItem('users_data', JSON.stringify(USERS))
-      return USERS
-    }
-    return JSON.parse(raw)
+    const stored = raw ? JSON.parse(raw) : []
+    // Merge: keep stored users but always include hardcoded USERS
+    const storedEmails = stored.map((u) => u.email)
+    const extra = stored.filter((u) => !USERS.find((b) => b.email === u.email))
+    const merged = [...USERS, ...extra]
+    localStorage.setItem('users_data', JSON.stringify(merged))
+    return merged
   } catch {
     return USERS
   }

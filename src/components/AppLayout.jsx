@@ -42,6 +42,10 @@ const NAV_ITEMS = [
     icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>,
   },
   {
+    to: '/projetos', label: 'Projetos',
+    icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="9" y="3" width="13" height="2" rx="1"/><rect x="2" y="11" width="6" height="6" rx="1"/><rect x="9" y="11" width="13" height="2" rx="1"/><rect x="9" y="16" width="8" height="2" rx="1"/></svg>,
+  },
+  {
     to: '/perfil', label: 'Perfil',
     icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
   },
@@ -69,7 +73,7 @@ export default function AppLayout() {
   return (
     <div className="dash">
       <aside className="dash__sidebar">
-        <Link to="/" className="dash__logo">
+        <Link to="/dashboard" className="dash__logo">
           <span className="dash__logo-icon">{'{}'}</span>
           <span>Curso Iniciante</span>
         </Link>
