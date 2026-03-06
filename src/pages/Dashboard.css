@@ -338,6 +338,13 @@
   min-width: 0;
 }
 
+.dash__module-row-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
 .dash__module-row-title {
   font-size: var(--text-sm);
   font-weight: 600;
@@ -345,6 +352,19 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.dash__module-row-stage {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mod-color, var(--color-accent));
+  background: color-mix(in srgb, var(--mod-color, var(--color-accent)) 12%, transparent);
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .dash__module-row-bar {

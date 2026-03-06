@@ -64,6 +64,7 @@ export default function Modulos() {
               </div>
 
               <div className="modulos__card-body">
+                {mod.stage && <span className="modulos__card-stage">{mod.stage}</span>}
                 <h2 className="modulos__card-title">{mod.title}</h2>
                 <p className="modulos__card-desc">{mod.description}</p>
               </div>

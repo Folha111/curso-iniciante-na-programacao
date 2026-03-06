@@ -2,6 +2,7 @@ export const MODULES = [
   {
     id: 'modulo-1',
     number: '01',
+    stage: 'Introdução',
     title: 'Introdução à Programação',
     description: 'Entenda o que é programação, como os computadores pensam e por que aprender a programar.',
     color: '#3b82f6',
@@ -115,8 +116,211 @@ Mas antes de tudo isso, o mais importante é entender: programar é uma habilida
     ],
   },
   {
-    id: 'modulo-2',
+    id: 'modulo-logica',
     number: '02',
+    stage: 'Lógica',
+    title: 'Lógica de Programação',
+    description: 'Aprenda algoritmos, pseudocódigo e como estruturar o raciocínio para resolver problemas com o computador.',
+    color: '#6366f1',
+    context: `## O que é um algoritmo?
+
+Um **algoritmo** é uma sequência finita de passos ordenados para resolver um problema. Todo programa de computador é, na essência, um algoritmo.
+
+Pense em uma receita de bolo: ela tem ingredientes (dados de entrada), passos a seguir (processamento) e o bolo pronto (saída). Isso é um algoritmo!
+
+## As três estruturas básicas
+
+Todo algoritmo é construído com apenas três estruturas:
+
+### 1. Sequência
+Passos executados um após o outro, na ordem:
+\`\`\`
+INÍCIO
+  Ler número1
+  Ler número2
+  soma = número1 + número2
+  Exibir soma
+FIM
+\`\`\`
+
+### 2. Decisão (Condicional)
+Escolhe entre caminhos diferentes dependendo de uma condição:
+\`\`\`
+SE temperatura > 30 ENTÃO
+  Exibir "Está quente!"
+SENÃO
+  Exibir "Temperatura agradável"
+FIM SE
+\`\`\`
+
+### 3. Repetição (Loop)
+Repete um bloco de ações enquanto uma condição for verdadeira:
+\`\`\`
+ENQUANTO contador < 10 FAÇA
+  Exibir contador
+  contador = contador + 1
+FIM ENQUANTO
+\`\`\`
+
+## Variáveis
+
+Uma **variável** é um espaço na memória do computador com um nome para guardar um valor:
+
+\`\`\`
+idade = 25
+nome = "João"
+aprovado = VERDADEIRO
+\`\`\`
+
+O valor de uma variável pode mudar durante a execução.
+
+## Fluxogramas
+
+Fluxogramas são representações visuais de algoritmos usando símbolos:
+- **Oval** → Início/Fim
+- **Retângulo** → Processo (ação)
+- **Losango** → Decisão (sim/não)
+- **Paralelogramo** → Entrada/Saída
+
+## Por que aprender lógica antes de programar?
+
+Linguagens de programação mudam. A lógica é universal. Quem pensa com clareza em pseudocódigo aprende qualquer linguagem mais rápido porque já sabe **o que** fazer — só precisa aprender **como escrever** em cada linguagem.`,
+    tasks: [
+      {
+        id: 'task-1',
+        type: 'quiz',
+        question: 'O que é um algoritmo?',
+        options: [
+          'Um tipo de linguagem de programação para iniciantes',
+          'Uma sequência finita de passos ordenados para resolver um problema',
+          'Um software para escrever código automaticamente',
+          'Um erro encontrado em um programa',
+        ],
+        correct: 1,
+        explanation: 'Um algoritmo é uma receita de passos bem definidos para chegar a um resultado. Todo programa é a implementação de um algoritmo em uma linguagem de programação.',
+      },
+      {
+        id: 'task-2',
+        type: 'quiz',
+        question: 'Quais são os três tipos básicos de estruturas em algoritmos?',
+        options: [
+          'Entrada, Processamento e Saída',
+          'HTML, CSS e JavaScript',
+          'Sequência, Decisão e Repetição',
+          'Variáveis, Funções e Objetos',
+        ],
+        correct: 2,
+        explanation: 'Todo algoritmo, por mais complexo que seja, é composto de apenas três estruturas fundamentais: Sequência (passos em ordem), Decisão (escolhas com SE/SENÃO) e Repetição (loops ENQUANTO/PARA).',
+      },
+      {
+        id: 'task-3',
+        type: 'fill',
+        title: 'Complete o pseudocódigo',
+        description: 'Preencha as lacunas para completar o algoritmo que calcula a média de duas notas:',
+        code: 'INÍCIO\n  Ler {{blank}}1\n  Ler nota2\n  media = (nota1 {{blank}} nota2) / 2\n  SE media >= 7 {{blank}}\n    Exibir "Aprovado"\n  SENÃO\n    Exibir "Reprovado"\n  FIM SE\nFIM',
+        blanks: ['nota', '+', 'ENTÃO'],
+        hint: 'Leia os dois dados, some-os e divida por 2. Use SE/ENTÃO para a decisão.',
+        successMessage: 'Perfeito! Você montou um algoritmo completo com sequência e decisão.',
+      },
+      {
+        id: 'task-4',
+        type: 'drag',
+        title: 'Ordene o algoritmo de troco',
+        description: 'Um cliente paga e precisa receber troco. Ordene os passos do algoritmo:',
+        blocks: [
+          'Ler valor_da_compra',
+          'Ler valor_pago',
+          'troco = valor_pago - valor_da_compra',
+          'SE troco > 0 ENTÃO exibir troco',
+          'SENÃO exibir "Valor insuficiente"',
+        ],
+        hint: 'Primeiro leia os dados, depois calcule, por último decida o que exibir.',
+        successMessage: 'Ótimo! Você ordenou corretamente o algoritmo de calcular troco.',
+      },
+      {
+        id: 'task-5',
+        type: 'type',
+        question: 'Como se chama a estrutura de algoritmo que repete um bloco de ações várias vezes?',
+        answer: ['repetição', 'loop', 'laço', 'iteração'],
+        placeholder: 'Digite o nome da estrutura...',
+        hint: 'É uma das três estruturas básicas. Em inglês se chama "loop".',
+        explanation: 'A estrutura de repetição (ou loop) permite executar um bloco de código múltiplas vezes sem precisar reescrever. Em JavaScript usamos for, while e do/while.',
+      },
+      {
+        id: 'task-6',
+        type: 'quiz',
+        question: 'O que representa uma VARIÁVEL em um algoritmo?',
+        options: [
+          'Um passo fixo que nunca muda',
+          'Um tipo de decisão condicional',
+          'Um espaço nomeado na memória para guardar um valor que pode mudar',
+          'Uma função que retorna um resultado',
+        ],
+        correct: 2,
+        explanation: 'Uma variável é como uma caixa com etiqueta: tem um nome (a etiqueta) e guarda um valor (o conteúdo). O valor pode ser trocado a qualquer momento durante a execução do algoritmo.',
+      },
+      {
+        id: 'task-7',
+        type: 'fill',
+        title: 'Complete o loop de contagem',
+        description: 'Preencha as lacunas do pseudocódigo que conta de 1 até 5:',
+        code: 'contador = {{blank}}\n{{blank}} contador <= 5 FAÇA\n  Exibir contador\n  contador = contador {{blank}} 1\nFIM ENQUANTO',
+        blanks: ['1', 'ENQUANTO', '+'],
+        hint: 'O contador começa em 1, o loop continua ENQUANTO for menor ou igual a 5, e incrementa +1 a cada volta.',
+        successMessage: 'Correto! Você escreveu um loop de contagem em pseudocódigo.',
+      },
+      {
+        id: 'task-8',
+        type: 'bug',
+        title: 'Erro lógico: divisão por zero',
+        description: 'O algoritmo abaixo tenta calcular a média mas tem um erro lógico. Encontre o problema:',
+        buggyCode: 'INÍCIO\n  Ler nota1\n  Ler nota2\n  media = nota1 + nota2 / 2\n  Exibir media\nFIM',
+        validate: (doc) => true,
+        successMessage: 'Correto! Sem parênteses, só nota2 é dividida por 2. A divisão tem prioridade sobre a soma. Deveria ser: (nota1 + nota2) / 2.',
+        hint: 'Observe a precedência de operadores. A divisão acontece antes da soma. Como garantir que a soma ocorra primeiro?',
+        correctLine: 3,
+        lines: [
+          'INÍCIO',
+          '  Ler nota1',
+          '  Ler nota2',
+          '  media = nota1 + nota2 / 2',
+          '  Exibir media',
+          'FIM',
+        ],
+        bugLine: 3,
+        explanation: 'Sem parênteses, a expressão é avaliada como nota1 + (nota2 / 2) pela precedência de operadores. O correto é (nota1 + nota2) / 2.',
+      },
+      {
+        id: 'task-9',
+        type: 'drag',
+        title: 'Etapas de resolução de problemas',
+        description: 'Ordene as etapas corretas para resolver um problema com programação:',
+        blocks: [
+          '1. Entender o problema',
+          '2. Identificar entradas e saídas',
+          '3. Criar o algoritmo (pseudocódigo)',
+          '4. Codificar em uma linguagem',
+          '5. Testar e corrigir erros',
+        ],
+        hint: 'Primeiro entenda, depois planeje, depois escreva o código, depois teste.',
+        successMessage: 'Excelente! Essa é a metodologia de qualquer desenvolvedor profissional.',
+      },
+      {
+        id: 'task-10',
+        type: 'fill',
+        title: 'Estrutura SE/SENÃO',
+        description: 'Complete a estrutura condicional que verifica se um número é positivo:',
+        code: '{{blank}} numero > 0 {{blank}}\n  Exibir "Positivo"\n{{blank}}\n  Exibir "Zero ou negativo"\nFIM SE',
+        blanks: ['SE', 'ENTÃO', 'SENÃO'],
+        hint: 'A estrutura condicional usa SE para verificar, ENTÃO para o caso verdadeiro e SENÃO para o caso falso.',
+        successMessage: 'Perfeito! Você domina a estrutura de decisão em pseudocódigo.',
+      },
+    ],
+  },
+  {
+    id: 'modulo-2',
+    number: '03',
+    stage: 'Iniciante',
     title: 'HTML: primeiros elementos',
     description: 'Aprenda as tags mais importantes do HTML e escreva seu primeiro código.',
     color: '#8b5cf6',
@@ -289,7 +493,8 @@ A tag \`<img>\` não tem fechamento (é uma tag vazia).`,
   },
   {
     id: 'modulo-3',
-    number: '03',
+    number: '04',
+    stage: 'Iniciante Avançado',
     title: 'Estrutura de uma página HTML',
     description: 'Aprenda a estrutura completa de um documento HTML com head e body.',
     color: '#ec4899',
@@ -441,7 +646,8 @@ Sem essa estrutura básica, o navegador ainda tenta mostrar a página, mas pode 
   },
   {
     id: 'modulo-4',
-    number: '04',
+    number: '05',
+    stage: 'Médio',
     title: 'CSS: primeiros estilos',
     description: 'Aprenda a adicionar cores, fontes e bordas às suas páginas com CSS.',
     color: '#10b981',
@@ -647,7 +853,8 @@ div {
   },
   {
     id: 'modulo-5',
-    number: '05',
+    number: '06',
+    stage: 'Médio Avançado',
     title: 'CSS: box model e layout',
     description: 'Entenda o box model e crie layouts com flexbox.',
     color: '#f59e0b',
@@ -855,7 +1062,8 @@ Valores comuns para \`justify-content\`:
   },
   {
     id: 'modulo-6',
-    number: '06',
+    number: '07',
+    stage: 'Entendedor',
     title: 'JavaScript: variáveis e tipos',
     description: 'Dê seus primeiros passos em JavaScript aprendendo variáveis e tipos de dados.',
     color: '#f43f5e',
@@ -1046,7 +1254,8 @@ console.log(typeof 42)        // "number"
   },
   {
     id: 'modulo-7',
-    number: '07',
+    number: '08',
+    stage: 'Entendedor Avançado',
     title: 'JavaScript: condicionais e funções',
     description: 'Aprenda a tomar decisões com if/else e a organizar código com funções.',
     color: '#8b5cf6',
@@ -1247,8 +1456,229 @@ document.getElementById('resultado').textContent = classificar(8)
     ],
   },
   {
+    id: 'modulo-dom',
+    number: '09',
+    stage: 'Avançado',
+    title: 'JavaScript: DOM e eventos',
+    description: 'Aprenda a manipular a página em tempo real com JavaScript — selecione elementos, altere conteúdo e reaja a cliques.',
+    color: '#06b6d4',
+    context: `## O que é o DOM?
+
+**DOM** significa Document Object Model. Quando o navegador carrega uma página HTML, ele cria uma representação em memória de todos os elementos — essa representação é o DOM.
+
+JavaScript pode ler e modificar o DOM para mudar a página **sem recarregar**.
+
+## Selecionando elementos
+
+\`\`\`js
+// Por ID
+const titulo = document.getElementById('meu-titulo')
+
+// Por seletor CSS (mais flexível)
+const btn = document.querySelector('.meu-botao')
+const todos = document.querySelectorAll('p') // NodeList
+\`\`\`
+
+## Modificando conteúdo
+
+\`\`\`js
+const el = document.getElementById('resultado')
+
+el.textContent = 'Novo texto simples'     // só texto
+el.innerHTML = '<strong>Negrito!</strong>' // HTML completo
+\`\`\`
+
+Use \`textContent\` para texto simples (mais seguro) e \`innerHTML\` só quando precisar inserir HTML.
+
+## Alterando estilos e classes
+
+\`\`\`js
+el.style.color = 'red'           // estilo inline
+el.classList.add('ativo')        // adiciona classe
+el.classList.remove('ativo')     // remove classe
+el.classList.toggle('ativo')     // alterna
+\`\`\`
+
+## Eventos
+
+Eventos são ações do usuário que o JavaScript pode escutar:
+
+\`\`\`js
+const btn = document.getElementById('btn')
+
+btn.addEventListener('click', function() {
+  alert('Você clicou!')
+})
+\`\`\`
+
+Eventos mais comuns:
+| Evento | Quando dispara |
+| --- | --- |
+| \`click\` | ao clicar |
+| \`input\` | ao digitar |
+| \`submit\` | ao enviar formulário |
+| \`mouseover\` | ao passar o mouse |
+
+## Criando e inserindo elementos
+
+\`\`\`js
+const novoItem = document.createElement('li')
+novoItem.textContent = 'Novo item'
+document.getElementById('lista').appendChild(novoItem)
+\`\`\``,
+    tasks: [
+      {
+        id: 'task-1',
+        type: 'quiz',
+        question: 'O que é o DOM (Document Object Model)?',
+        options: [
+          'Um banco de dados para guardar HTML',
+          'A representação em memória dos elementos da página, manipulável com JavaScript',
+          'Uma linguagem de programação para web',
+          'Um framework CSS para estilizar páginas',
+        ],
+        correct: 1,
+        explanation: 'O DOM é a estrutura em árvore que o navegador cria ao carregar o HTML. JavaScript acessa e modifica essa estrutura para alterar a página dinamicamente sem recarregá-la.',
+      },
+      {
+        id: 'task-2',
+        type: 'code',
+        title: 'Selecione e modifique um elemento',
+        description: 'Use <code>document.getElementById</code> para pegar o elemento com <code>id="mensagem"</code> e defina seu <code>textContent</code> como <strong>"Olá, DOM!"</strong>.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <body>\n    <p id="mensagem">Texto original</p>\n    <script>\n      // Selecione o elemento e mude o textContent\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const el = doc.getElementById('mensagem')
+          return el !== null && el.textContent.trim() === 'Olá, DOM!'
+        },
+        successMessage: 'Perfeito! Você manipulou o DOM pela primeira vez!',
+        hint: "document.getElementById('mensagem').textContent = 'Olá, DOM!'",
+      },
+      {
+        id: 'task-3',
+        type: 'code',
+        title: 'Adicione um evento de clique',
+        description: 'Use <code>addEventListener("click", ...)</code> no botão com <code>id="btn"</code> para colocar o texto <strong>"Clicado!"</strong> no parágrafo <code>id="resultado"</code> quando clicar.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <body>\n    <button id="btn">Clique aqui</button>\n    <p id="resultado"></p>\n    <script>\n      // Adicione o evento de clique\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const btn = doc.getElementById('btn')
+          const resultado = doc.getElementById('resultado')
+          if (!btn || !resultado) return false
+          btn.click()
+          return resultado.textContent.trim().length > 0
+        },
+        successMessage: 'Excelente! Seu primeiro event listener funcionando!',
+        hint: "document.getElementById('btn').addEventListener('click', function() { document.getElementById('resultado').textContent = 'Clicado!' })",
+      },
+      {
+        id: 'task-4',
+        type: 'quiz',
+        question: 'Qual método seleciona elementos usando um seletor CSS (como classe ou tag)?',
+        options: [
+          'document.getElementById()',
+          'document.getElement()',
+          'document.querySelector()',
+          'document.findElement()',
+        ],
+        correct: 2,
+        explanation: 'querySelector() aceita qualquer seletor CSS válido: "#id", ".classe", "p", "div > span" etc. É o mais versátil. querySelectorAll() retorna todos os elementos que casam com o seletor.',
+      },
+      {
+        id: 'task-5',
+        type: 'fill',
+        title: 'Complete o código de manipulação DOM',
+        description: 'Preencha as lacunas para selecionar um input e exibir seu valor:',
+        code: 'const campo = document.{{blank}}("#campo")\nconst btn = document.getElementById("btn")\n\nbtn.addEventListener("{{blank}}", function() {\n  const valor = campo.{{blank}}\n  document.getElementById("saida").textContent = valor\n})',
+        blanks: ['querySelector', 'click', 'value'],
+        hint: 'querySelector usa seletor CSS. O evento é "click". Para ler o que o usuário digitou em um input, use .value',
+        successMessage: 'Correto! querySelector, click e .value — trio essencial do DOM!',
+      },
+      {
+        id: 'task-6',
+        type: 'code',
+        title: 'Adicione uma classe dinamicamente',
+        description: 'Ao clicar no botão <code>id="btn"</code>, adicione a classe <code>"ativo"</code> ao elemento <code>id="caixa"</code> usando <code>classList.add()</code>.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <head>\n    <style>\n      .ativo { background: #3b82f6; color: white; padding: 8px; }\n    </style>\n  </head>\n  <body>\n    <div id="caixa">Caixa</div>\n    <button id="btn">Ativar</button>\n    <script>\n      // Adicione a classe "ativo" à caixa ao clicar no botão\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const btn = doc.getElementById('btn')
+          const caixa = doc.getElementById('caixa')
+          if (!btn || !caixa) return false
+          btn.click()
+          return caixa.classList.contains('ativo')
+        },
+        successMessage: 'Ótimo! classList.add() é a forma mais limpa de aplicar estilos dinamicamente.',
+        hint: "document.getElementById('btn').addEventListener('click', function() { document.getElementById('caixa').classList.add('ativo') })",
+      },
+      {
+        id: 'task-7',
+        type: 'drag',
+        title: 'Ordene: criar e inserir elemento no DOM',
+        description: 'Qual é a ordem correta para criar um novo item e adicioná-lo a uma lista?',
+        blocks: [
+          'const lista = document.getElementById("lista")',
+          'const item = document.createElement("li")',
+          'item.textContent = "Novo item"',
+          'lista.appendChild(item)',
+        ],
+        hint: 'Primeiro selecione o container, depois crie o novo elemento, defina seu conteúdo e por fim insira na página.',
+        successMessage: 'Perfeito! Criar → configurar → inserir é a sequência correta.',
+      },
+      {
+        id: 'task-8',
+        type: 'bug',
+        title: 'Event listener com erro de digitação',
+        description: 'O código abaixo não funciona porque o nome do evento está errado. Encontre e corrija!',
+        buggyCode: '<button id="btn">Clique</button>\n<p id="msg"></p>\n<script>\n  document.getElementById("btn")\n    .addEventListener("clik", function() {\n      document.getElementById("msg").textContent = "Funcionou!"\n    })\n</script>',
+        validate: (doc) => {
+          const scripts = doc.querySelectorAll('script')
+          for (const s of scripts) {
+            if (s.textContent.includes('"click"') || s.textContent.includes("'click'")) return true
+          }
+          return false
+        },
+        successMessage: 'Correto! O evento correto é "click" — com dois c\'s no final.',
+        hint: 'O nome do evento de clique é "click". Verifique a ortografia.',
+        lines: [
+          '<button id="btn">Clique</button>',
+          '<p id="msg"></p>',
+          '<script>',
+          '  document.getElementById("btn")',
+          '    .addEventListener("clik", function() {',
+          '      document.getElementById("msg").textContent = "Funcionou!"',
+          '    })',
+          '</script>',
+        ],
+        bugLine: 4,
+        explanation: '"clik" está com erro de digitação. O evento correto é "click" (com ck no final). Nomes de eventos devem ser escritos exatamente como a especificação define.',
+      },
+      {
+        id: 'task-9',
+        type: 'fill',
+        title: 'classList: add, remove, toggle',
+        description: 'Complete o código para manipular classes CSS com JavaScript:',
+        code: 'const el = document.getElementById("caixa")\n\nel.classList.{{blank}}("ativo")    // adiciona\nel.classList.{{blank}}("ativo")    // remove\nel.classList.{{blank}}("ativo")    // alterna (add se não tem, remove se tem)',
+        blanks: ['add', 'remove', 'toggle'],
+        hint: 'add adiciona, remove retira, toggle alterna entre os dois.',
+        successMessage: 'Ótimo! classList.add/remove/toggle são os métodos mais usados para CSS dinâmico.',
+      },
+      {
+        id: 'task-10',
+        type: 'quiz',
+        question: 'Qual a diferença entre textContent e innerHTML?',
+        options: [
+          'Não há diferença — são sinônimos',
+          'textContent insere HTML; innerHTML insere texto simples',
+          'textContent insere texto simples (seguro); innerHTML interpreta HTML (mas pode ser perigoso)',
+          'textContent funciona só em <p>; innerHTML em qualquer elemento',
+        ],
+        correct: 2,
+        explanation: 'textContent é mais seguro pois trata tudo como texto puro — nada é interpretado como HTML. innerHTML interpreta o conteúdo como HTML (útil para inserir elementos), mas pode causar vulnerabilidades (XSS) se o conteúdo vier de fontes externas.',
+      },
+    ],
+  },
+  {
     id: 'modulo-8',
-    number: '08',
+    number: '10',
+    stage: 'Super Avançado',
     title: 'Seu primeiro projeto completo',
     description: 'Una HTML, CSS e JavaScript para criar uma página interativa do zero.',
     color: '#06b6d4',

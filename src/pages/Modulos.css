@@ -24,6 +24,19 @@
   color: var(--color-gray);
 }
 
+.modulos__card-stage {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mod-color, var(--color-accent));
+  background: color-mix(in srgb, var(--mod-color, var(--color-accent)) 12%, transparent);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-1);
+}
+
 .modulos__overall-bar {
   height: 6px;
   background: var(--color-bg-alt);

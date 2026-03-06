@@ -179,7 +179,10 @@ export default function Dashboard() {
                 <span className="dash__module-row-num">{mod.number}</span>
 
                 <div className="dash__module-row-info">
-                  <span className="dash__module-row-title">{mod.title}</span>
+                  <div className="dash__module-row-header">
+                    <span className="dash__module-row-title">{mod.title}</span>
+                    {mod.stage && <span className="dash__module-row-stage">{mod.stage}</span>}
+                  </div>
                   <div className="dash__module-row-bar">
                     <div className="dash__module-row-fill" style={{ width: `${pct}%` }} />
                   </div>
