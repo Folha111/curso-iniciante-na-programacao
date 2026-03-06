@@ -103,7 +103,69 @@ Conhecendo HTML, CSS e JavaScript, você pode seguir para:
 - **Editor de código**: VS Code (gratuito, da Microsoft)
 - **Navegador + DevTools**: Chrome com F12 abre as ferramentas de desenvolvedor
 - **Git**: sistema de controle de versão para salvar e compartilhar código
-- **GitHub**: plataforma online para hospedar projetos com Git`,
+- **GitHub**: plataforma online para hospedar projetos com Git
+
+## Uma breve história da programação
+
+A programação existe há mais tempo do que a maioria das pessoas imagina. Em 1843, **Ada Lovelace** escreveu o que é considerado o primeiro algoritmo — para uma máquina que sequer havia sido construída ainda. Ela é reconhecida como a primeira programadora da história.
+
+Nos anos 1940, os computadores eram máquinas gigantescas que ocupavam salas inteiras. Para programá-los, os cientistas precisavam conectar fios físicos — não havia teclado, nem código, nem tela. Cada "instrução" era literalmente uma conexão elétrica.
+
+Na década de 1950, surgiram as primeiras **linguagens de alto nível** — linguagens que humanos conseguiam escrever e ler com mais facilidade. Antes disso, os programadores escreviam diretamente em código binário (zeros e uns) ou em Assembly (abreviações de instruções de máquina).
+
+**Marcos importantes:**
+- **1957** — Fortran, primeira linguagem de alto nível amplamente usada (para cálculos científicos)
+- **1972** — C, a linguagem que influenciou quase todas as outras (ainda usada hoje)
+- **1991** — Python, criada para ser simples e legível
+- **1995** — JavaScript e Java nascem no mesmo ano
+- **1995** — PHP surge para criar páginas web dinâmicas
+- **2009** — Node.js permite rodar JavaScript no servidor
+
+## Por que tantas linguagens existem?
+
+Cada linguagem foi criada para resolver um problema específico. Não existe "a melhor linguagem" — existe a linguagem certa para cada situação:
+
+- **Python** → ciência de dados, inteligência artificial, automação
+- **JavaScript** → web (front-end e back-end com Node.js)
+- **Java / Kotlin** → apps Android, sistemas corporativos
+- **Swift** → apps iOS e macOS
+- **C / C++** → sistemas operacionais, jogos, hardware
+- **SQL** → bancos de dados relacionais
+- **Rust** → sistemas de alto desempenho com segurança de memória
+
+## Como um computador entende código?
+
+Quando você escreve \`let x = 5\` em JavaScript, o computador não entende isso diretamente. O código passa por um processo de tradução:
+
+1. **Código-fonte** → o que você escreve (texto legível para humanos)
+2. **Interpretador / Compilador** → traduz para instruções de máquina
+3. **Código de máquina** → zeros e uns que o processador executa
+
+Linguagens **compiladas** (C, Java) traduzem tudo antes de executar — resultado: mais rápido.
+Linguagens **interpretadas** (Python, JavaScript) traduzem linha por linha — resultado: mais flexível.
+
+## O que é open source?
+
+**Open source** (código aberto) significa que o código-fonte de um projeto é público — qualquer pessoa pode ler, usar, modificar e contribuir. A maior parte das ferramentas que você vai usar são open source:
+
+- Linux (sistema operacional usado em 96% dos servidores)
+- VS Code (editor da Microsoft)
+- React, Vue, Angular (frameworks web)
+- Python, Node.js, PostgreSQL
+
+O movimento open source revolucionou a tecnologia: em vez de cada empresa reinventar tudo do zero, o conhecimento é compartilhado globalmente.
+
+## A mentalidade de um programador
+
+Programar não é só escrever código. É uma forma de pensar. Bons programadores desenvolvem algumas características específicas:
+
+**Pensamento decomposicional** — quebrar problemas grandes em partes menores. Um sistema complexo é sempre uma coleção de partes simples bem conectadas.
+
+**Tolerância a erros** — errar é parte do processo. Todo programador, do iniciante ao sênior, passa horas depurando erros. A diferença está em não desistir e em aprender com cada erro.
+
+**Curiosidade constante** — a tecnologia muda rápido. Programadores precisam estar sempre aprendendo. As melhores oportunidades vão para quem não para de estudar.
+
+**Pesquisa eficiente** — nenhum programador memoriza tudo. Saber pesquisar no Google, ler documentações e usar o Stack Overflow é tão importante quanto saber programar.`,
     tasks: [
       {
         id: 'task-1',
@@ -410,7 +472,91 @@ Benefícios:
 | Lógica | Código roda mas dá resultado errado | usar / em vez de * |
 | Execução | Erro que ocorre durante a execução | divisão por zero |
 
-O **erro de lógica** é o mais perigoso porque o programa parece funcionar normalmente.`,
+O **erro de lógica** é o mais perigoso porque o programa parece funcionar normalmente.
+
+## Como pensar em algoritmos no dia a dia
+
+A melhor forma de aprender lógica de programação é reconhecer algoritmos no cotidiano. Você já executa algoritmos o tempo todo sem perceber:
+
+**Fazer um café:**
+\`\`\`
+INÍCIO
+  SE não tem café em pó ENTÃO ir ao mercado
+  Colocar água na chaleira
+  Ligar a chaleira
+  ENQUANTO água não ferveu FAÇA esperar
+  Colocar café no filtro
+  Despejar água quente no filtro
+  ENQUANTO café não coou FAÇA esperar
+  Servir na xícara
+FIM
+\`\`\`
+
+**Atravessar a rua:**
+\`\`\`
+INÍCIO
+  Chegar na calçada
+  ENQUANTO sinal vermelho para pedestres FAÇA esperar
+  Olhar para os dois lados
+  SE nenhum carro vindo ENTÃO atravessar
+  SENÃO esperar e verificar novamente
+FIM
+\`\`\`
+
+Perceba que qualquer processo do mundo real pode ser transformado em um algoritmo. Essa é a habilidade fundamental de um programador.
+
+## Decomposição: a arte de dividir para conquistar
+
+Um dos princípios mais importantes da computação é a **decomposição** — quebrar um problema complexo em problemas menores e mais simples.
+
+Exemplo: "Criar um sistema de login"
+
+Isso parece grande e assustador. Mas decompondo:
+1. Criar um formulário com campos de email e senha
+2. Ao clicar em "Entrar", ler os valores dos campos
+3. Verificar se o email existe na base de dados
+4. Se existe, comparar a senha digitada com a senha armazenada
+5. Se correta, redirecionar para a página principal
+6. Se incorreta, exibir mensagem de erro
+
+Cada um desses passos é um algoritmo pequeno e resolvível. Juntos, formam o sistema completo.
+
+## Abstração: ignorar o que não importa
+
+**Abstração** é a capacidade de focar no que é essencial e ignorar os detalhes irrelevantes.
+
+Quando você usa a função \`Exibir()\` no pseudocódigo, não precisa se preocupar com como o computador acende cada pixel da tela para mostrar as letras. Você abstrai esse detalhe e foca no problema que está resolvendo.
+
+Esse é exatamente o que as linguagens de programação fazem: abstraem as instruções de máquina para que você escreva em um nível mais humano.
+
+## Reconhecimento de padrões
+
+Programadores experientes reconhecem padrões rapidamente. Quando veem um problema novo, percebem: "isso é parecido com aquele problema que resolvi antes."
+
+Exemplo de padrão: **verificar se algo é válido antes de usar**
+\`\`\`
+SE dado existe E dado é válido ENTÃO
+  processar dado
+SENÃO
+  exibir erro
+\`\`\`
+
+Esse padrão aparece em praticamente todo sistema que já foi criado. Login, cadastro, formulários, APIs — todos fazem essa verificação.
+
+## A importância de testar
+
+Nenhum algoritmo está completo sem testes. Ao criar um algoritmo, sempre pergunte:
+
+- **Caso normal**: o que acontece com uma entrada esperada?
+- **Caso extremo**: o que acontece com valores muito grandes ou muito pequenos?
+- **Caso inválido**: o que acontece se a entrada for nula ou do tipo errado?
+
+Exemplo: algoritmo que divide dois números
+- Normal: 10 / 2 = 5 ✓
+- Extremo: 999999 / 1 = 999999 ✓
+- Inválido: 10 / 0 = ERRO (divisão por zero — precisa de tratamento!)
+
+Todo bom programador pensa nos casos inválidos antes de escrever uma linha de código.`,
     tasks: [
       {
         id: 'task-1',
@@ -743,7 +889,103 @@ A tag \`<img>\` não tem fechamento (é uma tag vazia).
 <em>itálico com ênfase semântica</em>
 <mark>texto marcado (amarelo)</mark>
 <code>trecho de código</code>
-\`\`\``,
+\`\`\`
+
+## O que são atributos HTML?
+
+Tags HTML podem receber **atributos** — informações extras que modificam o comportamento ou aparência do elemento:
+
+\`\`\`html
+<a href="https://google.com" target="_blank" rel="noopener">Abrir no Google</a>
+\`\`\`
+
+- \`href\` — o destino do link
+- \`target="_blank"\` — abre em nova aba
+- \`rel="noopener"\` — boa prática de segurança ao abrir em nova aba
+
+Outros atributos comuns:
+
+\`\`\`html
+<img src="foto.jpg" alt="Minha foto" width="300" height="200" />
+<input type="text" placeholder="Digite aqui" required />
+<div id="principal" class="container destaque">Conteúdo</div>
+\`\`\`
+
+- \`id\` — identificador único (só pode existir um por página)
+- \`class\` — classe CSS (pode repetir em vários elementos)
+- \`placeholder\` — texto de dica em inputs
+- \`required\` — campo obrigatório em formulários
+
+## Tags auto-fechantes (void elements)
+
+Algumas tags HTML não têm conteúdo interno e não precisam de tag de fechamento:
+
+\`\`\`html
+<img src="imagem.jpg" alt="Descrição" />
+<input type="text" />
+<br />      <!-- quebra de linha -->
+<hr />      <!-- linha horizontal -->
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="styles.css" />
+\`\`\`
+
+No HTML5, a barra final (\`/>\`) é opcional para essas tags, mas é boa prática mantê-la.
+
+## Elementos de bloco vs. inline
+
+Todos os elementos HTML se comportam de duas formas básicas:
+
+**Elementos de bloco** — ocupam toda a largura disponível e criam uma quebra de linha antes e depois:
+- \`<div>\`, \`<p>\`, \`<h1>\` a \`<h6>\`, \`<ul>\`, \`<ol>\`, \`<li>\`, \`<table>\`, \`<header>\`, \`<main>\`, \`<footer>\`, \`<section>\`
+
+**Elementos inline** — ficam no fluxo do texto, ocupando apenas o espaço necessário:
+- \`<span>\`, \`<a>\`, \`<strong>\`, \`<em>\`, \`<img>\`, \`<input>\`, \`<button>\`, \`<code>\`
+
+Isso explica por que \`<p>\` sempre fica em uma linha separada, mas \`<a>\` dentro de um \`<p>\` fica junto com o texto.
+
+## Regras de aninhamento
+
+Elementos HTML precisam ser fechados na ordem inversa em que foram abertos:
+
+\`\`\`html
+<!-- ✅ Correto -->
+<p>Texto com <strong>negrito <em>e itálico</em></strong> aqui.</p>
+
+<!-- ❌ Errado — cruzamento de tags -->
+<p>Texto com <strong>negrito <em>e itálico</strong></em> aqui.</p>
+\`\`\`
+
+Além disso, nem todo elemento pode estar dentro de qualquer outro:
+- \`<p>\` não pode conter \`<div>\`
+- \`<ul>\` só pode conter \`<li>\` como filhos diretos
+- \`<a>\` não pode conter outro \`<a>\`
+
+## Entidades HTML
+
+Alguns caracteres têm significado especial no HTML e precisam ser escapados:
+
+| Caractere | Entidade HTML | Uso |
+| --- | --- | --- |
+| \`<\` | \`&lt;\` | menor que |
+| \`>\` | \`&gt;\` | maior que |
+| \`&\` | \`&amp;\` | e comercial |
+| \`"\` | \`&quot;\` | aspas |
+| espaço extra | \`&nbsp;\` | espaço não quebrável |
+
+\`\`\`html
+<p>O operador &lt; significa "menor que".</p>
+<p>Preço: R$&nbsp;29,90</p>
+\`\`\`
+
+## A evolução do HTML
+
+- **HTML 1.0 (1991)** — criado por Tim Berners-Lee, apenas texto e links
+- **HTML 2.0 (1995)** — adicionou formulários
+- **HTML 4.01 (1999)** — versão dominante por anos
+- **XHTML (2000)** — tentativa de tornar HTML mais rígido (não pegou bem)
+- **HTML5 (2014)** — versão atual: vídeo nativo, canvas, geolocalização, localStorage, tags semânticas
+
+HTML5 foi um marco porque eliminou a dependência de plugins como Flash para rodar vídeos e jogos nos browsers.`,
     tasks: [
       {
         id: 'task-1',
@@ -1057,7 +1299,109 @@ Isso permite reutilizar o mesmo CSS em múltiplas páginas.
 </body>
 \`\`\`
 
-O `<script>` vai no final do `<body>` para o HTML ser carregado antes do JavaScript executar.`,
+O \`<script>\` vai no final do \`<body>\` para o HTML ser carregado antes do JavaScript executar.
+
+## Acessibilidade (a11y)
+
+Acessibilidade é fazer com que seu site funcione para todas as pessoas, inclusive aquelas com deficiências visuais, auditivas ou motoras.
+
+Boas práticas essenciais:
+
+**1. Sempre use o atributo \`alt\` em imagens**
+\`\`\`html
+<img src="grafico.png" alt="Gráfico mostrando crescimento de 30% nas vendas" />
+<img src="decorativo.png" alt="" /> <!-- imagem decorativa: alt vazio -->
+\`\`\`
+
+**2. Use labels em todos os campos de formulário**
+\`\`\`html
+<!-- ✅ Acessível -->
+<label for="email">E-mail:</label>
+<input type="email" id="email" />
+
+<!-- ❌ Inacessível para leitores de tela -->
+<input type="email" placeholder="E-mail" />
+\`\`\`
+
+**3. Use headings em ordem hierárquica**
+\`\`\`html
+<h1>Título principal</h1>    <!-- só um por página -->
+  <h2>Seção</h2>
+    <h3>Subseção</h3>
+  <h2>Outra seção</h2>
+\`\`\`
+
+**4. Use tags semânticas** — \`<nav>\`, \`<main>\`, \`<article>\`, \`<aside>\` dizem ao leitor de tela qual é a função de cada parte da página.
+
+Cerca de **15% da população mundial** tem algum tipo de deficiência. Acessibilidade não é extra — é responsabilidade.
+
+## SEO: como o Google lê seu HTML
+
+**SEO** (Search Engine Optimization) é o conjunto de práticas para aparecer bem nos resultados de busca. O Google "lê" seu HTML para entender o conteúdo da página.
+
+**O que o Google valoriza:**
+
+\`\`\`html
+<head>
+  <title>Aprenda HTML do zero em 30 dias | Curso Iniciante</title>
+  <meta name="description" content="Curso completo de HTML para iniciantes absolutos. Do zero ao seu primeiro site." />
+</head>
+<body>
+  <h1>Aprenda HTML do Zero</h1>  <!-- apenas UM h1 por página -->
+  <p>Texto relevante com palavras-chave naturais.</p>
+  <img src="html.jpg" alt="Código HTML sendo escrito" />  <!-- alt conta para SEO -->
+  <a href="/proxima-aula">Próxima aula</a>  <!-- texto descritivo no link -->
+</body>
+\`\`\`
+
+**O que prejudica o SEO:**
+- Múltiplos \`<h1>\` na mesma página
+- Imagens sem \`alt\`
+- Links com texto genérico ("clique aqui")
+- Página sem \`<title>\`
+- Conteúdo duplicado
+
+## Formulários em detalhe
+
+Formulários são a principal forma de coletar dados do usuário:
+
+\`\`\`html
+<form action="/enviar" method="POST">
+  <!-- Texto -->
+  <input type="text" name="nome" placeholder="Seu nome" />
+
+  <!-- Email (valida formato automaticamente) -->
+  <input type="email" name="email" />
+
+  <!-- Senha (esconde o texto) -->
+  <input type="password" name="senha" />
+
+  <!-- Número -->
+  <input type="number" name="idade" min="1" max="120" />
+
+  <!-- Caixa de seleção -->
+  <input type="checkbox" name="termos" id="termos" />
+  <label for="termos">Aceito os termos</label>
+
+  <!-- Opção única (radio) -->
+  <input type="radio" name="plano" value="gratuito" /> Gratuito
+  <input type="radio" name="plano" value="premium" /> Premium
+
+  <!-- Seleção de lista -->
+  <select name="pais">
+    <option value="br">Brasil</option>
+    <option value="pt">Portugal</option>
+  </select>
+
+  <!-- Área de texto -->
+  <textarea name="mensagem" rows="4"></textarea>
+
+  <!-- Botão de envio -->
+  <button type="submit">Enviar</button>
+</form>
+\`\`\`
+
+O atributo \`name\` em cada campo é o identificador que será enviado ao servidor junto com o valor digitado.`,
     tasks: [
       {
         id: 'task-1',
@@ -1316,7 +1660,118 @@ div {
 | --- | --- |
 | \`h1\` | todas as tags h1 |
 | \`.destaque\` | elementos com class="destaque" |
-| \`#titulo\` | elemento com id="titulo" |`,
+| \`#titulo\` | elemento com id="titulo" |
+
+## A cascata do CSS (o "C" de CSS)
+
+CSS significa **Cascading Style Sheets** — "Folhas de Estilo em Cascata". A "cascata" descreve como o navegador decide qual estilo aplicar quando há conflitos:
+
+**1. Especificidade** — estilos mais específicos vencem:
+\`\`\`css
+p { color: blue; }               /* menos específico */
+.texto { color: green; }         /* mais específico */
+#titulo { color: red; }          /* ainda mais específico */
+\`\`\`
+Se um elemento tem id="titulo" e class="texto" e é uma \`<p>\`, a cor será **vermelho** (ID ganha).
+
+**2. Ordem** — quando a especificidade é igual, o último declarado vence:
+\`\`\`css
+p { color: blue; }
+p { color: red; }   /* este vence — veio por último */
+\`\`\`
+
+**3. Herança** — filhos herdam algumas propriedades dos pais:
+\`\`\`css
+body {
+  font-family: Arial;   /* todos os filhos herdam */
+  color: #333;          /* todos os filhos herdam */
+}
+\`\`\`
+Propriedades herdadas: \`color\`, \`font-family\`, \`font-size\`. Não herdadas: \`margin\`, \`padding\`, \`border\`.
+
+## Pseudo-classes
+
+Pseudo-classes permitem estilizar um elemento **em um estado específico**:
+
+\`\`\`css
+/* Ao passar o mouse */
+a:hover { color: red; }
+
+/* Quando o campo está em foco */
+input:focus { border-color: blue; outline: none; }
+
+/* Botão sendo clicado */
+button:active { transform: scale(0.98); }
+
+/* Link já visitado */
+a:visited { color: purple; }
+
+/* Primeiro filho */
+li:first-child { font-weight: bold; }
+
+/* Último filho */
+li:last-child { border-bottom: none; }
+
+/* Filho de posição específica */
+tr:nth-child(even) { background: #f5f5f5; }  /* linhas pares */
+\`\`\`
+
+## Pseudo-elementos
+
+Pseudo-elementos criam "elementos virtuais" que não existem no HTML:
+
+\`\`\`css
+/* Conteúdo antes do elemento */
+h2::before {
+  content: '→ ';
+  color: blue;
+}
+
+/* Conteúdo depois do elemento */
+p::after {
+  content: ' ✓';
+}
+
+/* Primeira letra */
+p::first-letter {
+  font-size: 2em;
+  font-weight: bold;
+}
+\`\`\`
+
+## Unidades de medida
+
+CSS tem várias unidades para expressar tamanhos:
+
+| Unidade | Significado | Exemplo |
+| --- | --- | --- |
+| \`px\` | pixels (absoluto) | \`font-size: 16px\` |
+| \`%\` | relativo ao elemento pai | \`width: 50%\` |
+| \`em\` | relativo ao font-size do elemento | \`padding: 1.5em\` |
+| \`rem\` | relativo ao font-size do root (html) | \`font-size: 1.25rem\` |
+| \`vw\` | porcentagem da largura da viewport | \`width: 100vw\` |
+| \`vh\` | porcentagem da altura da viewport | \`height: 100vh\` |
+
+**Dica profissional:** use \`rem\` para fontes (respeita as configurações de acessibilidade do usuário) e \`px\` para bordas e sombras.
+
+## CSS Reset
+
+Por padrão, cada navegador aplica seus próprios estilos em elementos HTML. Chrome, Firefox e Safari têm diferenças sutis. Para garantir consistência, muitos projetos começam com um **CSS Reset**:
+
+\`\`\`css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+\`\`\`
+
+O seletor \`*\` seleciona **todos** os elementos da página. Essa é a única situação em que usá-lo faz sentido.`,
     tasks: [
       {
         id: 'task-1',
@@ -1663,7 +2118,123 @@ button {
 }
 \`\`\`
 
-Variáveis CSS permitem reutilizar valores e mudar o tema inteiro em um só lugar.`,
+Variáveis CSS permitem reutilizar valores e mudar o tema inteiro em um só lugar.
+
+## Position: controlando onde o elemento aparece
+
+A propriedade \`position\` muda como um elemento é posicionado na página:
+
+\`\`\`css
+/* Padrão — flui com o documento */
+div { position: static; }
+
+/* Relativo à sua posição normal */
+div { position: relative; top: 10px; left: 20px; }
+
+/* Relativo ao ancestral posicionado mais próximo */
+.tooltip { position: absolute; top: 0; right: 0; }
+
+/* Fixo na tela — não rola com o scroll */
+.navbar { position: fixed; top: 0; width: 100%; }
+
+/* Fixo dentro de um container até sair da tela */
+.sidebar-title { position: sticky; top: 20px; }
+\`\`\`
+
+**Caso de uso clássico:** botão "voltar ao topo" fixo no canto da tela:
+\`\`\`css
+.btn-topo {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+}
+\`\`\`
+
+## Z-index: sobreposição de elementos
+
+\`z-index\` controla qual elemento fica "por cima" quando há sobreposição. Funciona apenas em elementos com \`position\` diferente de \`static\`:
+
+\`\`\`css
+.modal { position: fixed; z-index: 1000; }
+.overlay { position: fixed; z-index: 999; }
+.navbar { position: sticky; z-index: 100; }
+\`\`\`
+
+Quanto maior o número, mais à frente o elemento aparece.
+
+## Transições e animações
+
+CSS pode animar mudanças de estilo sem JavaScript:
+
+\`\`\`css
+button {
+  background: blue;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+  background: darkblue;
+  transform: scale(1.05);
+}
+\`\`\`
+
+\`transition\` recebe: **propriedade duração timing-function**
+
+Para animações mais complexas, use \`@keyframes\`:
+\`\`\`css
+@keyframes pulsar {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.icone {
+  animation: pulsar 1.5s infinite;
+}
+\`\`\`
+
+## Media Queries: design responsivo
+
+Media queries permitem aplicar estilos diferentes dependendo do tamanho da tela:
+
+\`\`\`css
+/* Estilo padrão (mobile first) */
+.container {
+  padding: 16px;
+  flex-direction: column;
+}
+
+/* Tablet: 768px ou mais */
+@media (min-width: 768px) {
+  .container {
+    padding: 24px;
+    flex-direction: row;
+  }
+}
+
+/* Desktop: 1024px ou mais */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+\`\`\`
+
+**Mobile First** é a abordagem profissional: comece estilizando para telas pequenas e use \`min-width\` para adicionar estilos em telas maiores. É mais fácil adicionar do que remover.
+
+## Overflow: o que acontece quando o conteúdo é grande demais
+
+\`\`\`css
+div {
+  overflow: visible;  /* padrão: conteúdo sai do box */
+  overflow: hidden;   /* corta o conteúdo que passa */
+  overflow: scroll;   /* sempre mostra scrollbar */
+  overflow: auto;     /* scrollbar só quando necessário */
+}
+\`\`\`
+
+Muito útil para criar áreas com scroll interno ou esconder conteúdo animado.`,
     tasks: [
       {
         id: 'task-1',
@@ -1970,7 +2541,130 @@ String(42)            // '42' (número → string)
 Boolean(0)            // false
 Boolean('texto')      // true (qualquer string não-vazia é truthy)
 parseInt('42px')      // 42 (extrai número do início da string)
-\`\`\``,
+\`\`\`
+
+## Como o JavaScript funciona no navegador
+
+Quando o navegador carrega uma página, ele cria dois ambientes separados:
+
+**1. Processo de renderização** — processa HTML e CSS, cria a árvore visual
+**2. Engine JavaScript** — executa o código JS (Chrome usa a V8, Firefox usa SpiderMonkey)
+
+O JavaScript é **single-threaded** — executa uma coisa de cada vez, na ordem que foi escrito. Mas tem um mecanismo chamado **Event Loop** que permite lidar com operações assíncronas (como esperar uma resposta de um servidor) sem travar a página.
+
+## Escopo e hoisting
+
+**Escopo** define onde uma variável existe:
+
+\`\`\`js
+let global = 'visível em todo lugar'
+
+function minhaFuncao() {
+  let local = 'só existe aqui dentro'
+  console.log(global)  // ✅ funciona
+  console.log(local)   // ✅ funciona
+}
+
+console.log(local)     // ❌ ReferenceError: local is not defined
+\`\`\`
+
+**Hoisting** (içamento): \`var\` e declarações de função são "içadas" para o topo do escopo:
+
+\`\`\`js
+console.log(x)  // undefined (não dá erro por causa do hoisting)
+var x = 5
+
+// Com let e const:
+console.log(y)  // ❌ ReferenceError (let/const NÃO sofrem hoisting da mesma forma)
+let y = 5
+\`\`\`
+
+Por isso é melhor sempre usar \`let\` e \`const\` — o comportamento é mais previsível.
+
+## Métodos de String
+
+Strings têm vários métodos úteis:
+
+\`\`\`js
+const nome = 'maria silva'
+
+nome.toUpperCase()        // 'MARIA SILVA'
+nome.toLowerCase()        // 'maria silva' (já estava)
+nome.trim()               // remove espaços das bordas
+'  olá  '.trim()          // 'olá'
+
+nome.includes('silva')    // true
+nome.startsWith('maria')  // true
+nome.endsWith('silva')    // true
+
+nome.replace('silva', 'santos')  // 'maria santos'
+nome.split(' ')           // ['maria', 'silva']
+nome.length               // 11
+
+// Pegar parte de uma string:
+'JavaScript'.slice(0, 4)  // 'Java'
+'JavaScript'.slice(4)     // 'Script'
+
+// Repetir:
+'ha'.repeat(3)            // 'hahaha'
+\`\`\`
+
+## O objeto Math
+
+JavaScript tem um objeto embutido com funções matemáticas:
+
+\`\`\`js
+Math.round(4.7)    // 5 — arredonda para o inteiro mais próximo
+Math.floor(4.9)    // 4 — sempre arredonda para baixo
+Math.ceil(4.1)     // 5 — sempre arredonda para cima
+Math.abs(-10)      // 10 — valor absoluto
+Math.max(3, 7, 2)  // 7 — maior valor
+Math.min(3, 7, 2)  // 2 — menor valor
+Math.sqrt(16)      // 4 — raiz quadrada
+Math.pow(2, 8)     // 256 — potência (2^8)
+Math.PI            // 3.14159... — constante PI
+
+// Número aleatório entre 0 e 1:
+Math.random()
+
+// Número inteiro aleatório entre 1 e 10:
+Math.floor(Math.random() * 10) + 1
+\`\`\`
+
+## Métodos de Array
+
+Arrays têm métodos muito poderosos para transformar dados:
+
+\`\`\`js
+const numeros = [1, 2, 3, 4, 5]
+
+// forEach — executa uma função para cada item
+numeros.forEach(n => console.log(n))
+
+// map — transforma cada item, retorna novo array
+const dobrados = numeros.map(n => n * 2)
+// [2, 4, 6, 8, 10]
+
+// filter — retorna apenas os itens que passam no teste
+const pares = numeros.filter(n => n % 2 === 0)
+// [2, 4]
+
+// find — retorna o PRIMEIRO item que passa no teste
+const primeiroPar = numeros.find(n => n % 2 === 0)
+// 2
+
+// reduce — acumula um resultado
+const soma = numeros.reduce((acc, n) => acc + n, 0)
+// 15
+
+// includes — verifica se um valor existe
+numeros.includes(3)  // true
+
+// indexOf — posição de um valor
+numeros.indexOf(3)   // 2
+\`\`\`
+
+Esses métodos (\`map\`, \`filter\`, \`reduce\`) são fundamentais no JavaScript moderno e usados em todo framework.`,
     tasks: [
       {
         id: 'task-1',
@@ -2292,6 +2986,118 @@ function exemplo() {
 }
 
 console.log(local) // ERRO — local não existe aqui
+\`\`\`
+
+## Callbacks: funções como argumento
+
+Em JavaScript, funções são "cidadãs de primeira classe" — podem ser passadas como argumentos para outras funções:
+
+\`\`\`js
+function executar(funcao) {
+  funcao()
+}
+
+function dizerOla() {
+  console.log('Olá!')
+}
+
+executar(dizerOla)  // 'Olá!'
+
+// Forma compacta com arrow function:
+executar(() => console.log('Olá!'))
+\`\`\`
+
+Esse padrão é chamado de **callback** e é fundamental em JavaScript — usado em eventos, animações, requisições HTTP e muito mais.
+
+## Parâmetros padrão
+
+Funções podem ter valores padrão para os parâmetros:
+
+\`\`\`js
+function saudar(nome = 'visitante', saudacao = 'Olá') {
+  return \`\${saudacao}, \${nome}!\`
+}
+
+saudar('Ana', 'Boa tarde')  // 'Boa tarde, Ana!'
+saudar('João')              // 'Olá, João!'
+saudar()                    // 'Olá, visitante!'
+\`\`\`
+
+## Tratamento de erros: try/catch
+
+Quando algo pode dar errado (operação inválida, dado ausente, servidor offline), use \`try/catch\`:
+
+\`\`\`js
+try {
+  const resultado = JSON.parse('isso não é JSON válido')
+  console.log(resultado)
+} catch (erro) {
+  console.log('Deu erro:', erro.message)
+  // continua executando sem travar
+}
+\`\`\`
+
+Sem \`try/catch\`, um erro não tratado **para a execução do programa inteiro**.
+
+## Desestruturação
+
+Forma moderna e compacta de extrair valores de arrays e objetos:
+
+\`\`\`js
+// Array:
+const cores = ['vermelho', 'verde', 'azul']
+const [primeira, segunda] = cores
+// primeira = 'vermelho', segunda = 'verde'
+
+// Objeto:
+const pessoa = { nome: 'Ana', idade: 28, cidade: 'SP' }
+const { nome, idade } = pessoa
+// nome = 'Ana', idade = 28
+
+// Em parâmetros de função:
+function mostrar({ nome, idade }) {
+  console.log(\`\${nome} tem \${idade} anos\`)
+}
+mostrar(pessoa)  // 'Ana tem 28 anos'
+\`\`\`
+
+## Spread e Rest
+
+**Spread (\`...\`)** — expande um array ou objeto:
+\`\`\`js
+const a = [1, 2, 3]
+const b = [4, 5, 6]
+const c = [...a, ...b]       // [1, 2, 3, 4, 5, 6]
+
+const config = { cor: 'azul' }
+const novo = { ...config, tamanho: 'grande' }
+// { cor: 'azul', tamanho: 'grande' }
+\`\`\`
+
+**Rest (\`...\`)** — coleta múltiplos argumentos em um array:
+\`\`\`js
+function somar(...numeros) {
+  return numeros.reduce((acc, n) => acc + n, 0)
+}
+somar(1, 2, 3, 4, 5)  // 15
+\`\`\`
+
+## Short-circuit evaluation
+
+JavaScript usa avaliação "curto-circuito" com \`&&\` e \`||\`:
+
+\`\`\`js
+// && retorna o primeiro valor falsy ou o último valor:
+false && 'qualquer coisa'   // false (parou no false)
+true && 'valor'             // 'valor'
+
+// || retorna o primeiro valor truthy:
+null || 'padrão'            // 'padrão'
+'texto' || 'padrão'         // 'texto'
+
+// Uso prático:
+const nome = usuario?.nome || 'Anônimo'
+const isAdmin = usuario && usuario.role === 'admin'
 \`\`\``,
     tasks: [
       {
@@ -2551,7 +3357,136 @@ Eventos mais comuns:
 const novoItem = document.createElement('li')
 novoItem.textContent = 'Novo item'
 document.getElementById('lista').appendChild(novoItem)
-\`\`\``,
+\`\`\`
+
+## A árvore do DOM
+
+O DOM organiza os elementos HTML em uma estrutura de árvore:
+
+\`\`\`
+document
+└── html
+    ├── head
+    │   ├── title
+    │   └── meta
+    └── body
+        ├── header
+        │   └── h1
+        ├── main
+        │   ├── p
+        │   └── ul
+        │       ├── li
+        │       └── li
+        └── footer
+\`\`\`
+
+Cada nó da árvore tem relações familiares:
+- **parent** — elemento pai
+- **children** — elementos filhos
+- **siblings** — elementos irmãos (mesmo nível)
+
+\`\`\`js
+const lista = document.getElementById('lista')
+lista.parentElement      // elemento pai
+lista.children           // HTMLCollection com os filhos
+lista.firstElementChild  // primeiro filho
+lista.lastElementChild   // último filho
+lista.nextElementSibling // próximo irmão
+\`\`\`
+
+## Event Bubbling e Delegation
+
+Quando você clica em um elemento, o evento **sobe** (borbulha) pela árvore do DOM:
+
+\`\`\`html
+<div id="pai">
+  <button id="filho">Clique</button>
+</div>
+\`\`\`
+
+\`\`\`js
+document.getElementById('filho').addEventListener('click', () => {
+  console.log('filho clicado')
+})
+document.getElementById('pai').addEventListener('click', () => {
+  console.log('pai também recebe o evento!')
+})
+// Clicar no botão imprime AMBAS as mensagens
+\`\`\`
+
+**Event Delegation** — em vez de adicionar listener em cada filho, adicione no pai:
+
+\`\`\`js
+document.getElementById('lista').addEventListener('click', function(e) {
+  if (e.target.tagName === 'LI') {
+    e.target.style.textDecoration = 'line-through'
+  }
+})
+// Funciona para LIs adicionados dinamicamente também!
+\`\`\`
+
+Essa técnica é muito mais eficiente quando você tem muitos elementos filhos.
+
+## localStorage: persistindo dados no navegador
+
+O \`localStorage\` permite salvar dados no navegador que persistem mesmo após fechar a aba:
+
+\`\`\`js
+// Salvar
+localStorage.setItem('tema', 'escuro')
+localStorage.setItem('usuario', JSON.stringify({ nome: 'Ana', xp: 150 }))
+
+// Ler
+const tema = localStorage.getItem('tema')               // 'escuro'
+const usuario = JSON.parse(localStorage.getItem('usuario'))  // { nome: 'Ana', xp: 150 }
+
+// Remover
+localStorage.removeItem('tema')
+
+// Limpar tudo
+localStorage.clear()
+\`\`\`
+
+Diferença com \`sessionStorage\`: os dados do \`sessionStorage\` somem quando a aba é fechada.
+
+## O objeto Event
+
+Quando um evento dispara, a função recebe um objeto \`event\` com informações:
+
+\`\`\`js
+document.addEventListener('click', function(event) {
+  console.log(event.target)        // elemento que foi clicado
+  console.log(event.type)          // 'click'
+  console.log(event.clientX)       // posição X do mouse
+  console.log(event.clientY)       // posição Y do mouse
+  event.preventDefault()           // cancela comportamento padrão
+  event.stopPropagation()          // para o bubbling
+})
+
+document.addEventListener('keydown', function(event) {
+  console.log(event.key)           // 'Enter', 'a', 'ArrowLeft', etc.
+  console.log(event.ctrlKey)       // true se Ctrl estava pressionado
+})
+\`\`\`
+
+## Fetch API: buscando dados de servidores
+
+O \`fetch\` permite fazer requisições HTTP para buscar dados de APIs:
+
+\`\`\`js
+// Buscar dados de uma API pública
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+    // { id: 1, title: 'delectus aut autem', completed: false }
+  })
+  .catch(erro => {
+    console.error('Erro ao buscar dados:', erro)
+  })
+\`\`\`
+
+Isso abre um mundo de possibilidades: mostrar previsão do tempo, listar repositórios do GitHub, buscar posts de um blog — tudo em tempo real, sem recarregar a página.`,
     tasks: [
       {
         id: 'task-1',
@@ -2914,7 +3849,90 @@ Projetos reais usam a estrutura semântica:
 - **GitHub**: publique seus projetos para criar um portfólio
 - **React / Vue**: frameworks JavaScript para apps maiores
 - **Node.js**: JavaScript no servidor (back-end)
-- **APIs**: aprenda a buscar dados de serviços externos`,
+- **APIs**: aprenda a buscar dados de serviços externos
+
+## Boas práticas de código
+
+Escrever código que funciona é apenas metade do trabalho. O código precisa ser **legível e manutenível**:
+
+**1. Nomes descritivos**
+\`\`\`js
+// ❌ Ruim
+let x = 86400
+function f(n) { return n * x }
+
+// ✅ Bom
+const SEGUNDOS_POR_DIA = 86400
+function calcularSegundosTotais(numeroDias) {
+  return numeroDias * SEGUNDOS_POR_DIA
+}
+\`\`\`
+
+**2. Funções pequenas com uma única responsabilidade**
+\`\`\`js
+// ❌ Função que faz tudo
+function processarPedido(pedido) {
+  // valida, calcula desconto, envia email, salva no banco...
+  // 100 linhas de código
+}
+
+// ✅ Funções separadas e compostas
+function validarPedido(pedido) { ... }
+function calcularTotal(pedido) { ... }
+function enviarConfirmacao(pedido) { ... }
+\`\`\`
+
+**3. Evite comentários óbvios**
+\`\`\`js
+// ❌ Desnecessário
+let i = 0 // inicializa i como zero
+
+// ✅ Comente o "porquê", não o "o quê"
+// Começa em 1 para pular o cabeçalho da lista
+for (let i = 1; i < lista.length; i++) { ... }
+\`\`\`
+
+## Como publicar seu projeto gratuitamente
+
+Depois de criar seu projeto, você pode publicá-lo online de graça usando o **GitHub Pages**:
+
+1. Crie uma conta no [github.com](https://github.com)
+2. Crie um repositório com o nome do projeto
+3. Faça upload dos seus arquivos HTML, CSS e JS
+4. Vá em Settings → Pages → Branch: main → Save
+5. Seu site estará em: \`https://seunome.github.io/nome-do-projeto\`
+
+**Outras opções gratuitas:**
+- **Vercel** — deploy automático a partir do GitHub
+- **Netlify** — drag & drop dos arquivos, site no ar em segundos
+- **CodePen** — ideal para projetos pequenos e experimentos
+
+## Como continuar aprendendo
+
+Você terminou o curso básico — isso é uma conquista real. Mas a jornada de um desenvolvedor nunca termina. Aqui está um roteiro realista do que aprender a seguir:
+
+**Imediatamente (próximas semanas):**
+- Construa pelo menos 3 projetos pessoais do zero (calculadora, lista de tarefas, portfólio)
+- Publique tudo no GitHub
+- Leia código de outros projetos open source
+
+**Em seguida:**
+- **Git avançado** — branches, merge, pull requests
+- **JavaScript avançado** — Promises, async/await, módulos ES6
+- **CSS avançado** — Grid completo, animações, metodologia BEM
+- **React** — a biblioteca JS mais usada no mercado para interfaces
+
+**Depois:**
+- **Node.js** — JavaScript no back-end
+- **Banco de dados** — SQL (PostgreSQL) e/ou NoSQL (MongoDB)
+- **APIs REST** — como o front-end conversa com o back-end
+
+**Sempre:**
+- Leia a documentação oficial (MDN Web Docs é o melhor recurso para HTML, CSS e JS)
+- Participe de comunidades (Discord, Reddit, LinkedIn)
+- Construa, construa, construa — não há atalho para a experiência prática
+
+> "Todo especialista foi um dia iniciante que não desistiu."`,
     tasks: [
       {
         id: 'task-1',
