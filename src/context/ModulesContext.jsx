@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useMemo, useCallback } from 'react'
-import { MODULES as STATIC_MODULES } from '../data/modules'
+import { MODULES as STATIC_MODULES, STAGES } from '../data/modules'
 
 const ModulesContext = createContext(null)
 
@@ -106,7 +106,7 @@ export function ModulesProvider({ children }) {
   )
 
   const value = useMemo(
-    () => ({ modules, updateModuleMeta, addTaskToModule, removeExtraTask, addModule, removeModule, resetModules, isStaticModule, extraTasks }),
+    () => ({ modules, stages: STAGES, updateModuleMeta, addTaskToModule, removeExtraTask, addModule, removeModule, resetModules, isStaticModule, extraTasks }),
     [modules, updateModuleMeta, addTaskToModule, removeExtraTask, addModule, removeModule, resetModules, isStaticModule, extraTasks]
   )
 

@@ -232,14 +232,8 @@ export function ProgressProvider({ children }) {
   )
 
   const isModuleUnlocked = useCallback(
-    (moduleId) => {
-      if (user?.role === 'admin') return true
-      const index = modules.findIndex((m) => m.id === moduleId)
-      if (index === 0) return true
-      const prev = modules[index - 1]
-      return isModuleDone(prev.id)
-    },
-    [isModuleDone, modules, user]
+    () => true,
+    []
   )
 
   const badges = useMemo(() => {

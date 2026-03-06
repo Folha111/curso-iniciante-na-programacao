@@ -4,11 +4,18 @@ import { useProgress } from '../context/ProgressContext'
 import { useModules } from '../context/ModulesContext'
 import './Dashboard.css'
 
+function groupByStage(modules, stages) {
+  return stages.map((stage) => ({
+    ...stage,
+    modules: modules.filter((m) => m.stageId === stage.id),
+  })).filter((s) => s.modules.length > 0)
+}
+
 export default function Dashboard() {
   const { user } = useAuth()
   const navigate = useNavigate()
   const { isTaskDone, isModuleDone, isModuleUnlocked, xp, streak, badges, reviewQueue, weeklyXp, weeklyGoal } = useProgress()
-  const { modules: MODULES } = useModules()
+  const { modules: MODULES, stages: STAGES } = useModules()
 
   const totalTasks = MODULES.reduce((acc, m) => acc + m.tasks.length, 0)
   const doneTasks = MODULES.reduce(
@@ -158,63 +165,71 @@ export default function Dashboard() {
         </section>
       )}
 
-      {/* Modules list */}
+      {/* Modules list grouped by stage */}
       <section id="modulos">
         <h2 className="dash__section-title">Módulos</h2>
         <div className="dash__modules">
-          {MODULES.map((mod) => {
-            const modDone = isModuleDone(mod.id)
-            const unlocked = isModuleUnlocked(mod.id)
-            const modTasksDone = mod.tasks.filter((t) => isTaskDone(mod.id, t.id)).length
-            const pct = Math.round((modTasksDone / mod.tasks.length) * 100)
-            const status = modDone ? 'done' : unlocked ? (modTasksDone > 0 ? 'active' : 'unlocked') : 'locked'
-
-            return (
-              <div
-                key={mod.id}
-                className={`dash__module-row dash__module-row--${status}`}
-                style={{ '--mod-color': mod.color }}
-                onClick={() => unlocked && navigate(`/modulo/${mod.id}`)}
-              >
-                <span className="dash__module-row-num">{mod.number}</span>
-
-                <div className="dash__module-row-info">
-                  <div className="dash__module-row-header">
-                    <span className="dash__module-row-title">{mod.title}</span>
-                    {mod.stage && <span className="dash__module-row-stage">{mod.stage}</span>}
-                  </div>
-                  <div className="dash__module-row-bar">
-                    <div className="dash__module-row-fill" style={{ width: `${pct}%` }} />
-                  </div>
-                </div>
-
-                <div className="dash__module-row-right">
-                  <span className="dash__module-row-count">{modTasksDone}/{mod.tasks.length}</span>
-                  {modDone && (
-                    <span className="dash__module-row-icon dash__module-row-icon--done">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M2.5 7l3 3 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </span>
-                  )}
-                  {status === 'locked' && (
-                    <span className="dash__module-row-icon dash__module-row-icon--locked">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
-                      </svg>
-                    </span>
-                  )}
-                  {(status === 'active' || status === 'unlocked') && (
-                    <span className="dash__module-row-icon dash__module-row-icon--arrow">
-                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </span>
-                  )}
-                </div>
+          {groupByStage(MODULES, STAGES).map((stage) => (
+            <div key={stage.id} className="dash__stage-group">
+              <div className="dash__stage-label" style={{ '--stage-color': stage.color }}>
+                <span className="dash__stage-label-dot" />
+                {stage.name}
               </div>
-            )
-          })}
+              {stage.modules.map((mod) => {
+                const modDone = isModuleDone(mod.id)
+                const unlocked = isModuleUnlocked(mod.id)
+                const modTasksDone = mod.tasks.filter((t) => isTaskDone(mod.id, t.id)).length
+                const pct = Math.round((modTasksDone / mod.tasks.length) * 100)
+                const status = modDone ? 'done' : unlocked ? (modTasksDone > 0 ? 'active' : 'unlocked') : 'locked'
+
+                return (
+                  <div
+                    key={mod.id}
+                    className={`dash__module-row dash__module-row--${status}`}
+                    style={{ '--mod-color': mod.color }}
+                    onClick={() => unlocked && navigate(`/modulo/${mod.id}`)}
+                  >
+                    <span className="dash__module-row-num">{mod.number}</span>
+
+                    <div className="dash__module-row-info">
+                      <div className="dash__module-row-header">
+                        <span className="dash__module-row-title">{mod.title}</span>
+                        {mod.stage && <span className="dash__module-row-stage">{mod.stage}</span>}
+                      </div>
+                      <div className="dash__module-row-bar">
+                        <div className="dash__module-row-fill" style={{ width: `${pct}%` }} />
+                      </div>
+                    </div>
+
+                    <div className="dash__module-row-right">
+                      <span className="dash__module-row-count">{modTasksDone}/{mod.tasks.length}</span>
+                      {modDone && (
+                        <span className="dash__module-row-icon dash__module-row-icon--done">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M2.5 7l3 3 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      )}
+                      {status === 'locked' && (
+                        <span className="dash__module-row-icon dash__module-row-icon--locked">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+                          </svg>
+                        </span>
+                      )}
+                      {(status === 'active' || status === 'unlocked') && (
+                        <span className="dash__module-row-icon dash__module-row-icon--arrow">
+                          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          ))}
         </div>
       </section>
     </main>

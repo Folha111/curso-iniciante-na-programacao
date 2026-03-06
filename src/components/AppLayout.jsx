@@ -1,4 +1,5 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
 import '../pages/Dashboard.css'
@@ -51,6 +52,10 @@ export default function AppLayout() {
   const { dark, toggleTheme } = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
+
+  useEffect(() => {
+    localStorage.setItem('last_path', location.pathname)
+  }, [location.pathname])
 
   function handleLogout() {
     logout()

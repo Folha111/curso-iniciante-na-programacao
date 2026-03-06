@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './Login.css'
 
@@ -9,6 +9,7 @@ export default function Login() {
   const [error, setError] = useState('')
   const { login } = useAuth()
   const navigate = useNavigate()
+  const { state } = useLocation()
 
   const handleChange = (e) => {
     setError('')
@@ -19,7 +20,7 @@ export default function Login() {
     e.preventDefault()
     const ok = login(form.email, form.password)
     if (ok) {
-      navigate('/dashboard')
+      navigate(state?.from || '/dashboard')
     } else {
       setError('E-mail ou senha incorretos.')
     }

@@ -2,6 +2,7 @@ export const MODULES = [
   {
     id: 'modulo-1',
     number: '01',
+    stageId: 'curioso',
     stage: 'Introdução',
     title: 'Introdução à Programação',
     description: 'Entenda o que é programação, como os computadores pensam e por que aprender a programar.',
@@ -55,7 +56,54 @@ Neste curso você vai aprender a criar páginas web usando três tecnologias:
 - **CSS** — o visual da página (cores, fontes, layout)
 - **JavaScript** — o comportamento da página (interações, lógica)
 
-Mas antes de tudo isso, o mais importante é entender: programar é uma habilidade. Como qualquer habilidade, ela se desenvolve com prática e paciência.`,
+Mas antes de tudo isso, o mais importante é entender: programar é uma habilidade. Como qualquer habilidade, ela se desenvolve com prática e paciência.
+
+## Como o computador armazena informações?
+
+Tudo dentro de um computador é representado por **bits** (0 e 1). Um bit é a menor unidade de informação. Oito bits formam um **byte**.
+
+- 1 byte = 1 caractere (uma letra, um número)
+- 1 kilobyte (KB) = 1.024 bytes
+- 1 megabyte (MB) = 1.024 KB
+- 1 gigabyte (GB) = 1.024 MB
+
+Os computadores usam o sistema **binário** (base 2) porque os transistores têm apenas dois estados: ligado (1) ou desligado (0).
+
+## O que é um navegador?
+
+Um **navegador** (browser) é o programa que interpreta código HTML, CSS e JavaScript e exibe a página para o usuário. Os mais usados são:
+
+- **Chrome** — da Google
+- **Firefox** — da Mozilla
+- **Edge** — da Microsoft
+- **Safari** — da Apple
+
+O navegador recebe arquivos do servidor e os "renderiza" (transforma em pixels na tela).
+
+## O que é um servidor?
+
+Um **servidor web** é um computador que fica sempre ligado e responde requisições de usuários. Quando você digita um endereço no navegador:
+
+1. O navegador envia uma **requisição** ao servidor
+2. O servidor encontra os arquivos (HTML, CSS, JS)
+3. O servidor envia os arquivos de volta (**resposta**)
+4. O navegador renderiza a página
+
+## Caminhos de carreira em programação
+
+Conhecendo HTML, CSS e JavaScript, você pode seguir para:
+
+- **Front-end** — interfaces visuais (React, Vue, Angular)
+- **Back-end** — servidores e bancos de dados (Node.js, Python, Java)
+- **Full-stack** — os dois lados
+- **Mobile** — apps (React Native, Flutter)
+
+## Ferramentas essenciais
+
+- **Editor de código**: VS Code (gratuito, da Microsoft)
+- **Navegador + DevTools**: Chrome com F12 abre as ferramentas de desenvolvedor
+- **Git**: sistema de controle de versão para salvar e compartilhar código
+- **GitHub**: plataforma online para hospedar projetos com Git`,
     tasks: [
       {
         id: 'task-1',
@@ -113,11 +161,126 @@ Mas antes de tudo isso, o mais importante é entender: programar é uma habilida
         hint: 'É a base de qualquer linguagem de programação.',
         explanation: 'Lógica de programação é a habilidade de decompor um problema em passos e organizá-los em sequência. É fundamental antes de aprender qualquer linguagem.',
       },
+      {
+        id: 'task-6',
+        type: 'quiz',
+        question: 'O que é um navegador web?',
+        options: [
+          'Um tipo de linguagem de programação',
+          'Um programa que interpreta HTML, CSS e JS e exibe a página para o usuário',
+          'Um servidor que armazena sites na internet',
+          'Um editor de código para programadores',
+        ],
+        correct: 1,
+        explanation: 'O navegador (Chrome, Firefox, Safari, Edge) é o software que recebe os arquivos HTML, CSS e JavaScript e os renderiza visualmente para o usuário. Sem ele, o código seria apenas texto.',
+      },
+      {
+        id: 'task-7',
+        type: 'fill',
+        title: 'Complete as responsabilidades das tecnologias web',
+        description: 'Cada tecnologia tem um papel específico. Complete as lacunas:',
+        code: '// Define a ESTRUTURA da página:\n{{blank}}\n\n// Define o VISUAL da página:\n{{blank}}\n\n// Define o COMPORTAMENTO da página:\n{{blank}}',
+        blanks: ['HTML', 'CSS', 'JavaScript'],
+        hint: 'HTML = estrutura, CSS = visual, JavaScript = comportamento.',
+        successMessage: 'Perfeito! HTML estrutura, CSS estiliza, JavaScript dá vida!',
+      },
+      {
+        id: 'task-8',
+        type: 'quiz',
+        question: 'Qual é a menor unidade de informação em um computador?',
+        options: ['Byte', 'Kilobyte', 'Bit', 'Pixel'],
+        correct: 2,
+        explanation: 'Um bit é a menor unidade de informação: representa 0 ou 1 (desligado ou ligado). Oito bits formam um byte, que pode representar um caractere. Tudo no computador — texto, imagem, vídeo — é armazenado como sequências de bits.',
+      },
+      {
+        id: 'task-9',
+        type: 'drag',
+        title: 'O que acontece quando você acessa um site?',
+        description: 'Ordene as etapas que ocorrem quando você digita um endereço no navegador:',
+        blocks: [
+          '1. Você digita a URL no navegador',
+          '2. O navegador envia uma requisição ao servidor',
+          '3. O servidor encontra os arquivos (HTML, CSS, JS)',
+          '4. O servidor envia os arquivos de volta',
+          '5. O navegador renderiza e exibe a página',
+        ],
+        hint: 'O fluxo é: usuário → requisição → servidor → resposta → renderização.',
+        successMessage: 'Excelente! Você entende o ciclo completo de uma requisição web!',
+      },
+      {
+        id: 'task-10',
+        type: 'quiz',
+        question: 'Qual ferramenta você usa para ver e depurar o código de uma página no navegador?',
+        options: ['O bloco de notas', 'DevTools (F12)', 'O Task Manager', 'O Painel de Controle'],
+        correct: 1,
+        explanation: 'As DevTools (Ferramentas de Desenvolvedor) são abertas com F12 ou clique direito → Inspecionar. Elas mostram o HTML, CSS, console JavaScript, requisições de rede e muito mais. São a ferramenta mais importante de qualquer desenvolvedor web.',
+      },
+      {
+        id: 'task-11',
+        type: 'type',
+        question: 'Como se chama o sistema de versionamento de código mais usado no mundo (que rastreia mudanças nos arquivos)?',
+        answer: ['git', 'Git'],
+        placeholder: 'nome do sistema',
+        hint: 'É uma palavra de 3 letras. Junto com GitHub, é a ferramenta de colaboração padrão da indústria.',
+        explanation: 'Git é o sistema de controle de versão mais popular. Ele rastreia cada mudança nos arquivos, permite trabalhar em equipe e voltar para versões anteriores do código.',
+      },
+      {
+        id: 'task-12',
+        type: 'quiz',
+        question: 'O que significa "renderizar" uma página web?',
+        options: [
+          'Enviar o código para o servidor',
+          'Salvar o arquivo HTML no computador',
+          'Transformar o código em pixels visuais na tela',
+          'Apagar o histórico do navegador',
+        ],
+        correct: 2,
+        explanation: 'Renderizar é o processo pelo qual o navegador lê o código HTML, CSS e JavaScript e o transforma em uma interface visual exibida na tela — pixels, cores, formas e textos que o usuário vê.',
+      },
+      {
+        id: 'task-13',
+        type: 'fill',
+        title: 'Unidades de armazenamento',
+        description: 'Complete a sequência correta de unidades de armazenamento do menor para o maior:',
+        code: '{{blank}} → byte → {{blank}} → megabyte → {{blank}} → terabyte',
+        blanks: ['bit', 'kilobyte', 'gigabyte'],
+        hint: 'A ordem é: bit, byte, kilobyte, megabyte, gigabyte, terabyte.',
+        successMessage: 'Correto! Agora você sabe a hierarquia das unidades de armazenamento.',
+      },
+      {
+        id: 'task-14',
+        type: 'quiz',
+        question: 'Qual é a diferença entre front-end e back-end?',
+        options: [
+          'Front-end é mais difícil que back-end',
+          'Front-end cuida da interface visual do usuário; back-end cuida do servidor e banco de dados',
+          'Front-end usa Python e back-end usa JavaScript',
+          'Não há diferença prática entre os dois',
+        ],
+        correct: 1,
+        explanation: 'Front-end é tudo que o usuário vê e interage (HTML, CSS, JavaScript no navegador). Back-end é a parte "de trás" — servidores, bancos de dados, lógica de negócio. Full-stack domina os dois lados.',
+      },
+      {
+        id: 'task-15',
+        type: 'drag',
+        title: 'Classifique as tecnologias',
+        description: 'Ordene as tecnologias do aprendizado mais básico para o mais avançado em desenvolvimento web:',
+        blocks: [
+          'HTML (estrutura)',
+          'CSS (estilo)',
+          'JavaScript básico (interatividade)',
+          'JavaScript avançado (frameworks)',
+          'Back-end (Node.js, banco de dados)',
+        ],
+        hint: 'Comece pela estrutura, depois o visual, depois o comportamento, depois frameworks e servidor.',
+        successMessage: 'Ótimo! Você tem o mapa da jornada de aprendizado web!',
+      },
     ],
   },
   {
     id: 'modulo-logica',
     number: '02',
+    stageId: 'curioso',
     stage: 'Lógica',
     title: 'Lógica de Programação',
     description: 'Aprenda algoritmos, pseudocódigo e como estruturar o raciocínio para resolver problemas com o computador.',
@@ -184,7 +347,70 @@ Fluxogramas são representações visuais de algoritmos usando símbolos:
 
 ## Por que aprender lógica antes de programar?
 
-Linguagens de programação mudam. A lógica é universal. Quem pensa com clareza em pseudocódigo aprende qualquer linguagem mais rápido porque já sabe **o que** fazer — só precisa aprender **como escrever** em cada linguagem.`,
+Linguagens de programação mudam. A lógica é universal. Quem pensa com clareza em pseudocódigo aprende qualquer linguagem mais rápido porque já sabe **o que** fazer — só precisa aprender **como escrever** em cada linguagem.
+
+## Operadores
+
+Operadores realizam operações sobre valores:
+
+### Aritméticos
+\`\`\`
++  soma
+-  subtração
+*  multiplicação
+/  divisão
+%  módulo (resto da divisão)
+\`\`\`
+
+O **módulo** (%) é muito útil: \`10 % 3 = 1\` (o resto de 10 dividido por 3 é 1).
+
+### Relacionais (resultado: verdadeiro ou falso)
+\`\`\`
+>    maior que
+<    menor que
+>=   maior ou igual
+<=   menor ou igual
+=    igual (em muitas linguagens == ou ===)
+<>   diferente (em algumas linguagens != ou !==)
+\`\`\`
+
+## Estrutura PARA (loop com contador)
+
+Além do ENQUANTO, existe o loop PARA, ideal quando você sabe quantas vezes repetir:
+
+\`\`\`
+PARA i DE 1 ATÉ 10 FAÇA
+  Exibir i
+FIM PARA
+\`\`\`
+
+## Funções e procedimentos
+
+Uma **função** (ou procedimento) é um bloco de código com nome que pode ser chamado várias vezes:
+
+\`\`\`
+FUNÇÃO calcularMedia(nota1, nota2)
+  media = (nota1 + nota2) / 2
+  RETORNAR media
+FIM FUNÇÃO
+
+resultado = calcularMedia(8, 6)  → 7
+\`\`\`
+
+Benefícios:
+- **Reutilização**: escreve uma vez, usa várias
+- **Legibilidade**: dá nome a uma operação complexa
+- **Manutenção**: corrija em um lugar, muda em todos
+
+## Tipos de erros
+
+| Tipo | Quando acontece | Exemplo |
+| --- | --- | --- |
+| Sintaxe | Código escrito errado | SE x > 0 ENTAO (sem acento) |
+| Lógica | Código roda mas dá resultado errado | usar / em vez de * |
+| Execução | Erro que ocorre durante a execução | divisão por zero |
+
+O **erro de lógica** é o mais perigoso porque o programa parece funcionar normalmente.`,
     tasks: [
       {
         id: 'task-1',
@@ -315,11 +541,68 @@ Linguagens de programação mudam. A lógica é universal. Quem pensa com clarez
         hint: 'A estrutura condicional usa SE para verificar, ENTÃO para o caso verdadeiro e SENÃO para o caso falso.',
         successMessage: 'Perfeito! Você domina a estrutura de decisão em pseudocódigo.',
       },
+      {
+        id: 'task-11',
+        type: 'quiz',
+        question: 'O que o operador % (módulo) retorna?',
+        options: [
+          'O resultado da divisão inteira',
+          'A porcentagem de um número',
+          'O resto da divisão entre dois números',
+          'O maior dos dois números',
+        ],
+        correct: 2,
+        explanation: 'O operador módulo (%) retorna o resto da divisão. Exemplo: 10 % 3 = 1 (pois 10 = 3×3 + 1). É muito útil para verificar se um número é par (n % 2 === 0) ou para criar ciclos.',
+      },
+      {
+        id: 'task-12',
+        type: 'fill',
+        title: 'Loop PARA em pseudocódigo',
+        description: 'Complete o loop que imprime os números de 1 a 10:',
+        code: '{{blank}} i {{blank}} 1 {{blank}} 10 FAÇA\n  Exibir i\nFIM PARA',
+        blanks: ['PARA', 'DE', 'ATÉ'],
+        hint: 'O loop PARA tem a sintaxe: PARA variável DE início ATÉ fim.',
+        successMessage: 'Correto! O loop PARA é perfeito quando você sabe quantas repetições fazer.',
+      },
+      {
+        id: 'task-13',
+        type: 'quiz',
+        question: 'Qual tipo de erro é o mais perigoso porque o programa parece funcionar normalmente?',
+        options: ['Erro de sintaxe', 'Erro de compilação', 'Erro de lógica', 'Erro de execução'],
+        correct: 2,
+        explanation: 'Erros de lógica são os mais difíceis de detectar: o programa executa sem travar, mas produz resultados errados. Por exemplo, calcular a média como nota1 + nota2/2 em vez de (nota1+nota2)/2 — o programa roda, mas a resposta é incorreta.',
+      },
+      {
+        id: 'task-14',
+        type: 'fill',
+        title: 'Defina uma função em pseudocódigo',
+        description: 'Complete a função que calcula o dobro de um número:',
+        code: '{{blank}} calcularDobro(numero)\n  resultado = numero {{blank}} 2\n  {{blank}} resultado\nFIM FUNÇÃO',
+        blanks: ['FUNÇÃO', '*', 'RETORNAR'],
+        hint: 'Uma função começa com FUNÇÃO, faz o processamento e usa RETORNAR para devolver o resultado.',
+        successMessage: 'Perfeito! Você sabe declarar uma função em pseudocódigo.',
+      },
+      {
+        id: 'task-15',
+        type: 'drag',
+        title: 'Ordene: verificar número par ou ímpar',
+        description: 'Ordene os passos do algoritmo para verificar se um número é par ou ímpar:',
+        blocks: [
+          'Ler numero',
+          'resto = numero % 2',
+          'SE resto === 0 ENTÃO',
+          '  Exibir "Par"',
+          'SENÃO Exibir "Ímpar"',
+        ],
+        hint: 'Leia o número, calcule o resto da divisão por 2, depois decida: resto 0 = par, resto 1 = ímpar.',
+        successMessage: 'Excelente! Verificar paridade com módulo é um clássico da programação!',
+      },
     ],
   },
   {
     id: 'modulo-2',
     number: '03',
+    stageId: 'aprendiz',
     stage: 'Iniciante',
     title: 'HTML: primeiros elementos',
     description: 'Aprenda as tags mais importantes do HTML e escreva seu primeiro código.',
@@ -392,7 +675,75 @@ O atributo \`href\` define o destino do link.
 <img src="foto.jpg" alt="Descrição da foto" />
 \`\`\`
 
-A tag \`<img>\` não tem fechamento (é uma tag vazia).`,
+A tag \`<img>\` não tem fechamento (é uma tag vazia).
+
+## Divisão e organização: div e span
+
+- **\`<div>\`** — container de bloco, para agrupar elementos em blocos
+- **\`<span>\`** — container inline, para estilizar partes de um texto
+
+\`\`\`html
+<div class="cartao">
+  <h2>Título do cartão</h2>
+  <p>Texto com uma <span style="color: red">palavra vermelha</span> no meio.</p>
+</div>
+\`\`\`
+
+## Tabelas
+
+\`\`\`html
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Idade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Maria</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>João</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+\`\`\`
+
+- **\`<table>\`** — a tabela
+- **\`<thead>\`** / **\`<tbody>\`** — cabeçalho e corpo
+- **\`<tr>\`** — linha (table row)
+- **\`<th>\`** — célula de cabeçalho (negrito, centralizado)
+- **\`<td>\`** — célula de dados
+
+## Formulários básicos
+
+\`\`\`html
+<form>
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome" placeholder="Digite seu nome" />
+  <button type="submit">Enviar</button>
+</form>
+\`\`\`
+
+- **\`<input type="text">\`** — campo de texto
+- **\`<input type="email">\`** — campo de e-mail (com validação automática)
+- **\`<input type="number">\`** — campo numérico
+- **\`<textarea>\`** — área de texto multilinha
+- **\`<label>\`** — rótulo associado a um campo (melhora acessibilidade)
+
+## Negrito, itálico e destaques
+
+\`\`\`html
+<b>negrito visual</b>
+<strong>negrito com ênfase semântica</strong>
+<i>itálico visual</i>
+<em>itálico com ênfase semântica</em>
+<mark>texto marcado (amarelo)</mark>
+<code>trecho de código</code>
+\`\`\``,
     tasks: [
       {
         id: 'task-1',
@@ -489,11 +840,109 @@ A tag \`<img>\` não tem fechamento (é uma tag vazia).`,
         successMessage: 'Correto! A tag </a> (com barra) fecha o link corretamente.',
         hint: 'Tags de fechamento precisam de uma barra /. A tag de fechamento correta é </a>, não <a>.',
       },
+      {
+        id: 'task-9',
+        type: 'code',
+        title: 'Crie uma tabela simples',
+        description: 'Crie uma <code>&lt;table&gt;</code> com 2 colunas (Nome e Nota) e 2 linhas de dados usando <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code> e <code>&lt;td&gt;</code>.',
+        starterCode: '<!-- Crie uma tabela com cabeçalho e 2 linhas de dados -->\n',
+        validate: (doc) => {
+          const table = doc.querySelector('table')
+          if (!table) return false
+          const rows = table.querySelectorAll('tr')
+          const cells = table.querySelectorAll('td, th')
+          return rows.length >= 2 && cells.length >= 4
+        },
+        successMessage: 'Ótimo! Você criou uma tabela HTML com cabeçalho e dados!',
+        hint: '<table><tr><th>Nome</th><th>Nota</th></tr><tr><td>Maria</td><td>9</td></tr><tr><td>João</td><td>8</td></tr></table>',
+      },
+      {
+        id: 'task-10',
+        type: 'quiz',
+        question: 'Qual é a diferença entre <div> e <span>?',
+        options: [
+          'div é para textos; span é para imagens',
+          'div é um container de bloco (ocupa a linha toda); span é inline (ocupa só o espaço do conteúdo)',
+          'div é do HTML5; span é mais antigo',
+          'Não há diferença, são iguais',
+        ],
+        correct: 1,
+        explanation: '<div> é um elemento de bloco: ocupa toda a largura disponível e cria uma "quebra de linha" antes e depois. <span> é inline: fica no fluxo do texto. Use div para agrupar seções, span para estilizar partes de um texto.',
+      },
+      {
+        id: 'task-11',
+        type: 'code',
+        title: 'Crie um formulário básico',
+        description: 'Crie um formulário com um campo de texto (<code>&lt;input type="text"&gt;</code>), um campo de email (<code>&lt;input type="email"&gt;</code>) e um botão de envio.',
+        starterCode: '<!-- Crie um form com input text, email e button -->\n',
+        validate: (doc) => {
+          const form = doc.querySelector('form') || doc.body
+          const text = doc.querySelector('input[type="text"]')
+          const email = doc.querySelector('input[type="email"]')
+          const btn = doc.querySelector('button, input[type="submit"]')
+          return text !== null && email !== null && btn !== null
+        },
+        successMessage: 'Ótimo! Você criou um formulário HTML básico!',
+        hint: '<form><input type="text" placeholder="Nome"><input type="email" placeholder="Email"><button>Enviar</button></form>',
+      },
+      {
+        id: 'task-12',
+        type: 'fill',
+        title: 'Complete as tags de ênfase',
+        description: 'Complete as tags corretas para cada tipo de destaque no texto:',
+        code: '<!-- Negrito com ênfase semântica: -->\n<{{blank}}>Importante</{{blank}}>\n\n<!-- Itálico com ênfase semântica: -->\n<{{blank}}>Atenção</{{blank}}>\n\n<!-- Código inline: -->\n<{{blank}}>console.log()</{{blank}}>',
+        blanks: ['strong', 'strong', 'em', 'em', 'code', 'code'],
+        hint: 'Negrito semântico = strong, itálico semântico = em, código inline = code.',
+        successMessage: 'Perfeito! Você conhece as tags de ênfase semântica do HTML.',
+      },
+      {
+        id: 'task-13',
+        type: 'quiz',
+        question: 'Para que serve o atributo "alt" em uma tag <img>?',
+        options: [
+          'Define o tamanho da imagem',
+          'Define a URL da imagem',
+          'Fornece um texto alternativo para acessibilidade e quando a imagem não carrega',
+          'Define o título que aparece ao passar o mouse',
+        ],
+        correct: 2,
+        explanation: 'O atributo alt descreve a imagem em texto. Ele é usado por leitores de tela (acessibilidade para deficientes visuais) e é exibido quando a imagem não carrega. É obrigatório para boas práticas de HTML.',
+      },
+      {
+        id: 'task-14',
+        type: 'bug',
+        title: 'Tag de imagem sem alt',
+        description: 'A imagem abaixo está sem o atributo <code>alt</code>, o que é uma má prática de acessibilidade. Adicione um <code>alt</code> descritivo.',
+        buggyCode: '<img src="foto-perfil.jpg" />',
+        validate: (doc) => {
+          const img = doc.querySelector('img')
+          return img !== null && img.hasAttribute('alt')
+        },
+        successMessage: 'Correto! Toda imagem deve ter um atributo alt descritivo.',
+        hint: 'Adicione alt="descrição da imagem" dentro da tag img.',
+      },
+      {
+        id: 'task-15',
+        type: 'code',
+        title: 'Crie um cartão de perfil',
+        description: 'Use uma <code>&lt;div&gt;</code> com: um <code>&lt;h2&gt;</code> com um nome, um <code>&lt;p&gt;</code> com uma profissão e um <code>&lt;a&gt;</code> com href="#" e texto "Ver perfil".',
+        starterCode: '<!-- Crie um cartão de perfil com div, h2, p e a -->\n',
+        validate: (doc) => {
+          const div = doc.querySelector('div')
+          const h2 = doc.querySelector('h2')
+          const p = doc.querySelector('p')
+          const a = doc.querySelector('a')
+          return div !== null && h2 !== null && p !== null && a !== null
+        },
+        successMessage: 'Perfeito! Você montou um cartão de perfil HTML completo!',
+        hint: '<div><h2>Maria Silva</h2><p>Desenvolvedora</p><a href="#">Ver perfil</a></div>',
+      },
     ],
   },
   {
     id: 'modulo-3',
     number: '04',
+    stageId: 'aprendiz',
     stage: 'Iniciante Avançado',
     title: 'Estrutura de uma página HTML',
     description: 'Aprenda a estrutura completa de um documento HTML com head e body.',
@@ -545,7 +994,70 @@ Sem essa estrutura básica, o navegador ainda tenta mostrar a página, mas pode 
 - Sempre inclua \`<!DOCTYPE html>\`
 - Sempre use \`<meta charset="UTF-8">\` para suporte a caracteres especiais
 - Escreva um \`<title>\` descritivo para cada página
-- Mantenha a indentação organizada para facilitar a leitura`,
+- Mantenha a indentação organizada para facilitar a leitura
+
+## Tags semânticas do HTML5
+
+HTML5 introduziu tags que descrevem o **significado** do conteúdo, não só a aparência:
+
+\`\`\`html
+<header>   <!-- cabeçalho da página ou seção -->
+<nav>      <!-- menu de navegação -->
+<main>     <!-- conteúdo principal -->
+<section>  <!-- seção temática -->
+<article>  <!-- conteúdo independente (post, notícia) -->
+<aside>    <!-- conteúdo lateral (sidebar) -->
+<footer>   <!-- rodapé -->
+\`\`\`
+
+Antes, tudo era `<div>`. Com tags semânticas, o código fica mais legível e os mecanismos de busca (Google) entendem melhor o conteúdo.
+
+## Comentários em HTML
+
+\`\`\`html
+<!-- Isto é um comentário e não aparece na página -->
+<p>Este texto aparece.</p>
+<!-- TODO: adicionar imagem aqui -->
+\`\`\`
+
+Comentários são invisíveis para o usuário mas úteis para quem lê o código.
+
+## Vinculando CSS externo
+
+A melhor prática é manter o CSS em um arquivo separado:
+
+\`\`\`html
+<head>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+\`\`\`
+
+Isso permite reutilizar o mesmo CSS em múltiplas páginas.
+
+## Meta tags importantes
+
+\`\`\`html
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Página sobre programação web" />
+  <title>Minha Página</title>
+</head>
+\`\`\`
+
+- **viewport** — essencial para responsividade em mobile
+- **description** — aparece nos resultados do Google
+
+## Vinculando JavaScript externo
+
+\`\`\`html
+<body>
+  <!-- conteúdo -->
+  <script src="script.js"></script>
+</body>
+\`\`\`
+
+O `<script>` vai no final do `<body>` para o HTML ser carregado antes do JavaScript executar.`,
     tasks: [
       {
         id: 'task-1',
@@ -642,11 +1154,96 @@ Sem essa estrutura básica, o navegador ainda tenta mostrar a página, mas pode 
         successMessage: 'Correto! O <body> envolve todo o conteúdo visível da página.',
         hint: 'O <body> deve estar logo após o </head>. Envolva o <h1> e o <p> dentro de <body>...</body>.',
       },
+      {
+        id: 'task-9',
+        type: 'quiz',
+        question: 'Qual tag HTML5 representa o conteúdo PRINCIPAL de uma página?',
+        options: ['<content>', '<main>', '<body>', '<section>'],
+        correct: 1,
+        explanation: '<main> marca o conteúdo principal e único da página — o que a diferencia de todas as outras. Deve existir apenas um <main> por página. Ajuda na acessibilidade e SEO.',
+      },
+      {
+        id: 'task-10',
+        type: 'code',
+        title: 'Use tags semânticas',
+        description: 'Crie uma página com a estrutura semântica: <code>&lt;header&gt;</code> com um <code>&lt;h1&gt;</code>, <code>&lt;main&gt;</code> com um <code>&lt;p&gt;</code> e <code>&lt;footer&gt;</code> com qualquer texto.',
+        starterCode: '<!DOCTYPE html>\n<html lang="pt-BR">\n  <head>\n    <meta charset="UTF-8" />\n    <title>Página Semântica</title>\n  </head>\n  <body>\n    <!-- Use header, main e footer aqui -->\n  </body>\n</html>\n',
+        validate: (doc) => {
+          return (
+            doc.querySelector('header') !== null &&
+            doc.querySelector('main') !== null &&
+            doc.querySelector('footer') !== null
+          )
+        },
+        successMessage: 'Excelente! Sua página usa estrutura semântica corretamente!',
+        hint: '<body><header><h1>Meu Site</h1></header><main><p>Conteúdo principal.</p></main><footer>Rodapé</footer></body>',
+      },
+      {
+        id: 'task-11',
+        type: 'fill',
+        title: 'Complete a meta tag de viewport',
+        description: 'A meta tag de viewport é essencial para sites responsivos. Complete-a:',
+        code: '<meta name="{{blank}}" content="{{blank}}, initial-scale=1.0" />',
+        blanks: ['viewport', 'width=device-width'],
+        hint: 'O name é "viewport" e o content começa com "width=device-width".',
+        successMessage: 'Correto! A meta viewport garante que o site funcione bem em celulares.',
+      },
+      {
+        id: 'task-12',
+        type: 'quiz',
+        question: 'Por que o <script> deve ser colocado no final do <body>?',
+        options: [
+          'Por uma regra arbitrária de estilo de código',
+          'Para que o HTML seja carregado e exibido antes do JavaScript executar',
+          'Porque o JavaScript não funciona no <head>',
+          'Para que o CSS tenha prioridade sobre o JS',
+        ],
+        correct: 1,
+        explanation: 'Quando o navegador encontra um <script>, ele para de renderizar o HTML para executar o JavaScript. Se o script fica no final do <body>, o HTML já foi carregado e o usuário vê a página mais rápido. Além disso, o JS pode acessar os elementos HTML que já existem.',
+      },
+      {
+        id: 'task-13',
+        type: 'code',
+        title: 'Vincule um CSS externo',
+        description: 'Crie um documento HTML com a tag <code>&lt;link&gt;</code> no <code>&lt;head&gt;</code> apontando para um arquivo <code>styles.css</code> com <code>rel="stylesheet"</code>.',
+        starterCode: '<!DOCTYPE html>\n<html lang="pt-BR">\n  <head>\n    <meta charset="UTF-8" />\n    <title>Com CSS externo</title>\n    <!-- Adicione o link para styles.css aqui -->\n  </head>\n  <body>\n    <h1>Página com CSS externo</h1>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const link = doc.querySelector('link[rel="stylesheet"]')
+          return link !== null && link.getAttribute('href') !== null
+        },
+        successMessage: 'Ótimo! Você sabe vincular um arquivo CSS externo.',
+        hint: '<link rel="stylesheet" href="styles.css" />',
+      },
+      {
+        id: 'task-14',
+        type: 'type',
+        question: 'Qual tag HTML5 é usada para criar uma área de navegação (menu de links)?',
+        answer: ['nav', '<nav>'],
+        placeholder: 'nome da tag',
+        hint: 'É uma tag semântica do HTML5 de 3 letras, abreviação de "navigation".',
+        explanation: '<nav> é a tag semântica para menus de navegação. Ela indica aos buscadores e leitores de tela que aquele bloco contém links de navegação do site.',
+      },
+      {
+        id: 'task-15',
+        type: 'bug',
+        title: 'Meta charset fora do head',
+        description: 'A meta tag de charset está no lugar errado. Corrija a estrutura para que ela fique dentro do <head>.',
+        buggyCode: '<!DOCTYPE html>\n<html lang="pt-BR">\n  <head>\n    <title>Minha Página</title>\n  </head>\n  <body>\n    <meta charset="UTF-8" />\n    <h1>Olá!</h1>\n  </body>\n</html>',
+        validate: (doc) => {
+          const head = doc.querySelector('head')
+          if (!head) return false
+          const meta = head.querySelector('meta[charset]')
+          return meta !== null
+        },
+        successMessage: 'Correto! O <meta charset> deve estar sempre dentro do <head>.',
+        hint: 'Mova a tag <meta charset="UTF-8" /> para dentro de <head>, antes do <title>.',
+      },
     ],
   },
   {
     id: 'modulo-4',
     number: '05',
+    stageId: 'estudante',
     stage: 'Médio',
     title: 'CSS: primeiros estilos',
     description: 'Aprenda a adicionar cores, fontes e bordas às suas páginas com CSS.',
@@ -849,11 +1446,80 @@ div {
         hint: 'ID usa "#" e classe usa "." antes do nome.',
         successMessage: 'Correto! # para IDs e . para classes — fundamentos do CSS!',
       },
+      {
+        id: 'task-11',
+        type: 'code',
+        title: 'Estilize com uma classe',
+        description: 'Crie dois parágrafos. Aplique a classe <code>destaque</code> a um deles. No CSS, defina <code>.destaque</code> com <code>background-color: yellow</code> e <code>font-weight: bold</code>.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <head>\n    <style>\n      /* Defina .destaque aqui */\n    </style>\n  </head>\n  <body>\n    <p>Parágrafo normal</p>\n    <p class="destaque">Parágrafo destacado</p>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const style = doc.querySelector('style')
+          if (!style) return false
+          const css = style.textContent
+          return css.includes('.destaque') && css.includes('background-color') && css.includes('font-weight')
+        },
+        successMessage: 'Ótimo! Você sabe aplicar estilos via classe CSS.',
+        hint: '.destaque { background-color: yellow; font-weight: bold; }',
+      },
+      {
+        id: 'task-12',
+        type: 'quiz',
+        question: 'Qual é a ordem de especificidade do CSS (do mais fraco para o mais forte)?',
+        options: [
+          'ID → Classe → Tag',
+          'Tag → Classe → ID',
+          'Classe → ID → Tag',
+          'Todos têm a mesma especificidade',
+        ],
+        correct: 1,
+        explanation: 'A especificidade define qual regra CSS vence quando há conflito. Tag (ex: p) tem a menor especificidade, depois vem Classe (.destaque), e ID (#titulo) tem a maior. O style inline supera todos.',
+      },
+      {
+        id: 'task-13',
+        type: 'fill',
+        title: 'Propriedades CSS de texto',
+        description: 'Complete as propriedades CSS usadas para estilizar texto:',
+        code: 'p {\n  {{blank}}: 18px;       /* tamanho da fonte */\n  {{blank}}: bold;       /* negrito */\n  {{blank}}: center;     /* alinhamento */\n  {{blank}}: italic;     /* itálico */\n  {{blank}}: uppercase;  /* maiúsculas */\n}',
+        blanks: ['font-size', 'font-weight', 'text-align', 'font-style', 'text-transform'],
+        hint: 'Em ordem: tamanho, peso, alinhamento, estilo e transformação do texto.',
+        successMessage: 'Ótimo! Você conhece as principais propriedades CSS de tipografia.',
+      },
+      {
+        id: 'task-14',
+        type: 'code',
+        title: 'Crie um botão estilizado',
+        description: 'Crie um <code>&lt;button&gt;</code> e aplique CSS para: <code>background-color</code>, <code>color: white</code>, <code>padding</code>, <code>border-radius</code> e <code>border: none</code>.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <head>\n    <style>\n      /* Estilize o button */\n    </style>\n  </head>\n  <body>\n    <button>Clique aqui</button>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const style = doc.querySelector('style')
+          if (!style) return false
+          const css = style.textContent
+          return css.includes('background-color') && css.includes('padding') && css.includes('border-radius')
+        },
+        successMessage: 'Ótimo! Você criou um botão estilizado com CSS!',
+        hint: 'button { background-color: #3b82f6; color: white; padding: 10px 20px; border-radius: 6px; border: none; }',
+      },
+      {
+        id: 'task-15',
+        type: 'drag',
+        title: 'Ordem de importância dos seletores CSS',
+        description: 'Ordene os tipos de seletor do menos específico para o mais específico:',
+        blocks: [
+          'Tag (ex: p, h1, div)',
+          'Classe (ex: .destaque)',
+          'ID (ex: #titulo)',
+          'Style inline (ex: style="color: red")',
+          '!important (força máxima)',
+        ],
+        hint: 'Tag → Classe → ID → inline → !important.',
+        successMessage: 'Perfeito! Você entende a cascata de especificidade do CSS!',
+      },
     ],
   },
   {
     id: 'modulo-5',
     number: '06',
+    stageId: 'estudante',
     stage: 'Médio Avançado',
     title: 'CSS: box model e layout',
     description: 'Entenda o box model e crie layouts com flexbox.',
@@ -944,7 +1610,60 @@ Valores comuns para \`justify-content\`:
   <div class="card">Card 2</div>
   <div class="card">Card 3</div>
 </div>
-\`\`\``,
+\`\`\`
+
+## flex-direction e flex-wrap
+
+\`\`\`css
+.container {
+  display: flex;
+  flex-direction: row;     /* padrão: itens em linha */
+  flex-direction: column;  /* itens em coluna (um embaixo do outro) */
+  flex-wrap: wrap;         /* quebra de linha se não couber */
+}
+\`\`\`
+
+## CSS Grid (introdução)
+
+Grid é o sistema de layout bidimensional — controla linhas E colunas ao mesmo tempo:
+
+\`\`\`css
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 colunas iguais */
+  gap: 16px;
+}
+\`\`\`
+
+\`1fr\` significa "1 fração do espaço disponível". É como dividir o espaço em partes iguais.
+
+## box-sizing: border-box
+
+Por padrão, \`width\` não inclui padding e border. O \`border-box\` corrige isso:
+
+\`\`\`css
+* {
+  box-sizing: border-box; /* padding e border ficam dentro do width */
+}
+\`\`\`
+
+Essa é uma das primeiras linhas em qualquer projeto CSS moderno.
+
+## Variáveis CSS (Custom Properties)
+
+\`\`\`css
+:root {
+  --cor-primaria: #3b82f6;
+  --espacamento: 16px;
+}
+
+button {
+  background: var(--cor-primaria);
+  padding: var(--espacamento);
+}
+\`\`\`
+
+Variáveis CSS permitem reutilizar valores e mudar o tema inteiro em um só lugar.`,
     tasks: [
       {
         id: 'task-1',
@@ -1058,11 +1777,75 @@ Valores comuns para \`justify-content\`:
         hint: 'Para centralizar nos dois eixos, o valor é o mesmo: "center".',
         successMessage: 'Correto! justify-content e align-items: center centralizam tudo!',
       },
+      {
+        id: 'task-11',
+        type: 'code',
+        title: 'Layout em coluna com flexbox',
+        description: 'Crie um <code>.container</code> com <code>display: flex</code> e <code>flex-direction: column</code>. Adicione 3 filhos com textos diferentes.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <head>\n    <style>\n      /* Crie o container em coluna */\n    </style>\n  </head>\n  <body>\n    <div class="container">\n      <div>Topo</div>\n      <div>Meio</div>\n      <div>Base</div>\n    </div>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const style = doc.querySelector('style')
+          if (!style) return false
+          const css = style.textContent
+          return css.includes('flex') && css.includes('column')
+        },
+        successMessage: 'Ótimo! flex-direction: column empilha os itens verticalmente!',
+        hint: '.container { display: flex; flex-direction: column; gap: 8px; }',
+      },
+      {
+        id: 'task-12',
+        type: 'fill',
+        title: 'CSS Grid básico',
+        description: 'Complete o CSS para criar um grid de 3 colunas iguais com espaçamento:',
+        code: '.grid {\n  display: {{blank}};\n  grid-template-columns: {{blank}} {{blank}} {{blank}};\n  gap: 16px;\n}',
+        blanks: ['grid', '1fr', '1fr', '1fr'],
+        hint: 'display: grid ativa o grid, e "1fr" representa uma fração igual do espaço.',
+        successMessage: 'Perfeito! Você criou um grid de 3 colunas com frações iguais!',
+      },
+      {
+        id: 'task-13',
+        type: 'quiz',
+        question: 'O que faz o "box-sizing: border-box"?',
+        options: [
+          'Remove todas as bordas do elemento',
+          'Faz o padding e a border ficarem DENTRO da largura definida pelo width',
+          'Adiciona uma borda automática em todos os elementos',
+          'Transforma o elemento em uma caixa com cantos arredondados',
+        ],
+        correct: 1,
+        explanation: 'Com box-sizing: border-box, o width inclui padding e border. Sem ele (content-box), um elemento com width:200px e padding:20px ficaria com 240px de largura total. border-box é mais intuitivo e é a primeira coisa que bons projetos CSS definem.',
+      },
+      {
+        id: 'task-14',
+        type: 'fill',
+        title: 'Variáveis CSS',
+        description: 'Complete a sintaxe para definir e usar variáveis CSS:',
+        code: ':root {\n  {{blank}}cor-primaria: #3b82f6;\n  {{blank}}espacamento: 16px;\n}\n\nbutton {\n  background: {{blank}}(--cor-primaria);\n  padding: var({{blank}}espacamento);\n}',
+        blanks: ['--', '--', 'var', '--'],
+        hint: 'Variáveis CSS são declaradas com -- e usadas com var(--nome).',
+        successMessage: 'Ótimo! Variáveis CSS tornam o código muito mais fácil de manter.',
+      },
+      {
+        id: 'task-15',
+        type: 'code',
+        title: 'Mini página com CSS completo',
+        description: 'Crie uma página com um <code>.container</code> centralizado (<code>display: flex; justify-content: center; align-items: center; height: 100vh</code>) contendo um <code>.card</code> com padding, border-radius e background-color.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <head>\n    <style>\n      body { margin: 0; }\n      /* Estilize .container e .card */\n    </style>\n  </head>\n  <body>\n    <div class="container">\n      <div class="card">\n        <h2>Meu Card</h2>\n        <p>Conteúdo do card aqui.</p>\n      </div>\n    </div>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const style = doc.querySelector('style')
+          if (!style) return false
+          const css = style.textContent
+          return css.includes('flex') && css.includes('padding') && css.includes('border-radius')
+        },
+        successMessage: 'Parabéns! Você criou uma página profissional com CSS completo!',
+        hint: '.container { display: flex; justify-content: center; align-items: center; height: 100vh; } .card { padding: 24px; border-radius: 12px; background-color: white; }',
+      },
     ],
   },
   {
     id: 'modulo-6',
     number: '07',
+    stageId: 'praticante',
     stage: 'Entendedor',
     title: 'JavaScript: variáveis e tipos',
     description: 'Dê seus primeiros passos em JavaScript aprendendo variáveis e tipos de dados.',
@@ -1135,6 +1918,58 @@ Durante o desenvolvimento, o console é seu melhor amigo:
 console.log('teste')          // imprime no console do navegador
 console.log(typeof 'texto')   // "string"
 console.log(typeof 42)        // "number"
+\`\`\`
+
+## Arrays
+
+Arrays são listas ordenadas de valores:
+
+\`\`\`js
+const frutas = ['maçã', 'banana', 'laranja']
+console.log(frutas[0])      // 'maçã' (índice começa em 0)
+console.log(frutas.length)  // 3
+
+frutas.push('uva')          // adiciona ao final
+frutas.pop()                // remove o último
+\`\`\`
+
+## Objetos
+
+Objetos agrupam dados relacionados em pares chave:valor:
+
+\`\`\`js
+const pessoa = {
+  nome: 'Ana',
+  idade: 28,
+  ativo: true
+}
+
+console.log(pessoa.nome)       // 'Ana'
+console.log(pessoa['idade'])   // 28
+pessoa.email = 'ana@email.com' // adiciona nova propriedade
+\`\`\`
+
+## Operadores aritméticos
+
+\`\`\`js
+let x = 10
+x = x + 5   // 15 (ou: x += 5)
+x = x - 3   // 12 (ou: x -= 3)
+x = x * 2   // 24 (ou: x *= 2)
+x = x / 4   // 6  (ou: x /= 4)
+x = x % 4   // 2  (resto da divisão)
+x++         // incrementa 1 (x = x + 1)
+x--         // decrementa 1 (x = x - 1)
+\`\`\`
+
+## Conversão de tipos
+
+\`\`\`js
+Number('42')          // 42 (string → número)
+String(42)            // '42' (número → string)
+Boolean(0)            // false
+Boolean('texto')      // true (qualquer string não-vazia é truthy)
+parseInt('42px')      // 42 (extrai número do início da string)
 \`\`\``,
     tasks: [
       {
@@ -1250,11 +2085,61 @@ console.log(typeof 42)        // "number"
         hint: 'Concatenação usa + entre strings. Template literals usam ${} para inserir variáveis.',
         successMessage: 'Perfeito! Você domina as duas formas de combinar strings em JavaScript.',
       },
+      {
+        id: 'task-11',
+        type: 'quiz',
+        question: 'Qual é o índice do PRIMEIRO elemento de um array em JavaScript?',
+        options: ['1', '0', '-1', 'first'],
+        correct: 1,
+        explanation: 'Arrays em JavaScript (e na maioria das linguagens) começam no índice 0. Então frutas[0] é o primeiro, frutas[1] é o segundo, etc. O último elemento fica em frutas[frutas.length - 1].',
+      },
+      {
+        id: 'task-12',
+        type: 'fill',
+        title: 'Trabalhando com arrays',
+        description: 'Complete o código para manipular um array:',
+        code: 'const numeros = [10, 20, 30]\n\n// Acessar o primeiro elemento:\nlet primeiro = numeros[{{blank}}]\n\n// Quantidade de elementos:\nlet tamanho = numeros.{{blank}}\n\n// Adicionar ao final:\nnumeros.{{blank}}(40)',
+        blanks: ['0', 'length', 'push'],
+        hint: 'Primeiro índice = 0, tamanho = .length, adicionar = .push()',
+        successMessage: 'Perfeito! Você domina as operações básicas com arrays.',
+      },
+      {
+        id: 'task-13',
+        type: 'code',
+        title: 'Crie e use um objeto',
+        description: 'Crie um objeto <code>produto</code> com as propriedades <code>nome</code>, <code>preco</code> e <code>estoque</code>. Exiba <strong>"Produto: [nome], R$ [preco]"</strong> no elemento <code>id="resultado"</code>.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <body>\n    <p id="resultado"></p>\n    <script>\n      const produto = {\n        // Defina nome, preco e estoque aqui\n      }\n      // Exiba no resultado\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const el = doc.getElementById('resultado')
+          return el !== null && el.textContent.trim().length > 5
+        },
+        successMessage: 'Ótimo! Você criou e usou um objeto JavaScript!',
+        hint: 'const produto = { nome: "Notebook", preco: 2999, estoque: 5 }\ndocument.getElementById("resultado").textContent = `Produto: ${produto.nome}, R$ ${produto.preco}`',
+      },
+      {
+        id: 'task-14',
+        type: 'quiz',
+        question: 'O que retorna: Boolean(0)?',
+        options: ['true', 'false', '0', 'undefined'],
+        correct: 1,
+        explanation: 'Em JavaScript, 0 é um valor "falsy" — quando convertido para Boolean, resulta em false. Outros falsy: "" (string vazia), null, undefined, NaN. Tudo o resto é truthy (verdadeiro), incluindo "0" (string com zero).',
+      },
+      {
+        id: 'task-15',
+        type: 'fill',
+        title: 'Operadores de incremento e shorthand',
+        description: 'Complete os atalhos de operações aritméticas:',
+        code: 'let x = 10\n\nx {{blank}} 5   // equivale a: x = x + 5\nx {{blank}} 3   // equivale a: x = x - 3\nx{{blank}}      // equivale a: x = x + 1\nx{{blank}}      // equivale a: x = x - 1',
+        blanks: ['+=', '-=', '++', '--'],
+        hint: 'Shorthands: +=, -=, *= /=. Incremento: ++. Decremento: --.',
+        successMessage: 'Correto! Operadores de incremento e shorthand tornam o código mais limpo.',
+      },
     ],
   },
   {
     id: 'modulo-7',
     number: '08',
+    stageId: 'praticante',
     stage: 'Entendedor Avançado',
     title: 'JavaScript: condicionais e funções',
     description: 'Aprenda a tomar decisões com if/else e a organizar código com funções.',
@@ -1333,6 +2218,80 @@ function classificar(nota) {
 
 document.getElementById('resultado').textContent = classificar(8)
 // Aprovado
+\`\`\`
+
+## Loops: for e while
+
+\`\`\`js
+// For: quando você sabe quantas vezes repetir
+for (let i = 0; i < 5; i++) {
+  console.log(i) // 0, 1, 2, 3, 4
+}
+
+// While: quando você repete até uma condição mudar
+let contador = 0
+while (contador < 3) {
+  console.log(contador)
+  contador++
+}
+
+// Percorrer um array:
+const nomes = ['Ana', 'Bia', 'Carlos']
+for (const nome of nomes) {
+  console.log(nome)
+}
+\`\`\`
+
+## Operador ternário
+
+Uma forma compacta de escrever if/else:
+
+\`\`\`js
+// Forma longa:
+let msg
+if (idade >= 18) {
+  msg = 'Maior de idade'
+} else {
+  msg = 'Menor de idade'
+}
+
+// Ternário (uma linha):
+let msg = idade >= 18 ? 'Maior de idade' : 'Menor de idade'
+\`\`\`
+
+Sintaxe: \`condição ? valor_se_true : valor_se_false\`
+
+## Switch
+
+Quando há muitos casos para comparar um mesmo valor:
+
+\`\`\`js
+const dia = 'segunda'
+
+switch (dia) {
+  case 'segunda':
+    console.log('Início da semana')
+    break
+  case 'sexta':
+    console.log('Quase fim de semana!')
+    break
+  default:
+    console.log('Dia comum')
+}
+\`\`\`
+
+## Escopo de variáveis
+
+\`\`\`js
+let global = 'fora'
+
+function exemplo() {
+  let local = 'dentro'
+  console.log(global) // funciona — acessa o escopo externo
+  console.log(local)  // funciona
+}
+
+console.log(local) // ERRO — local não existe aqui
 \`\`\``,
     tasks: [
       {
@@ -1453,11 +2412,78 @@ document.getElementById('resultado').textContent = classificar(8)
         hint: 'AND usa &&, OR usa ||, NOT usa ! antes da expressão.',
         successMessage: 'Perfeito! Operadores &&, || e ! dominados!',
       },
+      {
+        id: 'task-11',
+        type: 'quiz',
+        question: 'Qual é a diferença entre o loop "for" e o "while"?',
+        options: [
+          'for é para strings; while é para números',
+          'for é usado quando sabe quantas iterações fazer; while é usado quando a condição de parada é dinâmica',
+          'while é mais rápido que for',
+          'Não há diferença entre os dois',
+        ],
+        correct: 1,
+        explanation: 'for é ideal quando você conhece o número de iterações (ex: percorrer um array de 5 itens). while é ideal quando você não sabe quando vai parar — a condição determina se continua (ex: "enquanto o usuário não acertar").',
+      },
+      {
+        id: 'task-12',
+        type: 'fill',
+        title: 'Operador ternário',
+        description: 'Converta o if/else para um operador ternário:',
+        code: '// if/else original:\n// if (nota >= 7) { resultado = "Aprovado" } else { resultado = "Reprovado" }\n\n// Versão ternária:\nlet resultado = nota >= 7 {{blank}} "Aprovado" {{blank}} "Reprovado"',
+        blanks: ['?', ':'],
+        hint: 'O ternário usa ? para o caso true e : para o caso false: condição ? verdadeiro : falso',
+        successMessage: 'Ótimo! O ternário é muito usado para expressões simples de if/else.',
+      },
+      {
+        id: 'task-13',
+        type: 'code',
+        title: 'Loop para exibir lista',
+        description: 'Crie um array com 3 frutas. Use um loop <code>for...of</code> para criar um <code>&lt;li&gt;</code> para cada fruta e adicione ao elemento <code>id="lista"</code>.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <body>\n    <ul id="lista"></ul>\n    <script>\n      const frutas = ["Maçã", "Banana", "Laranja"]\n      const lista = document.getElementById("lista")\n      // Use for...of para adicionar os itens\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const lista = doc.getElementById('lista')
+          if (!lista) return false
+          const items = lista.querySelectorAll('li')
+          return items.length >= 3
+        },
+        successMessage: 'Perfeito! Você gerou HTML dinamicamente com um loop!',
+        hint: 'for (const fruta of frutas) { lista.innerHTML += `<li>${fruta}</li>` }',
+      },
+      {
+        id: 'task-14',
+        type: 'fill',
+        title: 'Estrutura do loop for',
+        description: 'Complete o loop for que percorre um array de 5 elementos:',
+        code: '{{blank}} (let {{blank}} = 0; i {{blank}} array.length; {{blank}}) {\n  console.log(array[i])\n}',
+        blanks: ['for', 'i', '<', 'i++'],
+        hint: 'A estrutura do for é: for(inicialização; condição; incremento).',
+        successMessage: 'Correto! Você montou a estrutura completa de um loop for.',
+      },
+      {
+        id: 'task-15',
+        type: 'bug',
+        title: 'Loop infinito',
+        description: 'O while abaixo vai rodar para sempre porque o contador nunca é incrementado. Corrija o código!',
+        buggyCode: '<script>\n  let i = 0;\n  while (i < 5) {\n    console.log(i);\n    // Falta incrementar i!\n  }\n</script>',
+        validate: (doc) => {
+          const scripts = doc.querySelectorAll('script')
+          for (const s of scripts) {
+            if (s.textContent.includes('i++') || s.textContent.includes('i += 1') || s.textContent.includes('i = i + 1')) {
+              return true
+            }
+          }
+          return false
+        },
+        successMessage: 'Correto! Sem i++, o loop nunca termina. Sempre garanta que a condição do while vai se tornar falsa.',
+        hint: 'Adicione i++ dentro do while, após o console.log(i).',
+      },
     ],
   },
   {
     id: 'modulo-dom',
     number: '09',
+    stageId: 'construtor',
     stage: 'Avançado',
     title: 'JavaScript: DOM e eventos',
     description: 'Aprenda a manipular a página em tempo real com JavaScript — selecione elementos, altere conteúdo e reaja a cliques.',
@@ -1673,11 +2699,73 @@ document.getElementById('lista').appendChild(novoItem)
         correct: 2,
         explanation: 'textContent é mais seguro pois trata tudo como texto puro — nada é interpretado como HTML. innerHTML interpreta o conteúdo como HTML (útil para inserir elementos), mas pode causar vulnerabilidades (XSS) se o conteúdo vier de fontes externas.',
       },
+      {
+        id: 'task-11',
+        type: 'code',
+        title: 'Toggle de classe com CSS',
+        description: 'Crie um <code>&lt;div id="caixa"&gt;</code> e um botão. No CSS, defina <code>.ativo { background-color: green; color: white; }</code>. Ao clicar, use <code>classList.toggle("ativo")</code> para alternar a aparência.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <head>\n    <style>\n      #caixa { padding: 20px; background: lightgray; }\n      .ativo { background-color: green; color: white; }\n    </style>\n  </head>\n  <body>\n    <div id="caixa">Clique no botão!</div>\n    <button id="btn">Alternar</button>\n    <script>\n      // Use classList.toggle("ativo") ao clicar\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const btn = doc.getElementById('btn')
+          const caixa = doc.getElementById('caixa')
+          return btn !== null && caixa !== null && doc.querySelector('script') !== null
+        },
+        successMessage: 'Ótimo! classList.toggle é perfeito para alternar estados visuais!',
+        hint: "document.getElementById('btn').addEventListener('click', () => { document.getElementById('caixa').classList.toggle('ativo') })",
+      },
+      {
+        id: 'task-12',
+        type: 'fill',
+        title: 'Criando elementos dinamicamente',
+        description: 'Complete o código que cria e adiciona um novo item à lista:',
+        code: 'const lista = document.getElementById(\'lista\')\n\n// Cria um novo elemento li:\nconst item = document.{{blank}}(\'li\')\n\n// Define o texto do item:\nitem.{{blank}} = \'Novo item\'\n\n// Adiciona à lista:\nlista.{{blank}}(item)',
+        blanks: ['createElement', 'textContent', 'appendChild'],
+        hint: 'Para criar: createElement. Para texto: textContent. Para inserir: appendChild.',
+        successMessage: 'Perfeito! Você sabe criar e inserir elementos no DOM!',
+      },
+      {
+        id: 'task-13',
+        type: 'code',
+        title: 'Evento de teclado',
+        description: 'Crie um <code>&lt;input id="campo"&gt;</code> e um <code>&lt;p id="espelho"&gt;</code>. Use o evento <code>"input"</code> para que o parágrafo mostre em tempo real o que está sendo digitado.',
+        starterCode: '<!DOCTYPE html>\n<html>\n  <body>\n    <input id="campo" placeholder="Digite algo..." />\n    <p id="espelho">Você está digitando: </p>\n    <script>\n      // Use addEventListener com o evento "input"\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const campo = doc.getElementById('campo')
+          const espelho = doc.getElementById('espelho')
+          return campo !== null && espelho !== null && doc.querySelector('script') !== null
+        },
+        successMessage: 'Excelente! O evento "input" é disparado a cada tecla digitada!',
+        hint: "document.getElementById('campo').addEventListener('input', function() { document.getElementById('espelho').textContent = 'Você digitou: ' + this.value })",
+      },
+      {
+        id: 'task-14',
+        type: 'quiz',
+        question: 'O que faz document.querySelectorAll("p")?',
+        options: [
+          'Seleciona apenas o primeiro <p> da página',
+          'Seleciona todos os elementos <p> da página e retorna uma NodeList',
+          'Cria um novo elemento <p>',
+          'Remove todos os <p> da página',
+        ],
+        correct: 1,
+        explanation: 'querySelectorAll retorna uma NodeList (lista) com TODOS os elementos que correspondem ao seletor. Diferente de querySelector, que retorna apenas o primeiro. Para percorrer a lista: forEach ou for...of.',
+      },
+      {
+        id: 'task-15',
+        type: 'fill',
+        title: 'Alterar estilos via JavaScript',
+        description: 'Complete o código para alterar estilos de um elemento via JavaScript:',
+        code: 'const caixa = document.getElementById(\'caixa\')\n\n// Muda a cor do fundo:\ncaixa.{{blank}}.backgroundColor = \'blue\'\n\n// Muda o tamanho da fonte:\ncaixa.style.{{blank}} = \'24px\'\n\n// Adiciona uma classe:\ncaixa.{{blank}}.add(\'ativo\')',
+        blanks: ['style', 'fontSize', 'classList'],
+        hint: 'Para estilos inline: .style.propriedade. Para classes: .classList.add/remove/toggle.',
+        successMessage: 'Ótimo! Você sabe manipular estilos e classes via JavaScript!',
+      },
     ],
   },
   {
     id: 'modulo-8',
     number: '10',
+    stageId: 'construtor',
     stage: 'Super Avançado',
     title: 'Seu primeiro projeto completo',
     description: 'Una HTML, CSS e JavaScript para criar uma página interativa do zero.',
@@ -1758,7 +2846,75 @@ Com HTML, CSS e JavaScript você já consegue criar:
 - Formulários com validação
 - Listas interativas (to-do lists)
 
-O próximo passo é praticar cada vez mais. Todo grande desenvolvedor começou exatamente onde você está agora.`,
+O próximo passo é praticar cada vez mais. Todo grande desenvolvedor começou exatamente onde você está agora.
+
+## Manipulando listas com JavaScript
+
+\`\`\`html
+<ul id="lista"></ul>
+<input id="item" placeholder="Novo item" />
+<button id="adicionar">Adicionar</button>
+
+<script>
+  document.getElementById('adicionar').addEventListener('click', function() {
+    const texto = document.getElementById('item').value.trim()
+    if (texto === '') return
+    const li = document.createElement('li')
+    li.textContent = texto
+    document.getElementById('lista').appendChild(li)
+    document.getElementById('item').value = ''
+  })
+</script>
+\`\`\`
+
+## Validação de formulários com JS
+
+\`\`\`html
+<form id="meuForm">
+  <input id="email" type="email" placeholder="Email" />
+  <button type="submit">Enviar</button>
+  <p id="erro"></p>
+</form>
+
+<script>
+  document.getElementById('meuForm').addEventListener('submit', function(e) {
+    e.preventDefault() // evita recarregar a página
+    const email = document.getElementById('email').value
+    if (!email.includes('@')) {
+      document.getElementById('erro').textContent = 'Email inválido!'
+    } else {
+      document.getElementById('erro').textContent = 'Enviado com sucesso!'
+    }
+  })
+</script>
+\`\`\`
+
+## Tags semânticas no projeto
+
+Projetos reais usam a estrutura semântica:
+
+\`\`\`html
+<body>
+  <header>
+    <h1>Meu App</h1>
+    <nav><!-- links --></nav>
+  </header>
+  <main>
+    <section id="app"><!-- conteúdo principal --></section>
+  </main>
+  <footer>
+    <p>© 2025 Meu App</p>
+  </footer>
+</body>
+\`\`\`
+
+## Próximos passos após este curso
+
+- **Praticar**: construa projetos reais (calculadora, lista de tarefas, quiz)
+- **GitHub**: publique seus projetos para criar um portfólio
+- **React / Vue**: frameworks JavaScript para apps maiores
+- **Node.js**: JavaScript no servidor (back-end)
+- **APIs**: aprenda a buscar dados de serviços externos`,
     tasks: [
       {
         id: 'task-1',
@@ -1854,6 +3010,152 @@ O próximo passo é praticar cada vez mais. Todo grande desenvolvedor começou e
         successMessage: 'Correto! O método correto é addEventListener (com "Event" completo).',
         hint: 'O método está escrito como "addEventListner" — falta a letra "e" em "Listener". O correto é addEventListener.',
       },
+      {
+        id: 'task-8',
+        type: 'code',
+        title: 'Lista de tarefas interativa',
+        description: 'Crie uma lista de tarefas: um <code>&lt;input&gt;</code>, um <code>&lt;button&gt;</code> "Adicionar" e uma <code>&lt;ul id="lista"&gt;</code>. Ao clicar, adicione um <code>&lt;li&gt;</code> com o texto do input.',
+        starterCode: '<!DOCTYPE html>\n<html lang="pt-BR">\n  <head>\n    <meta charset="UTF-8" />\n    <style>\n      body { font-family: sans-serif; padding: 20px; }\n      li { margin: 4px 0; }\n    </style>\n  </head>\n  <body>\n    <h2>Minhas Tarefas</h2>\n    <input id="tarefa" placeholder="Nova tarefa..." />\n    <button id="adicionar">Adicionar</button>\n    <ul id="lista"></ul>\n    <script>\n      // Adicione o evento e crie os itens\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const input = doc.getElementById('tarefa')
+          const btn = doc.getElementById('adicionar')
+          const lista = doc.getElementById('lista')
+          return input !== null && btn !== null && lista !== null && doc.querySelector('script') !== null
+        },
+        successMessage: 'Ótimo! Você criou uma lista de tarefas dinâmica!',
+        hint: "document.getElementById('adicionar').addEventListener('click', () => { const t = document.getElementById('tarefa').value.trim(); if(t){const li = document.createElement('li'); li.textContent = t; document.getElementById('lista').appendChild(li); document.getElementById('tarefa').value='';} })",
+      },
+      {
+        id: 'task-9',
+        type: 'fill',
+        title: 'Prevenindo o comportamento padrão',
+        description: 'Em formulários, o submit recarrega a página por padrão. Complete o código para evitar isso:',
+        code: 'document.getElementById(\'form\').addEventListener(\'{{blank}}\', function({{blank}}) {\n  {{blank}}.preventDefault()  // evita recarregar\n  // processar os dados...\n})',
+        blanks: ['submit', 'e', 'e'],
+        hint: 'O evento do formulário é "submit". O parâmetro da função é o objeto evento (e) e preventDefault() cancela o comportamento padrão.',
+        successMessage: 'Correto! e.preventDefault() é essencial para formulários controlados por JavaScript.',
+      },
+      {
+        id: 'task-10',
+        type: 'quiz',
+        question: 'Qual é a boa prática para onde colocar a tag <script> em um projeto?',
+        options: [
+          'Dentro do <head>, sempre',
+          'Dentro do <body>, no topo, antes de qualquer elemento',
+          'No final do <body>, antes do </body>',
+          'Fora do <html>',
+        ],
+        correct: 2,
+        explanation: 'O <script> deve ir no final do <body> para que: (1) o HTML seja carregado antes do JS executar, (2) o usuário veja o conteúdo mais rápido, (3) o JS possa acessar os elementos já existentes no DOM.',
+      },
+      {
+        id: 'task-11',
+        type: 'code',
+        title: 'Calculadora simples',
+        description: 'Crie dois inputs de número, um botão "Somar" e um <code>&lt;p id="resultado"&gt;</code>. Ao clicar, some os dois números e exiba o resultado. Use <code>Number()</code> para converter os valores.',
+        starterCode: '<!DOCTYPE html>\n<html lang="pt-BR">\n  <head>\n    <meta charset="UTF-8" />\n    <style>\n      body { font-family: sans-serif; padding: 20px; }\n      input { width: 80px; padding: 8px; margin: 4px; }\n      button { padding: 8px 16px; cursor: pointer; }\n    </style>\n  </head>\n  <body>\n    <h2>Calculadora</h2>\n    <input id="num1" type="number" placeholder="0" />\n    <span>+</span>\n    <input id="num2" type="number" placeholder="0" />\n    <button id="somar">Somar</button>\n    <p id="resultado">Resultado: </p>\n    <script>\n      // Some os dois inputs e exiba o resultado\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const n1 = doc.getElementById('num1')
+          const n2 = doc.getElementById('num2')
+          const btn = doc.getElementById('somar')
+          const res = doc.getElementById('resultado')
+          return n1 !== null && n2 !== null && btn !== null && res !== null && doc.querySelector('script') !== null
+        },
+        successMessage: 'Ótimo! Você criou uma calculadora funcional com HTML, CSS e JavaScript!',
+        hint: "document.getElementById('somar').addEventListener('click', () => { const soma = Number(document.getElementById('num1').value) + Number(document.getElementById('num2').value); document.getElementById('resultado').textContent = 'Resultado: ' + soma })",
+      },
+      {
+        id: 'task-12',
+        type: 'fill',
+        title: 'Estrutura completa de um projeto',
+        description: 'Complete a estrutura semântica de um projeto web completo:',
+        code: '<!DOCTYPE html>\n<html lang="pt-BR">\n  <head>\n    <meta charset="UTF-8" />\n    <meta name="{{blank}}" content="width=device-width, initial-scale=1.0" />\n    <title>Meu Projeto</title>\n    <{{blank}} rel="stylesheet" href="styles.css" />\n  </head>\n  <body>\n    <{{blank}}><!-- cabeçalho --></header>\n    <{{blank}}><!-- conteúdo principal --></main>\n    <footer><!-- rodapé --></{{blank}}>\n    <{{blank}} src="script.js"></script>\n  </body>\n</html>',
+        blanks: ['viewport', 'link', 'header', 'main', 'footer', 'script'],
+        hint: 'Meta viewport, link para CSS, tags semânticas header/main/footer e script no final.',
+        successMessage: 'Perfeito! Você montou o esqueleto profissional de um projeto web!',
+      },
+      {
+        id: 'task-13',
+        type: 'quiz',
+        question: 'Qual é o próximo passo recomendado após aprender HTML, CSS e JavaScript básico?',
+        options: [
+          'Aprender Assembly para entender hardware',
+          'Construir projetos reais e publicar no GitHub para criar portfólio',
+          'Aprender PHP antes de qualquer framework',
+          'Estudar matemática avançada antes de continuar',
+        ],
+        correct: 1,
+        explanation: 'O melhor próximo passo é construir projetos reais (lista de tarefas, calculadora, portfólio, quiz) e publicá-los no GitHub. Isso consolida o aprendizado, cria um portfólio visível e prepara para frameworks como React.',
+      },
+      {
+        id: 'task-14',
+        type: 'drag',
+        title: 'Ordem de construção de um projeto web',
+        description: 'Ordene as etapas corretas para construir uma página web do zero:',
+        blocks: [
+          '1. Planejar a estrutura e o conteúdo',
+          '2. Escrever o HTML (estrutura)',
+          '3. Adicionar CSS (visual e layout)',
+          '4. Adicionar JavaScript (interatividade)',
+          '5. Testar em diferentes tamanhos de tela',
+          '6. Publicar no GitHub Pages',
+        ],
+        hint: 'Planejamento → estrutura (HTML) → visual (CSS) → comportamento (JS) → testes → publicação.',
+        successMessage: 'Excelente! Você conhece o workflow completo de um desenvolvedor web!',
+      },
+      {
+        id: 'task-15',
+        type: 'code',
+        title: 'Projeto final: contador interativo',
+        description: 'Crie um contador com: um <code>&lt;h2 id="contador"&gt;0&lt;/h2&gt;</code>, um botão "+ 1" e um botão "Zerar". Cada clique em "+ 1" aumenta o número; "Zerar" volta a 0. Estilize com CSS.',
+        starterCode: '<!DOCTYPE html>\n<html lang="pt-BR">\n  <head>\n    <meta charset="UTF-8" />\n    <style>\n      body { font-family: sans-serif; text-align: center; padding: 40px; }\n      h2 { font-size: 80px; margin: 20px; }\n      button {\n        padding: 12px 24px;\n        margin: 8px;\n        font-size: 18px;\n        cursor: pointer;\n        border: none;\n        border-radius: 8px;\n      }\n      #incrementar { background: #3b82f6; color: white; }\n      #zerar { background: #ef4444; color: white; }\n    </style>\n  </head>\n  <body>\n    <h1>Contador</h1>\n    <h2 id="contador">0</h2>\n    <button id="incrementar">+ 1</button>\n    <button id="zerar">Zerar</button>\n    <script>\n      // Implemente o contador\n    </script>\n  </body>\n</html>\n',
+        validate: (doc) => {
+          const contador = doc.getElementById('contador')
+          const inc = doc.getElementById('incrementar')
+          const zer = doc.getElementById('zerar')
+          return contador !== null && inc !== null && zer !== null && doc.querySelector('script') !== null
+        },
+        successMessage: 'Parabéns! Você completou o curso com um projeto interativo completo! Você é um desenvolvedor web!',
+        hint: 'let n = 0; document.getElementById("incrementar").addEventListener("click", () => { n++; document.getElementById("contador").textContent = n }); document.getElementById("zerar").addEventListener("click", () => { n = 0; document.getElementById("contador").textContent = 0 })',
+      },
     ],
+  },
+]
+
+export const STAGES = [
+  {
+    id: 'curioso',
+    name: 'Curioso',
+    subtitle: 'Primeiros passos no mundo da programação',
+    icon: '🔍',
+    color: '#3b82f6',
+  },
+  {
+    id: 'aprendiz',
+    name: 'Aprendiz',
+    subtitle: 'Aprendendo HTML e CSS do zero',
+    icon: '📚',
+    color: '#8b5cf6',
+  },
+  {
+    id: 'estudante',
+    name: 'Estudante',
+    subtitle: 'Dominando estilos e layout com CSS',
+    icon: '🎨',
+    color: '#10b981',
+  },
+  {
+    id: 'praticante',
+    name: 'Praticante',
+    subtitle: 'Introdução ao JavaScript',
+    icon: '⚡',
+    color: '#f43f5e',
+  },
+  {
+    id: 'construtor',
+    name: 'Construtor',
+    subtitle: 'Manipulando o DOM e criando projetos reais',
+    icon: '🏗️',
+    color: '#06b6d4',
   },
 ]

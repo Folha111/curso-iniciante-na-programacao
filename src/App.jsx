@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { AuthProvider, useAuth } from './context/AuthContext'
 import { ModulesProvider } from './context/ModulesContext'
 import { ProgressProvider } from './context/ProgressContext'
 import { ThemeProvider } from './context/ThemeContext'
@@ -29,6 +29,11 @@ import Perfil from './pages/Perfil'
 import Revisao from './pages/Revisao'
 
 function Home() {
+  const { user } = useAuth()
+  if (user) {
+    const last = localStorage.getItem('last_path')
+    return <Navigate to={last || '/dashboard'} replace />
+  }
   return (
     <>
       <Navbar />
