@@ -177,8 +177,8 @@
 }
 
 .adm__role--aluno {
-  background: rgba(59, 130, 246, 0.12);
-  color: #3b82f6;
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  color: var(--color-accent);
 }
 
 /* Note */
@@ -216,8 +216,8 @@
 }
 
 .adm__tab--active {
-  color: var(--accent, #3b82f6);
-  border-bottom-color: var(--accent, #3b82f6);
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
   font-weight: 600;
 }
 
@@ -246,7 +246,7 @@
 }
 
 .adm__btn--primary {
-  background: #3b82f6;
+  background: var(--color-accent);
   color: #fff;
 }
 
@@ -336,7 +336,7 @@
 }
 
 .adm__input:focus {
-  border-color: #3b82f6;
+  border-color: var(--color-accent);
 }
 
 .adm__input--small {
@@ -360,7 +360,7 @@
 }
 
 .adm__textarea:focus {
-  border-color: #3b82f6;
+  border-color: var(--color-accent);
 }
 
 .adm__textarea--large {
@@ -526,7 +526,7 @@
 
 .adm__task-row--extra .adm__task-type-badge {
   background: rgba(59,130,246,0.12);
-  color: #3b82f6;
+  color: var(--color-accent);
 }
 
 .adm__task-row-title {

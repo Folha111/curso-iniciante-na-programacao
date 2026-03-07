@@ -76,8 +76,8 @@
 }
 
 .quiz-task__option--selected {
-  border-color: var(--color-indigo, #6366f1);
-  background: #eef2ff;
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, white);
   color: var(--color-dark, #0f172a);
 }
 

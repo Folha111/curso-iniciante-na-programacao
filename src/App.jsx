@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext'
 import { ModulesProvider } from './context/ModulesContext'
 import { ProgressProvider } from './context/ProgressContext'
 import { ThemeProvider } from './context/ThemeContext'
+import { LangProvider } from './context/LangContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import ProtectedAdminRoute from './components/ProtectedAdminRoute'
 import AppLayout from './components/AppLayout'
@@ -29,6 +30,8 @@ import Perfil from './pages/Perfil'
 import Revisao from './pages/Revisao'
 import Projetos from './pages/Projetos'
 import Projeto from './pages/Projeto'
+import Configuracoes from './pages/Configuracoes'
+import Foco from './pages/Foco'
 
 function Home() {
   const { user } = useAuth()
@@ -55,6 +58,7 @@ function Home() {
 export default function App() {
   return (
     <ThemeProvider>
+      <LangProvider>
       <AuthProvider>
         <ModulesProvider>
           <ProgressProvider>
@@ -78,6 +82,8 @@ export default function App() {
                 <Route path="/conquistas" element={<Conquistas />} />
                 <Route path="/ranking" element={<Leaderboard />} />
                 <Route path="/perfil" element={<Perfil />} />
+                <Route path="/configuracoes" element={<Configuracoes />} />
+                <Route path="/foco" element={<Foco />} />
                 <Route path="/revisao" element={<Revisao />} />
                 <Route path="/projetos" element={<Projetos />} />
                 <Route path="/projeto/:id" element={<Projeto />} />
@@ -94,6 +100,7 @@ export default function App() {
           </ProgressProvider>
         </ModulesProvider>
       </AuthProvider>
+      </LangProvider>
     </ThemeProvider>
   )
 }

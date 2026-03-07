@@ -40,7 +40,7 @@
   height: 480px;
   top: -140px;
   right: -140px;
-  background: #6366f1;
+  background: var(--color-accent);
   opacity: 0.14;
   animation-delay: 0s;
 }
@@ -107,7 +107,7 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #6366f1;
+  color: var(--color-accent);
   margin-bottom: 10px;
 }
 
@@ -159,7 +159,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--game-color, #6366f1);
+  background: var(--game-color, var(--color-accent));
   border-radius: 18px 18px 0 0;
 }
 
@@ -189,7 +189,7 @@
 .game-card__cta {
   font-size: 13px;
   font-weight: 700;
-  color: var(--game-color, #6366f1);
+  color: var(--game-color, var(--color-accent));
   margin-top: 4px;
 }
 
@@ -257,7 +257,7 @@
 .game-play__timer {
   font-size: 20px;
   font-weight: 800;
-  color: #6366f1;
+  color: var(--color-accent);
   min-width: 36px;
   text-align: right;
   transition: color 0.3s;
@@ -282,7 +282,7 @@
 
 .game-play__progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  background: var(--gradient-brand);
   border-radius: 2px;
   transition: width 0.4s ease;
 }
@@ -345,12 +345,12 @@
   font-size: 15px;
   font-weight: 700;
   justify-content: center;
-  color: #6366f1;
+  color: var(--color-accent);
 }
 
 .game-play__option:hover:not(:disabled) {
-  border-color: #6366f1;
-  background: #eef2ff;
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, white);
   transform: translateY(-1px);
 }
 
@@ -543,7 +543,7 @@
 
 .memory-card:hover:not(:disabled) {
   transform: scale(1.04);
-  border-color: #6366f1;
+  border-color: var(--color-accent);
 }
 
 .memory-card__back,
@@ -574,7 +574,7 @@
 .memory-card--tag .memory-card__front {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: #6366f1;
+  color: var(--color-accent);
 }
 
 .memory-card--desc .memory-card__front {
@@ -604,7 +604,7 @@
   font-family: var(--font-mono);
   font-size: 20px;
   font-weight: 800;
-  color: #6366f1;
+  color: var(--color-accent);
   text-transform: lowercase;
 }
 
@@ -635,7 +635,7 @@
   text-align: center;
 }
 
-.scramble-input:focus { border-color: #6366f1; background: #fff; }
+.scramble-input:focus { border-color: var(--color-accent); background: #fff; }
 .scramble-input--correct { border-color: #86efac !important; background: #f0fdf4 !important; }
 .scramble-input--wrong   { border-color: #fca5a5 !important; background: #fef2f2 !important; }
 
@@ -678,7 +678,7 @@
   line-height: 1.6;
 }
 
-.typing-input:focus { border-color: #6366f1; background: #fff; }
+.typing-input:focus { border-color: var(--color-accent); background: #fff; }
 
 /* ---- Achar o Erro ---- */
 .bug-description {
@@ -813,8 +813,8 @@
 
 .completar-code__blank {
   display: inline-block;
-  background: rgba(99, 102, 241, 0.3);
-  border: 2px dashed #6366f1;
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  border: 2px dashed var(--color-accent);
   border-radius: 6px;
   color: #a5b4fc;
   padding: 0 10px;
@@ -961,8 +961,8 @@
 }
 
 .quiz-cron-option:hover:not(:disabled) {
-  border-color: #6366f1;
-  background: #eef2ff;
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, white);
 }
 
 .quiz-cron-option--correct {

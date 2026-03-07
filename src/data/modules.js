@@ -4390,6 +4390,2490 @@ Você terminou o curso básico — isso é uma conquista real. Mas a jornada de 
       },
     ],
   },
+
+  // ─── MÓDULO 11: CSS Flexbox ───────────────────────────────────────────────
+  {
+    id: 'modulo-flexbox',
+    number: '11',
+    stageId: 'estudante',
+    stage: 'CSS Avançado',
+    title: 'CSS: Flexbox',
+    description: 'Domine o sistema de layout mais usado na web moderna com Flexbox.',
+    color: '#a855f7',
+    context: `## O que é Flexbox?
+
+**Flexbox** (Flexible Box Layout) é um sistema de layout CSS que facilita alinhar e distribuir elementos dentro de um contêiner, mesmo quando seus tamanhos são desconhecidos ou dinâmicos.
+
+Antes do Flexbox, centralizar elementos verticalmente era complicado. Hoje é simples:
+
+\`\`\`css
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+\`\`\`
+
+## Contêiner e itens
+
+Flexbox divide os elementos em dois grupos:
+
+- **Flex container** — o elemento pai com \`display: flex\`
+- **Flex items** — os filhos diretos do container
+
+\`\`\`html
+<div class="container">  <!-- flex container -->
+  <div>Item 1</div>      <!-- flex item -->
+  <div>Item 2</div>      <!-- flex item -->
+  <div>Item 3</div>      <!-- flex item -->
+</div>
+\`\`\`
+
+## Eixo principal e cruzado
+
+O Flexbox trabalha com dois eixos:
+
+- **Eixo principal (main axis)** — definido por \`flex-direction\` (padrão: horizontal)
+- **Eixo cruzado (cross axis)** — perpendicular ao eixo principal
+
+## flex-direction
+
+Define a direção dos itens:
+
+\`\`\`css
+flex-direction: row;            /* → padrão: da esquerda para direita */
+flex-direction: row-reverse;    /* ← da direita para esquerda */
+flex-direction: column;         /* ↓ de cima para baixo */
+flex-direction: column-reverse; /* ↑ de baixo para cima */
+\`\`\`
+
+## justify-content
+
+Alinha os itens no **eixo principal**:
+
+\`\`\`css
+justify-content: flex-start;    /* início (padrão) */
+justify-content: flex-end;      /* final */
+justify-content: center;        /* centro */
+justify-content: space-between; /* espaço entre os itens */
+justify-content: space-around;  /* espaço ao redor dos itens */
+justify-content: space-evenly;  /* espaço igual entre todos */
+\`\`\`
+
+## align-items
+
+Alinha os itens no **eixo cruzado**:
+
+\`\`\`css
+align-items: stretch;     /* estica (padrão) */
+align-items: flex-start;  /* topo */
+align-items: flex-end;    /* baixo */
+align-items: center;      /* centro vertical */
+align-items: baseline;    /* alinha pelo texto */
+\`\`\`
+
+## flex-wrap
+
+Controla se os itens quebram linha:
+
+\`\`\`css
+flex-wrap: nowrap;   /* tudo em uma linha (padrão) */
+flex-wrap: wrap;     /* quebra para a próxima linha */
+flex-wrap: wrap-reverse; /* quebra para cima */
+\`\`\`
+
+## gap
+
+Espaçamento entre os itens:
+
+\`\`\`css
+.container {
+  display: flex;
+  gap: 16px;        /* espaço entre todos os itens */
+  gap: 16px 8px;    /* row-gap column-gap */
+}
+\`\`\`
+
+## flex (nos itens)
+
+Controla como cada item cresce ou encolhe:
+
+\`\`\`css
+.item { flex: 1; }    /* cresce para preencher o espaço disponível */
+.item { flex: 2; }    /* cresce o dobro dos itens flex: 1 */
+\`\`\`
+
+## Exemplo prático: navbar
+
+\`\`\`css
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+\`\`\`
+
+\`\`\`html
+<nav>
+  <span>Logo</span>
+  <ul>
+    <li>Início</li>
+    <li>Sobre</li>
+    <li>Contato</li>
+  </ul>
+</nav>
+\`\`\`
+
+## Centralizar um elemento
+
+O truque mais usado no CSS moderno:
+
+\`\`\`css
+.centralizador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+\`\`\`
+`,
+    tasks: [
+      {
+        id: 'flex-quiz-1',
+        type: 'quiz',
+        title: 'O que é Flexbox?',
+        question: 'Qual propriedade CSS transforma um elemento em flex container?',
+        options: ['flex: 1', 'display: flex', 'position: flex', 'layout: flex'],
+        correct: 1,
+        xp: 10,
+        successMessage: 'Correto! display: flex é o ponto de partida do Flexbox.',
+      },
+      {
+        id: 'flex-quiz-2',
+        type: 'quiz',
+        title: 'justify-content',
+        question: 'Qual valor de justify-content distribui os itens com espaço igual entre eles (mas não nas bordas)?',
+        options: ['space-evenly', 'space-around', 'space-between', 'center'],
+        correct: 2,
+        xp: 10,
+        successMessage: 'space-between coloca espaço entre os itens, sem margens nas extremidades.',
+      },
+      {
+        id: 'flex-fill-1',
+        type: 'fill',
+        title: 'Complete o CSS de centralização',
+        text: 'Para centralizar um elemento vertical e horizontalmente:\n.box { display: ___; justify-content: ___; align-items: ___; }',
+        blanks: ['flex', 'center', 'center'],
+        xp: 10,
+        successMessage: 'Perfeito! Essa combinação é a mais usada no dia a dia.',
+      },
+      {
+        id: 'flex-bug-1',
+        type: 'bug',
+        title: 'Encontre o erro no Flexbox',
+        description: 'O programador queria deixar os itens em coluna, mas algo está errado:',
+        lines: [
+          '.container {',
+          '  display: flex;',
+          '  flex-direction: coluna;',
+          '  gap: 8px;',
+          '}',
+        ],
+        bugLine: 2,
+        explanation: 'O valor correto é "column" (em inglês), não "coluna".',
+        xp: 20,
+        successMessage: 'Ótimo! Propriedades CSS sempre usam inglês.',
+      },
+      {
+        id: 'flex-drag-1',
+        type: 'drag',
+        title: 'Ordene: criar uma navbar com Flexbox',
+        description: 'Coloque as propriedades na ordem correta para criar uma navbar:',
+        blocks: [
+          'display: flex;',
+          'justify-content: space-between;',
+          'align-items: center;',
+          'padding: 16px;',
+        ],
+        correctOrder: [0, 1, 2, 3],
+        xp: 20,
+        successMessage: 'Navbar flexível criada com sucesso!',
+      },
+      {
+        id: 'flex-code-1',
+        type: 'code',
+        title: 'Crie um layout com Flexbox',
+        description: 'Crie 3 cards lado a lado usando Flexbox, com gap de 16px e centralizados.',
+        starterCode: `<style>
+  .container {
+    /* seu CSS aqui */
+  }
+  .card {
+    background: #6366f1;
+    color: white;
+    padding: 24px;
+    border-radius: 8px;
+    flex: 1;
+  }
+</style>
+<div class="container">
+  <div class="card">Card 1</div>
+  <div class="card">Card 2</div>
+  <div class="card">Card 3</div>
+</div>`,
+        hint: '.container { display: flex; gap: 16px; justify-content: center; }',
+        successMessage: 'Layout Flexbox criado com sucesso!',
+        xp: 15,
+      },
+    ],
+  },
+
+  // ─── MÓDULO 12: CSS Grid ──────────────────────────────────────────────────
+  {
+    id: 'modulo-grid',
+    number: '12',
+    stageId: 'estudante',
+    stage: 'CSS Avançado',
+    title: 'CSS: Grid',
+    description: 'Crie layouts complexos em duas dimensões com CSS Grid.',
+    color: '#ec4899',
+    context: `## O que é CSS Grid?
+
+**CSS Grid** é um sistema de layout bidimensional — ele trabalha com linhas **e** colunas ao mesmo tempo. É perfeito para criar layouts de páginas inteiras.
+
+Enquanto Flexbox é ótimo para layouts unidimensionais (uma linha ou coluna), Grid brilha quando você precisa de layouts mais complexos.
+
+## Ativando o Grid
+
+\`\`\`css
+.container {
+  display: grid;
+}
+\`\`\`
+
+## grid-template-columns
+
+Define as colunas do grid:
+
+\`\`\`css
+/* 3 colunas iguais de 200px */
+grid-template-columns: 200px 200px 200px;
+
+/* usando repeat() */
+grid-template-columns: repeat(3, 200px);
+
+/* colunas flexíveis com fr (fraction) */
+grid-template-columns: repeat(3, 1fr);
+
+/* mix: coluna fixa + flexível */
+grid-template-columns: 250px 1fr;
+\`\`\`
+
+## grid-template-rows
+
+Define as linhas do grid:
+
+\`\`\`css
+grid-template-rows: 80px 1fr 60px; /* header, conteúdo, footer */
+\`\`\`
+
+## gap
+
+Espaço entre células:
+
+\`\`\`css
+gap: 16px;           /* row e column gap iguais */
+gap: 16px 24px;      /* row-gap column-gap */
+column-gap: 24px;    /* só colunas */
+row-gap: 16px;       /* só linhas */
+\`\`\`
+
+## A unidade fr (fraction)
+
+\`fr\` divide o espaço disponível proporcionalmente:
+
+\`\`\`css
+grid-template-columns: 1fr 2fr 1fr;
+/* coluna do meio é o dobro das laterais */
+\`\`\`
+
+## Posicionando itens com grid-column e grid-row
+
+\`\`\`css
+.header {
+  grid-column: 1 / 4;  /* da coluna 1 até a 4 (ocupa 3 colunas) */
+}
+
+.sidebar {
+  grid-row: 2 / 4;     /* da linha 2 até a 4 (ocupa 2 linhas) */
+}
+\`\`\`
+
+Atalho: \`span\`
+
+\`\`\`css
+.header {
+  grid-column: span 3;  /* ocupa 3 colunas */
+}
+\`\`\`
+
+## grid-template-areas
+
+A forma mais visual de definir um layout:
+
+\`\`\`css
+.container {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "sidebar main main"
+    "footer footer footer";
+  grid-template-columns: 200px 1fr 1fr;
+  grid-template-rows: 60px 1fr 40px;
+}
+
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.footer  { grid-area: footer; }
+\`\`\`
+
+## place-items
+
+Alinha todos os itens dentro de suas células:
+
+\`\`\`css
+.container {
+  display: grid;
+  place-items: center; /* centraliza vertical e horizontalmente */
+}
+\`\`\`
+
+## Exemplo: galeria de fotos
+
+\`\`\`css
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+\`\`\`
+
+## Grid vs Flexbox
+
+| Situação | Use |
+|---|---|
+| Layout de página inteira | Grid |
+| Barra de navegação | Flexbox |
+| Cards em linha | Flexbox ou Grid |
+| Dashboard com áreas | Grid |
+| Centralizar um item | Flexbox ou Grid |
+`,
+    tasks: [
+      {
+        id: 'grid-quiz-1',
+        type: 'quiz',
+        title: 'Grid vs Flexbox',
+        question: 'Qual a principal diferença entre Grid e Flexbox?',
+        options: [
+          'Grid é mais antigo',
+          'Flexbox funciona apenas em mobile',
+          'Grid trabalha em duas dimensões (linhas e colunas)',
+          'Grid só funciona com imagens',
+        ],
+        correct: 2,
+        xp: 10,
+        successMessage: 'Grid é bidimensional (linhas + colunas), Flexbox é unidimensional.',
+      },
+      {
+        id: 'grid-quiz-2',
+        type: 'quiz',
+        title: 'A unidade fr',
+        question: 'O que significa a unidade "fr" no CSS Grid?',
+        options: ['frame', 'fraction (fração do espaço disponível)', 'frequency', 'flexible row'],
+        correct: 1,
+        xp: 10,
+        successMessage: 'fr divide o espaço restante proporcionalmente entre as colunas/linhas.',
+      },
+      {
+        id: 'grid-fill-1',
+        type: 'fill',
+        title: 'Complete o grid de 3 colunas',
+        text: 'Para criar um grid com 3 colunas iguais:\n.container { display: ___; grid-template-columns: repeat(___, 1fr); gap: 16px; }',
+        blanks: ['grid', '3'],
+        xp: 10,
+        successMessage: 'Perfeito! repeat(3, 1fr) cria 3 colunas de tamanho igual.',
+      },
+      {
+        id: 'grid-bug-1',
+        type: 'bug',
+        title: 'Erro no Grid',
+        description: 'O programador quer que o header ocupe 3 colunas, mas está errado:',
+        lines: [
+          '.header {',
+          '  grid-column: span 3;',
+          '  background: navy;',
+          '  grid-area: cabecalho;',
+          '}',
+          '.container {',
+          '  display: grid;',
+          '  grid-template-columns: repeat(2, 1fr);',
+          '}',
+        ],
+        bugLine: 7,
+        explanation: 'O container tem apenas 2 colunas, mas o header usa span 3. Deve ser repeat(3, 1fr).',
+        xp: 20,
+        successMessage: 'O número de colunas no container e nos itens devem ser compatíveis.',
+      },
+      {
+        id: 'grid-code-1',
+        type: 'code',
+        title: 'Crie uma galeria com Grid',
+        description: 'Crie uma galeria 3x2 com CSS Grid. Use repeat() e gap.',
+        starterCode: `<style>
+  .galeria {
+    /* seu grid aqui */
+  }
+  .foto {
+    background: #ec4899;
+    color: white;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+  }
+</style>
+<div class="galeria">
+  <div class="foto">1</div>
+  <div class="foto">2</div>
+  <div class="foto">3</div>
+  <div class="foto">4</div>
+  <div class="foto">5</div>
+  <div class="foto">6</div>
+</div>`,
+        hint: '.galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }',
+        successMessage: 'Galeria CSS Grid criada!',
+        xp: 15,
+      },
+      {
+        id: 'grid-drag-1',
+        type: 'drag',
+        title: 'Ordene: layout com grid-template-areas',
+        description: 'Ordene as propriedades para criar um layout com áreas nomeadas:',
+        blocks: [
+          'display: grid;',
+          'grid-template-areas: "header" "main" "footer";',
+          'grid-template-rows: 60px 1fr 40px;',
+          'min-height: 100vh;',
+        ],
+        correctOrder: [0, 1, 2, 3],
+        xp: 20,
+        successMessage: 'Layout com grid-template-areas montado corretamente!',
+      },
+    ],
+  },
+
+  // ─── MÓDULO 13: CSS Responsividade ───────────────────────────────────────
+  {
+    id: 'modulo-responsivo',
+    number: '13',
+    stageId: 'estudante',
+    stage: 'CSS Avançado',
+    title: 'CSS: Responsividade',
+    description: 'Crie sites que funcionam perfeitamente em celular, tablet e desktop.',
+    color: '#f59e0b',
+    context: `## O que é design responsivo?
+
+Um site **responsivo** adapta seu layout e conteúdo para funcionar bem em qualquer tamanho de tela — do celular ao monitor widescreen.
+
+Hoje, mais de 60% do tráfego web vem de dispositivos móveis. Um site não responsivo perde usuários.
+
+## A meta tag viewport
+
+O primeiro passo é incluir essa tag no \`<head>\`:
+
+\`\`\`html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+\`\`\`
+
+Sem ela, o celular "finge" ter a largura de um desktop.
+
+## Media Queries
+
+Media queries aplicam CSS apenas quando certas condições são atendidas:
+
+\`\`\`css
+/* CSS padrão (todos os tamanhos) */
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Quando a tela tiver até 768px */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
+\`\`\`
+
+## Breakpoints comuns
+
+| Dispositivo | Breakpoint |
+|---|---|
+| Celular pequeno | max-width: 480px |
+| Celular | max-width: 768px |
+| Tablet | max-width: 1024px |
+| Desktop | min-width: 1025px |
+
+## Mobile-first
+
+A abordagem **mobile-first** escreve o CSS base para mobile e adiciona media queries para telas maiores:
+
+\`\`\`css
+/* base: mobile */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* tablet */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* desktop */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+\`\`\`
+
+## Unidades relativas
+
+| Unidade | Relativa a |
+|---|---|
+| \`%\` | elemento pai |
+| \`em\` | font-size do elemento pai |
+| \`rem\` | font-size do elemento raiz (html) |
+| \`vw\` | largura do viewport (1vw = 1%) |
+| \`vh\` | altura do viewport |
+
+\`\`\`css
+.hero {
+  height: 100vh;    /* tela inteira */
+  font-size: 1rem;  /* 16px (padrão) */
+  padding: 5%;      /* 5% da largura do pai */
+}
+\`\`\`
+
+## Imagens responsivas
+
+\`\`\`css
+img {
+  max-width: 100%;  /* nunca ultrapassa o container */
+  height: auto;     /* mantém proporção */
+}
+\`\`\`
+
+## Texto responsivo com clamp()
+
+\`\`\`css
+h1 {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  /* mínimo: 1.5rem | ideal: 5vw | máximo: 3rem */
+}
+\`\`\`
+
+## Navegação responsiva
+
+Padrão comum: menu horizontal no desktop, hambúrguer no mobile:
+
+\`\`\`css
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* esconde no mobile */
+  }
+}
+\`\`\`
+`,
+    tasks: [
+      {
+        id: 'resp-quiz-1',
+        type: 'quiz',
+        title: 'Meta viewport',
+        question: 'Para que serve a meta tag viewport?',
+        options: [
+          'Define a cor de fundo da página',
+          'Garante que o celular exiba a página com a largura correta',
+          'Adiciona animações automáticas',
+          'Conecta CSS e HTML',
+        ],
+        correct: 1,
+        xp: 10,
+        successMessage: 'Sem o viewport, o celular renderiza a página como desktop e a encolhe.',
+      },
+      {
+        id: 'resp-quiz-2',
+        type: 'quiz',
+        title: 'Mobile-first',
+        question: 'Na abordagem mobile-first, qual media query é usada para adicionar estilos para telas maiores?',
+        options: ['max-width', 'min-width', 'screen-size', 'device-width'],
+        correct: 1,
+        xp: 10,
+        successMessage: 'min-width adiciona estilos para telas a partir de um tamanho mínimo.',
+      },
+      {
+        id: 'resp-fill-1',
+        type: 'fill',
+        title: 'Complete a media query',
+        text: 'Para aplicar CSS apenas em telas com até 768px:\n@___ (max-width: ___px) {\n  .menu { display: none; }\n}',
+        blanks: ['media', '768'],
+        xp: 10,
+        successMessage: 'Media queries são a base da responsividade!',
+      },
+      {
+        id: 'resp-bug-1',
+        type: 'bug',
+        title: 'Erro na responsividade',
+        description: 'O site não aparece bem no celular. Encontre o problema:',
+        lines: [
+          '<!DOCTYPE html>',
+          '<html lang="pt-BR">',
+          '<head>',
+          '  <meta charset="UTF-8">',
+          '  <title>Site</title>',
+          '</head>',
+        ],
+        bugLine: 4,
+        explanation: 'Falta a meta tag viewport: <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+        xp: 20,
+        successMessage: 'Sempre inclua a meta viewport em seus projetos!',
+      },
+      {
+        id: 'resp-drag-1',
+        type: 'drag',
+        title: 'Ordene: grid responsivo mobile-first',
+        description: 'Ordene corretamente o CSS mobile-first:',
+        blocks: [
+          '.grid { grid-template-columns: 1fr; }',
+          '@media (min-width: 768px) {',
+          '  .grid { grid-template-columns: repeat(2, 1fr); }',
+          '}',
+        ],
+        correctOrder: [0, 1, 2, 3],
+        xp: 20,
+        successMessage: 'Grid responsivo mobile-first montado corretamente!',
+      },
+      {
+        id: 'resp-code-1',
+        type: 'code',
+        title: 'Layout responsivo',
+        description: 'Crie 4 cards que ficam em coluna no mobile e em 2 colunas em telas maiores que 600px.',
+        starterCode: `<style>
+  .grid {
+    display: grid;
+    /* mobile: 1 coluna */
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
+  /* adicione media query aqui */
+  .card {
+    background: #f59e0b;
+    color: white;
+    padding: 32px;
+    border-radius: 8px;
+    text-align: center;
+  }
+</style>
+<div class="grid">
+  <div class="card">Card 1</div>
+  <div class="card">Card 2</div>
+  <div class="card">Card 3</div>
+  <div class="card">Card 4</div>
+</div>`,
+        hint: '@media (min-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }',
+        successMessage: 'Layout responsivo funcionando!',
+        xp: 15,
+      },
+    ],
+  },
+
+  // ─── MÓDULO 14: JS Arrays e Objetos ──────────────────────────────────────
+  {
+    id: 'modulo-arrays',
+    number: '14',
+    stageId: 'praticante',
+    stage: 'JavaScript Avançado',
+    title: 'JavaScript: arrays e objetos',
+    description: 'Aprenda a trabalhar com listas de dados e estruturas complexas em JavaScript.',
+    color: '#f43f5e',
+    context: `## Arrays
+
+Um **array** é uma lista ordenada de valores. Cada valor tem um índice numérico começando em 0.
+
+\`\`\`javascript
+const frutas = ['maçã', 'banana', 'laranja']
+
+console.log(frutas[0])  // 'maçã'
+console.log(frutas[1])  // 'banana'
+console.log(frutas[2])  // 'laranja'
+console.log(frutas.length)  // 3
+\`\`\`
+
+## Métodos de array
+
+### Adicionar e remover
+
+\`\`\`javascript
+frutas.push('uva')      // adiciona no final
+frutas.pop()            // remove do final
+frutas.unshift('kiwi')  // adiciona no início
+frutas.shift()          // remove do início
+\`\`\`
+
+### slice e splice
+
+\`\`\`javascript
+const nums = [1, 2, 3, 4, 5]
+
+// slice: copia uma parte (não modifica o original)
+nums.slice(1, 3)  // [2, 3]
+
+// splice: remove e/ou insere (modifica o original)
+nums.splice(1, 2)  // remove 2 elementos a partir do índice 1
+// nums agora é [1, 4, 5]
+\`\`\`
+
+### Iterar com forEach
+
+\`\`\`javascript
+frutas.forEach(function(fruta) {
+  console.log(fruta)
+})
+
+// com arrow function
+frutas.forEach(fruta => console.log(fruta))
+\`\`\`
+
+### map — transformar cada elemento
+
+\`\`\`javascript
+const numeros = [1, 2, 3, 4]
+const dobrados = numeros.map(n => n * 2)
+console.log(dobrados)  // [2, 4, 6, 8]
+\`\`\`
+
+### filter — filtrar elementos
+
+\`\`\`javascript
+const numeros = [1, 2, 3, 4, 5, 6]
+const pares = numeros.filter(n => n % 2 === 0)
+console.log(pares)  // [2, 4, 6]
+\`\`\`
+
+### find — encontrar um elemento
+
+\`\`\`javascript
+const usuarios = [
+  { nome: 'Ana', idade: 25 },
+  { nome: 'Bruno', idade: 17 },
+]
+const adulto = usuarios.find(u => u.idade >= 18)
+console.log(adulto.nome)  // 'Ana'
+\`\`\`
+
+### includes — verificar se existe
+
+\`\`\`javascript
+const cores = ['vermelho', 'azul', 'verde']
+console.log(cores.includes('azul'))   // true
+console.log(cores.includes('rosa'))   // false
+\`\`\`
+
+## Objetos
+
+Um **objeto** armazena dados em pares de chave-valor:
+
+\`\`\`javascript
+const pessoa = {
+  nome: 'Maria',
+  idade: 28,
+  cidade: 'São Paulo',
+}
+
+// acessar propriedades
+console.log(pessoa.nome)         // 'Maria'
+console.log(pessoa['idade'])     // 28
+
+// modificar
+pessoa.idade = 29
+
+// adicionar nova propriedade
+pessoa.email = 'maria@email.com'
+
+// remover propriedade
+delete pessoa.cidade
+\`\`\`
+
+## Métodos de objetos
+
+\`\`\`javascript
+const produto = { nome: 'Notebook', preco: 3500, estoque: 10 }
+
+Object.keys(produto)    // ['nome', 'preco', 'estoque']
+Object.values(produto)  // ['Notebook', 3500, 10]
+Object.entries(produto) // [['nome','Notebook'], ['preco',3500], ...]
+\`\`\`
+
+## Array de objetos
+
+O padrão mais comum em aplicações reais:
+
+\`\`\`javascript
+const alunos = [
+  { nome: 'João', nota: 8.5 },
+  { nome: 'Ana',  nota: 9.2 },
+  { nome: 'Bia',  nota: 7.0 },
+]
+
+// filtrar aprovados (nota >= 7)
+const aprovados = alunos.filter(a => a.nota >= 7)
+
+// pegar só os nomes
+const nomes = alunos.map(a => a.nome)
+\`\`\`
+`,
+    tasks: [
+      {
+        id: 'arr-quiz-1',
+        type: 'quiz',
+        title: 'Índices de arrays',
+        question: 'Qual é o índice do primeiro elemento de um array em JavaScript?',
+        options: ['1', '0', '-1', 'primeiro'],
+        correct: 1,
+        xp: 10,
+        successMessage: 'Arrays começam sempre no índice 0 em JavaScript!',
+      },
+      {
+        id: 'arr-quiz-2',
+        type: 'quiz',
+        title: 'map vs filter',
+        question: 'Qual método cria um novo array transformando cada elemento?',
+        options: ['filter()', 'find()', 'map()', 'includes()'],
+        correct: 2,
+        xp: 10,
+        successMessage: 'map() transforma, filter() seleciona, find() encontra o primeiro.',
+      },
+      {
+        id: 'arr-fill-1',
+        type: 'fill',
+        title: 'Complete com métodos de array',
+        text: 'Para filtrar apenas números maiores que 10:\nconst grandes = nums.___(n => n > 10)\n\nPara dobrar cada número:\nconst dobrados = nums.___(n => n * 2)',
+        blanks: ['filter', 'map'],
+        xp: 10,
+        successMessage: 'filter() e map() são dois dos métodos mais usados!',
+      },
+      {
+        id: 'arr-bug-1',
+        type: 'bug',
+        title: 'Erro no array',
+        description: 'O código deveria imprimir "banana", mas não funciona:',
+        lines: [
+          'const frutas = ["maçã", "banana", "laranja"]',
+          'console.log(frutas[2])',
+        ],
+        bugLine: 1,
+        explanation: '"banana" está no índice 1, não 2. Arrays começam em 0.',
+        xp: 20,
+        successMessage: 'Lembre-se: o índice começa em 0!',
+      },
+      {
+        id: 'arr-code-1',
+        type: 'code',
+        title: 'Filtre e exiba os aprovados',
+        description: 'Filtre os alunos com nota >= 7 e exiba seus nomes na tela.',
+        starterCode: `<script>
+  const alunos = [
+    { nome: 'João', nota: 8.5 },
+    { nome: 'Maria', nota: 5.0 },
+    { nome: 'Ana', nota: 9.2 },
+    { nome: 'Pedro', nota: 6.5 },
+    { nome: 'Bia', nota: 7.8 },
+  ]
+
+  // filtre os aprovados (nota >= 7) e exiba os nomes
+  const aprovados = alunos.filter(a => a.nota >= 7)
+  aprovados.forEach(a => {
+    document.write('<p>' + a.nome + ': ' + a.nota + '</p>')
+  })
+</script>`,
+        hint: 'Use .filter(a => a.nota >= 7) e depois .forEach() para mostrar os nomes.',
+        successMessage: 'Você filtrou dados reais com JavaScript!',
+        xp: 15,
+      },
+      {
+        id: 'arr-type-1',
+        type: 'type',
+        title: 'Digite: acessar propriedade de objeto',
+        textToType: 'const pessoa = { nome: "Ana", idade: 25 }\nconsole.log(pessoa.nome)',
+        xp: 15,
+        successMessage: 'A notação de ponto é a forma mais comum de acessar objetos.',
+      },
+    ],
+  },
+
+  // ─── MÓDULO 15: JS Loops ─────────────────────────────────────────────────
+  {
+    id: 'modulo-loops',
+    number: '15',
+    stageId: 'praticante',
+    stage: 'JavaScript Avançado',
+    title: 'JavaScript: loops',
+    description: 'Domine a repetição de código com for, while, for...of e mais.',
+    color: '#0ea5e9',
+    context: `## O que são loops?
+
+**Loops** (laços) repetem um bloco de código várias vezes. São essenciais para processar listas, contar, buscar dados e automatizar tarefas repetitivas.
+
+## Loop for
+
+O mais clássico — ideal quando você sabe quantas vezes vai repetir:
+
+\`\`\`javascript
+for (let i = 0; i < 5; i++) {
+  console.log('Iteração: ' + i)
+}
+// 0, 1, 2, 3, 4
+\`\`\`
+
+**Estrutura:** \`for (inicialização; condição; incremento)\`
+
+### Percorrendo um array com for
+
+\`\`\`javascript
+const frutas = ['maçã', 'banana', 'laranja']
+
+for (let i = 0; i < frutas.length; i++) {
+  console.log(frutas[i])
+}
+\`\`\`
+
+## Loop while
+
+Repete enquanto a condição for verdadeira — ideal quando não sabe quantas vezes vai repetir:
+
+\`\`\`javascript
+let contador = 0
+
+while (contador < 5) {
+  console.log(contador)
+  contador++
+}
+\`\`\`
+
+⚠️ **Cuidado:** se a condição nunca for falsa, o loop é infinito e trava o programa.
+
+## Loop do...while
+
+Executa pelo menos uma vez, depois verifica a condição:
+
+\`\`\`javascript
+let n = 0
+do {
+  console.log(n)
+  n++
+} while (n < 3)
+// executa mesmo se n já for >= 3
+\`\`\`
+
+## for...of
+
+Percorre elementos de um array diretamente (mais legível):
+
+\`\`\`javascript
+const cores = ['vermelho', 'verde', 'azul']
+
+for (const cor of cores) {
+  console.log(cor)
+}
+\`\`\`
+
+## for...in
+
+Percorre as chaves de um objeto:
+
+\`\`\`javascript
+const pessoa = { nome: 'Ana', idade: 25, cidade: 'SP' }
+
+for (const chave in pessoa) {
+  console.log(chave + ': ' + pessoa[chave])
+}
+// nome: Ana
+// idade: 25
+// cidade: SP
+\`\`\`
+
+## break e continue
+
+\`\`\`javascript
+// break: para o loop imediatamente
+for (let i = 0; i < 10; i++) {
+  if (i === 5) break
+  console.log(i)  // 0, 1, 2, 3, 4
+}
+
+// continue: pula para a próxima iteração
+for (let i = 0; i < 5; i++) {
+  if (i === 2) continue
+  console.log(i)  // 0, 1, 3, 4
+}
+\`\`\`
+
+## Exemplo prático: somar array
+
+\`\`\`javascript
+const numeros = [10, 20, 30, 40, 50]
+let soma = 0
+
+for (const num of numeros) {
+  soma += num
+}
+
+console.log('Soma:', soma)  // 150
+\`\`\`
+
+## Loops e o DOM
+
+\`\`\`javascript
+const itens = ['HTML', 'CSS', 'JavaScript']
+const lista = document.getElementById('lista')
+
+for (const item of itens) {
+  const li = document.createElement('li')
+  li.textContent = item
+  lista.appendChild(li)
+}
+\`\`\`
+`,
+    tasks: [
+      {
+        id: 'loop-quiz-1',
+        type: 'quiz',
+        title: 'Estrutura do for',
+        question: 'Qual a ordem correta das partes do loop for?',
+        options: [
+          'condição; inicialização; incremento',
+          'incremento; condição; inicialização',
+          'inicialização; condição; incremento',
+          'inicialização; incremento; condição',
+        ],
+        correct: 2,
+        xp: 10,
+        successMessage: 'for (inicialização; condição; incremento) — sempre nessa ordem!',
+      },
+      {
+        id: 'loop-quiz-2',
+        type: 'quiz',
+        title: 'break vs continue',
+        question: 'Qual palavra-chave pula para a próxima iteração sem parar o loop?',
+        options: ['break', 'stop', 'continue', 'skip'],
+        correct: 2,
+        xp: 10,
+        successMessage: 'continue pula a iteração atual, break termina o loop inteiro.',
+      },
+      {
+        id: 'loop-fill-1',
+        type: 'fill',
+        title: 'Complete o loop for...of',
+        text: 'Para percorrer cada fruta de um array:\n___ (const fruta ___ frutas) {\n  console.log(fruta)\n}',
+        blanks: ['for', 'of'],
+        xp: 10,
+        successMessage: 'for...of é a forma mais limpa de percorrer arrays!',
+      },
+      {
+        id: 'loop-bug-1',
+        type: 'bug',
+        title: 'Loop infinito',
+        description: 'Este while vai travar o programa. Encontre o erro:',
+        lines: [
+          'let i = 0',
+          'while (i < 5) {',
+          '  console.log(i)',
+          '  i--',
+          '}',
+        ],
+        bugLine: 3,
+        explanation: 'i-- diminui o valor, então i nunca chega a 5. Deve ser i++ para incrementar.',
+        xp: 20,
+        successMessage: 'Loops infinitos travam o browser. Sempre verifique o incremento!',
+      },
+      {
+        id: 'loop-drag-1',
+        type: 'drag',
+        title: 'Ordene: somar elementos de um array',
+        description: 'Ordene o código para somar todos os números de um array:',
+        blocks: [
+          'const nums = [1, 2, 3, 4, 5]',
+          'let soma = 0',
+          'for (const n of nums) {',
+          '  soma += n',
+          '}',
+          'console.log(soma)',
+        ],
+        correctOrder: [0, 1, 2, 3, 4, 5],
+        xp: 20,
+        successMessage: 'Soma com for...of dominada!',
+      },
+      {
+        id: 'loop-code-1',
+        type: 'code',
+        title: 'Tabuada com loop',
+        description: 'Use um loop for para exibir a tabuada do 7 (de 1 a 10) na página.',
+        starterCode: `<h2>Tabuada do 7</h2>
+<div id="resultado"></div>
+
+<script>
+  const div = document.getElementById('resultado')
+  // seu loop aqui
+</script>`,
+        hint: 'for (let i = 1; i <= 10; i++) { div.innerHTML += `<p>7 x ${i} = ${7 * i}</p>` }',
+        successMessage: 'Loop + DOM funcionando juntos!',
+        xp: 15,
+      },
+    ],
+  },
+
+  // ─── MÓDULO 16: JS Funções Avançadas ─────────────────────────────────────
+  {
+    id: 'modulo-funcoes-avancadas',
+    number: '16',
+    stageId: 'praticante',
+    stage: 'JavaScript Avançado',
+    title: 'JavaScript: funções avançadas',
+    description: 'Arrow functions, callbacks, escopo e funções de ordem superior.',
+    color: '#8b5cf6',
+    context: `## Arrow Functions
+
+Arrow functions são uma sintaxe mais curta para escrever funções:
+
+\`\`\`javascript
+// função tradicional
+function somar(a, b) {
+  return a + b
+}
+
+// arrow function equivalente
+const somar = (a, b) => a + b
+
+// com um parâmetro (parênteses opcionais)
+const dobrar = n => n * 2
+
+// sem parâmetros
+const saudacao = () => 'Olá!'
+\`\`\`
+
+## Retorno implícito
+
+Se o corpo tiver apenas uma expressão, o \`return\` é automático:
+
+\`\`\`javascript
+const quadrado = n => n * n         // retorna n*n automaticamente
+const maior = (a, b) => a > b ? a : b
+\`\`\`
+
+Para retornar um objeto literalmente, use parênteses:
+
+\`\`\`javascript
+const criarPessoa = (nome, idade) => ({ nome, idade })
+\`\`\`
+
+## Callbacks
+
+Um **callback** é uma função passada como argumento para outra função:
+
+\`\`\`javascript
+function executar(callback) {
+  console.log('Antes')
+  callback()
+  console.log('Depois')
+}
+
+executar(() => console.log('Sou o callback!'))
+// Antes
+// Sou o callback!
+// Depois
+\`\`\`
+
+Você já usou callbacks com forEach, map e filter:
+
+\`\`\`javascript
+[1, 2, 3].forEach(n => console.log(n))
+//                ↑ isso é um callback
+\`\`\`
+
+## Escopo
+
+O **escopo** define onde uma variável pode ser acessada:
+
+\`\`\`javascript
+let global = 'global'  // acessível em qualquer lugar
+
+function minhaFuncao() {
+  let local = 'local'    // só existe dentro desta função
+  console.log(global)    // ✅ pode acessar
+}
+
+console.log(local)       // ❌ ReferenceError!
+\`\`\`
+
+### var vs let vs const
+
+\`\`\`javascript
+// var: escopo de função (evite usar)
+var x = 1
+
+// let: escopo de bloco (prefira usar)
+let y = 2
+
+// const: escopo de bloco, não pode ser reatribuído
+const z = 3
+\`\`\`
+
+## Parâmetros padrão
+
+\`\`\`javascript
+function cumprimentar(nome = 'visitante') {
+  return 'Olá, ' + nome + '!'
+}
+
+cumprimentar('Ana')   // 'Olá, Ana!'
+cumprimentar()        // 'Olá, visitante!'
+\`\`\`
+
+## Rest parameters (...)
+
+Recebe um número variável de argumentos:
+
+\`\`\`javascript
+function somar(...numeros) {
+  return numeros.reduce((acc, n) => acc + n, 0)
+}
+
+somar(1, 2, 3, 4, 5)  // 15
+\`\`\`
+
+## Spread operator (...)
+
+Espalha um array em elementos individuais:
+
+\`\`\`javascript
+const a = [1, 2, 3]
+const b = [4, 5, 6]
+const todos = [...a, ...b]  // [1, 2, 3, 4, 5, 6]
+
+Math.max(...a)  // 3
+\`\`\`
+
+## Funções de ordem superior (Higher-Order)
+
+Funções que recebem ou retornam outras funções:
+
+\`\`\`javascript
+// retorna uma função
+function multiplicador(fator) {
+  return n => n * fator
+}
+
+const dobrar = multiplicador(2)
+const triplicar = multiplicador(3)
+
+dobrar(5)     // 10
+triplicar(5)  // 15
+\`\`\`
+`,
+    tasks: [
+      {
+        id: 'func-quiz-1',
+        type: 'quiz',
+        title: 'Arrow function',
+        question: 'Qual é a arrow function equivalente a: function dobrar(n) { return n * 2 }',
+        options: [
+          'const dobrar = n => { n * 2 }',
+          'const dobrar = n => n * 2',
+          'const dobrar = (n) { return n * 2 }',
+          'arrow dobrar = n => n * 2',
+        ],
+        correct: 1,
+        xp: 10,
+        successMessage: 'Arrow function com retorno implícito: n => n * 2',
+      },
+      {
+        id: 'func-quiz-2',
+        type: 'quiz',
+        title: 'Callbacks',
+        question: 'O que é um callback?',
+        options: [
+          'Um tipo de variável',
+          'Uma função passada como argumento para outra função',
+          'Um loop especial',
+          'Um método de array exclusivo',
+        ],
+        correct: 1,
+        xp: 10,
+        successMessage: 'Callbacks são fundamentais em JavaScript — usados em eventos, timers e muito mais.',
+      },
+      {
+        id: 'func-fill-1',
+        type: 'fill',
+        title: 'Complete a arrow function',
+        text: 'Transforme em arrow function:\nfunction quadrado(n) { return n * n }\n\nconst quadrado = ___ => ___ * ___',
+        blanks: ['n', 'n', 'n'],
+        xp: 10,
+        successMessage: 'Arrow function com parâmetro único e retorno implícito!',
+      },
+      {
+        id: 'func-bug-1',
+        type: 'bug',
+        title: 'Erro de escopo',
+        description: 'O código abaixo tem um erro de escopo. Encontre-o:',
+        lines: [
+          'function calcular() {',
+          '  let resultado = 42',
+          '}',
+          'calcular()',
+          'console.log(resultado)',
+        ],
+        bugLine: 4,
+        explanation: '"resultado" é uma variável local — só existe dentro da função. Para usá-la fora, declare-a fora ou use return.',
+        xp: 20,
+        successMessage: 'Variáveis locais não existem fora do bloco onde foram declaradas.',
+      },
+      {
+        id: 'func-type-1',
+        type: 'type',
+        title: 'Digite: função com parâmetro padrão',
+        textToType: 'const saudar = (nome = "visitante") => `Olá, ${nome}!`',
+        xp: 15,
+        successMessage: 'Parâmetros padrão evitam erros quando o argumento não é passado!',
+      },
+      {
+        id: 'func-code-1',
+        type: 'code',
+        title: 'Calculadora funcional',
+        description: 'Crie funções de somar, subtrair, multiplicar e dividir e mostre os resultados.',
+        starterCode: `<h2>Calculadora</h2>
+<div id="resultado"></div>
+<script>
+  const somar       = (a, b) => a + b
+  const subtrair    = (a, b) => a - b
+  const multiplicar = (a, b) => a * b
+  const dividir     = (a, b) => b !== 0 ? a / b : 'Erro: divisão por zero'
+
+  const div = document.getElementById('resultado')
+  div.innerHTML = \`
+    <p>10 + 5 = \${somar(10, 5)}</p>
+    <p>10 - 5 = \${subtrair(10, 5)}</p>
+    <p>10 × 5 = \${multiplicar(10, 5)}</p>
+    <p>10 ÷ 5 = \${dividir(10, 5)}</p>
+    <p>10 ÷ 0 = \${dividir(10, 0)}</p>
+  \`
+</script>`,
+        hint: 'Arrow functions com retorno implícito são perfeitas para operações matemáticas simples.',
+        successMessage: 'Calculadora com arrow functions funcionando!',
+        xp: 15,
+      },
+    ],
+  },
+
+  // ─── MÓDULO 17: JS Fetch e APIs ───────────────────────────────────────────
+  {
+    id: 'modulo-fetch',
+    number: '17',
+    stageId: 'praticante',
+    stage: 'JavaScript Avançado',
+    title: 'JavaScript: fetch e APIs',
+    description: 'Aprenda a buscar dados externos com fetch, Promises e async/await.',
+    color: '#06b6d4',
+    context: `## O que é uma API?
+
+**API** (Application Programming Interface) é uma forma de um sistema disponibilizar dados ou funcionalidades para outros programas.
+
+Exemplo: a API do GitHub permite buscar dados de usuários:
+\`https://api.github.com/users/torvalds\`
+
+Abra esse link no navegador e veja os dados em formato **JSON**.
+
+## O que é JSON?
+
+**JSON** (JavaScript Object Notation) é o formato padrão para trocar dados na web:
+
+\`\`\`json
+{
+  "nome": "Linus Torvalds",
+  "linguagem": "C",
+  "seguidores": 180000
+}
+\`\`\`
+
+JSON é basicamente um objeto JavaScript em formato de texto.
+
+## fetch()
+
+A função \`fetch()\` faz requisições HTTP e retorna uma **Promise**:
+
+\`\`\`javascript
+fetch('https://api.exemplo.com/dados')
+  .then(response => response.json())  // converte para objeto JS
+  .then(dados => console.log(dados))  // usa os dados
+  .catch(erro => console.error(erro)) // trata erros
+\`\`\`
+
+## O que são Promises?
+
+Uma **Promise** representa uma operação assíncrona que pode:
+- ✅ **Resolver** (ter sucesso) → \`.then()\`
+- ❌ **Rejeitar** (falhar) → \`.catch()\`
+
+\`\`\`javascript
+const promessa = new Promise((resolve, reject) => {
+  // operação assíncrona
+  if (sucesso) resolve('funcionou!')
+  else reject('deu erro')
+})
+\`\`\`
+
+## async/await
+
+Uma forma mais legível de trabalhar com Promises:
+
+\`\`\`javascript
+async function buscarDados() {
+  try {
+    const resposta = await fetch('https://api.exemplo.com/dados')
+    const dados = await resposta.json()
+    console.log(dados)
+  } catch (erro) {
+    console.error('Erro:', erro)
+  }
+}
+
+buscarDados()
+\`\`\`
+
+- \`async\` marca a função como assíncrona
+- \`await\` pausa a execução até a Promise resolver
+- \`try/catch\` captura erros
+
+## Exemplo real: buscar usuário do GitHub
+
+\`\`\`javascript
+async function buscarUsuario(nome) {
+  const resposta = await fetch(\`https://api.github.com/users/\${nome}\`)
+  const usuario = await resposta.json()
+
+  document.getElementById('nome').textContent = usuario.name
+  document.getElementById('bio').textContent = usuario.bio
+  document.getElementById('repos').textContent = usuario.public_repos
+}
+
+buscarUsuario('torvalds')
+\`\`\`
+
+## Status HTTP
+
+A resposta HTTP sempre tem um código de status:
+
+| Código | Significado |
+|---|---|
+| 200 | OK (sucesso) |
+| 201 | Created (criado) |
+| 400 | Bad Request (requisição inválida) |
+| 401 | Unauthorized (não autenticado) |
+| 404 | Not Found (não encontrado) |
+| 500 | Internal Server Error (erro no servidor) |
+
+\`\`\`javascript
+const resposta = await fetch(url)
+
+if (!resposta.ok) {
+  throw new Error('Erro: ' + resposta.status)
+}
+\`\`\`
+
+## Métodos HTTP
+
+| Método | Uso |
+|---|---|
+| GET | Buscar dados |
+| POST | Enviar/criar dados |
+| PUT | Atualizar dados |
+| DELETE | Deletar dados |
+`,
+    tasks: [
+      {
+        id: 'fetch-quiz-1',
+        type: 'quiz',
+        title: 'O que é JSON?',
+        question: 'Para que serve o método response.json() no fetch?',
+        options: [
+          'Cria um arquivo JSON',
+          'Converte a resposta HTTP em um objeto JavaScript',
+          'Envia dados em formato JSON',
+          'Verifica se a resposta é válida',
+        ],
+        correct: 1,
+        xp: 10,
+        successMessage: 'response.json() lê o corpo da resposta e converte de texto JSON para objeto JS.',
+      },
+      {
+        id: 'fetch-quiz-2',
+        type: 'quiz',
+        title: 'async/await',
+        question: 'O que acontece quando usamos await antes de uma Promise?',
+        options: [
+          'Cancela a Promise',
+          'Executa a Promise duas vezes',
+          'Pausa a função até a Promise resolver',
+          'Converte a Promise em callback',
+        ],
+        correct: 2,
+        xp: 10,
+        successMessage: 'await "espera" a Promise finalizar antes de continuar a execução.',
+      },
+      {
+        id: 'fetch-fill-1',
+        type: 'fill',
+        title: 'Complete o async/await',
+        text: '___ function buscarDados() {\n  const resposta = ___ fetch(url)\n  const dados = ___ resposta.json()\n  return dados\n}',
+        blanks: ['async', 'await', 'await'],
+        xp: 10,
+        successMessage: 'async marca a função, await espera cada Promise.',
+      },
+      {
+        id: 'fetch-bug-1',
+        type: 'bug',
+        title: 'Erro no fetch',
+        description: 'O código deveria buscar dados mas não funciona corretamente:',
+        lines: [
+          'async function buscar() {',
+          '  const resposta = await fetch("https://api.exemplo.com")',
+          '  const dados = resposta.json()',
+          '  console.log(dados)',
+          '}',
+        ],
+        bugLine: 2,
+        explanation: 'Falta o await antes de resposta.json(). Sem ele, dados será uma Promise não resolvida.',
+        xp: 20,
+        successMessage: 'Todo await é necessário — não esqueça de "esperar" o json()!',
+      },
+      {
+        id: 'fetch-drag-1',
+        type: 'drag',
+        title: 'Ordene: função async completa',
+        description: 'Ordene o código de uma função que busca e exibe dados:',
+        blocks: [
+          'async function buscar() {',
+          '  try {',
+          '    const res = await fetch(url)',
+          '    const dados = await res.json()',
+          '    console.log(dados)',
+          '  } catch (e) { console.error(e) }',
+          '}',
+        ],
+        correctOrder: [0, 1, 2, 3, 4, 5, 6],
+        xp: 20,
+        successMessage: 'Estrutura async/await com try/catch dominada!',
+      },
+    ],
+  },
+
+  // ─── MÓDULO 18: Projeto Calculadora ──────────────────────────────────────
+  {
+    id: 'modulo-projeto-calc',
+    number: '18',
+    stageId: 'construtor',
+    stage: 'Projetos',
+    title: 'Projeto: Calculadora',
+    description: 'Construa uma calculadora funcional com HTML, CSS e JavaScript.',
+    color: '#10b981',
+    context: `## O que vamos construir?
+
+Uma **calculadora** completa com:
+- Display mostrando o número atual e a operação
+- Botões para dígitos (0-9), operações (+, -, ×, ÷) e especiais (C, =)
+- Lógica em JavaScript puro
+- Design limpo com CSS Grid
+
+## Estrutura HTML
+
+\`\`\`html
+<div class="calculadora">
+  <div class="display">
+    <div class="display__operacao">3 +</div>
+    <div class="display__valor">4</div>
+  </div>
+  <div class="teclado">
+    <button class="btn-especial">C</button>
+    <button class="btn-especial">+/-</button>
+    <button class="btn-especial">%</button>
+    <button class="btn-operacao">÷</button>
+    <!-- ... mais botões ... -->
+  </div>
+</div>
+\`\`\`
+
+## Layout com CSS Grid
+
+O teclado da calculadora é perfeito para Grid:
+
+\`\`\`css
+.teclado {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+/* botão zero ocupa 2 colunas */
+.btn-zero {
+  grid-column: span 2;
+}
+\`\`\`
+
+## Lógica JavaScript
+
+O estado da calculadora precisa de 3 informações:
+
+\`\`\`javascript
+let valorAtual = '0'       // o que está no display
+let valorAnterior = ''     // o número antes da operação
+let operacao = null        // +, -, *, /
+\`\`\`
+
+### Adicionar dígito
+
+\`\`\`javascript
+function adicionarDigito(digito) {
+  if (valorAtual === '0' || resultado) {
+    valorAtual = digito
+    resultado = false
+  } else {
+    valorAtual += digito
+  }
+  atualizar()
+}
+\`\`\`
+
+### Selecionar operação
+
+\`\`\`javascript
+function selecionarOperacao(op) {
+  valorAnterior = valorAtual
+  operacao = op
+  valorAtual = '0'
+  atualizar()
+}
+\`\`\`
+
+### Calcular resultado
+
+\`\`\`javascript
+function calcular() {
+  const a = parseFloat(valorAnterior)
+  const b = parseFloat(valorAtual)
+
+  switch (operacao) {
+    case '+': valorAtual = String(a + b); break
+    case '-': valorAtual = String(a - b); break
+    case '*': valorAtual = String(a * b); break
+    case '/': valorAtual = b !== 0 ? String(a / b) : 'Erro'; break
+  }
+
+  operacao = null
+  valorAnterior = ''
+  atualizar()
+}
+\`\`\`
+
+## Boas práticas
+
+1. Separe a **lógica** da **interface** — funções JS não devem misturar cálculo com DOM
+2. Valide entradas (divisão por zero, ponto decimal duplo)
+3. Use \`parseFloat()\` para converter strings em números
+4. Mostre feedback visual ao pressionar botões
+
+## Design da calculadora
+
+Cores inspiradas na calculadora do iPhone:
+- Fundo: \`#1c1c1e\` (cinza escuro)
+- Números: \`#333333\` (cinza médio)
+- Operações: \`#ff9f0a\` (laranja)
+- Especiais: \`#a5a5a5\` (cinza claro)
+- Texto: \`white\`
+`,
+    tasks: [
+      {
+        id: 'calc-quiz-1',
+        type: 'quiz',
+        title: 'parseFloat()',
+        question: 'Por que usamos parseFloat() na calculadora?',
+        options: [
+          'Para formatar o número com casas decimais',
+          'Para converter string em número decimal',
+          'Para arredondar o resultado',
+          'Para verificar se é um número',
+        ],
+        correct: 1,
+        xp: 10,
+        successMessage: 'Inputs e DOM trabalham com strings. parseFloat() converte para número.',
+      },
+      {
+        id: 'calc-quiz-2',
+        type: 'quiz',
+        title: 'switch statement',
+        question: 'Para que serve o switch usado na função calcular()?',
+        options: [
+          'Criar condições independentes para cada operação matemática',
+          'Alternar entre modo claro e escuro',
+          'Mudar o tipo de variável',
+          'Iterar sobre os botões',
+        ],
+        correct: 0,
+        xp: 10,
+        successMessage: 'switch é perfeito quando você tem vários casos para um mesmo valor!',
+      },
+      {
+        id: 'calc-fill-1',
+        type: 'fill',
+        title: 'Complete a lógica de cálculo',
+        text: 'Para somar dois valores do display:\nconst a = ___(valorAnterior)\nconst b = ___(valorAtual)\nresultado = ___(a + b)',
+        blanks: ['parseFloat', 'parseFloat', 'String'],
+        xp: 10,
+        successMessage: 'parseFloat para ler, String para exibir!',
+      },
+      {
+        id: 'calc-bug-1',
+        type: 'bug',
+        title: 'Erro na calculadora',
+        description: 'A calculadora está dando erro na divisão. Encontre o problema:',
+        lines: [
+          'case "/":',
+          '  valorAtual = String(a / b)',
+          '  break',
+        ],
+        bugLine: 1,
+        explanation: 'Falta verificar se b é zero antes de dividir. Divisão por zero resulta em Infinity.',
+        xp: 20,
+        successMessage: 'Sempre valide a divisão por zero!',
+      },
+      {
+        id: 'calc-code-1',
+        type: 'code',
+        title: 'Construa a calculadora',
+        description: 'Crie uma calculadora funcional com os 4 botões de operação e o botão de igual.',
+        starterCode: `<style>
+  body { display: flex; justify-content: center; padding: 24px; background: #000; }
+  .calc { background: #1c1c1e; border-radius: 20px; padding: 16px; width: 280px; }
+  .display { text-align: right; padding: 12px 16px; margin-bottom: 12px; }
+  .display__valor { font-size: 2.5rem; color: white; font-weight: 300; }
+  .teclado { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  button { padding: 18px; border: none; border-radius: 50%; font-size: 1.1rem;
+    cursor: pointer; font-weight: 500; }
+  .esp { background: #a5a5a5; color: black; }
+  .op  { background: #ff9f0a; color: white; }
+  .num { background: #333; color: white; }
+  .zero { grid-column: span 2; border-radius: 30px; text-align: left; padding-left: 24px; }
+</style>
+<div class="calc">
+  <div class="display">
+    <div class="display__valor" id="display">0</div>
+  </div>
+  <div class="teclado">
+    <button class="esp" onclick="limpar()">C</button>
+    <button class="esp">+/-</button>
+    <button class="esp">%</button>
+    <button class="op"  onclick="op('/')">÷</button>
+    <button class="num" onclick="dig('7')">7</button>
+    <button class="num" onclick="dig('8')">8</button>
+    <button class="num" onclick="dig('9')">9</button>
+    <button class="op"  onclick="op('*')">×</button>
+    <button class="num" onclick="dig('4')">4</button>
+    <button class="num" onclick="dig('5')">5</button>
+    <button class="num" onclick="dig('6')">6</button>
+    <button class="op"  onclick="op('-')">−</button>
+    <button class="num" onclick="dig('1')">1</button>
+    <button class="num" onclick="dig('2')">2</button>
+    <button class="num" onclick="dig('3')">3</button>
+    <button class="op"  onclick="op('+')">+</button>
+    <button class="num zero" onclick="dig('0')">0</button>
+    <button class="num" onclick="dig('.')">.</button>
+    <button class="op"  onclick="calcular()">=</button>
+  </div>
+</div>
+<script>
+  let atual = '0', anterior = '', operacao = null, novo = true
+  const display = document.getElementById('display')
+
+  function dig(d) {
+    if (novo || atual === '0') { atual = d; novo = false }
+    else if (d === '.' && atual.includes('.')) return
+    else atual += d
+    display.textContent = atual
+  }
+  function op(o) { anterior = atual; operacao = o; novo = true }
+  function limpar() { atual = '0'; anterior = ''; operacao = null; display.textContent = '0' }
+  function calcular() {
+    if (!operacao) return
+    const a = parseFloat(anterior), b = parseFloat(atual)
+    let res
+    if (operacao === '+') res = a + b
+    else if (operacao === '-') res = a - b
+    else if (operacao === '*') res = a * b
+    else res = b !== 0 ? a / b : 'Erro'
+    atual = String(parseFloat(res.toFixed(10)))
+    display.textContent = atual
+    operacao = null; novo = true
+  }
+</script>`,
+        hint: 'A calculadora já está completa! Experimente alterar as cores ou adicionar novos botões.',
+        successMessage: 'Calculadora completa construída! Este é um projeto de portfólio real.',
+        xp: 15,
+      },
+    ],
+  },
+
+  // ─── MÓDULO 19: Projeto Lista de Tarefas ─────────────────────────────────
+  {
+    id: 'modulo-projeto-todo',
+    number: '19',
+    stageId: 'construtor',
+    stage: 'Projetos',
+    title: 'Projeto: Lista de Tarefas',
+    description: 'Crie um app de to-do list com localStorage, adição, conclusão e remoção de tarefas.',
+    color: '#f97316',
+    context: `## O que vamos construir?
+
+Um **app de lista de tarefas** (to-do list) completo com:
+- Adicionar tarefas
+- Marcar como concluída
+- Remover tarefas
+- Persistir dados no localStorage (não perde ao recarregar)
+- Contador de tarefas pendentes
+
+## Estrutura de dados
+
+Cada tarefa é um objeto:
+
+\`\`\`javascript
+{
+  id: Date.now(),      // ID único usando timestamp
+  texto: 'Estudar JS', // o texto da tarefa
+  feita: false,        // se está concluída
+}
+\`\`\`
+
+A lista é um array de tarefas:
+
+\`\`\`javascript
+let tarefas = []
+\`\`\`
+
+## localStorage
+
+Para persistir as tarefas:
+
+\`\`\`javascript
+// salvar
+function salvar() {
+  localStorage.setItem('tarefas', JSON.stringify(tarefas))
+}
+
+// carregar
+function carregar() {
+  const dados = localStorage.getItem('tarefas')
+  tarefas = dados ? JSON.parse(dados) : []
+}
+\`\`\`
+
+## Adicionar tarefa
+
+\`\`\`javascript
+function adicionar(texto) {
+  if (!texto.trim()) return // não adiciona tarefa vazia
+
+  const tarefa = {
+    id: Date.now(),
+    texto: texto.trim(),
+    feita: false,
+  }
+
+  tarefas.push(tarefa)
+  salvar()
+  renderizar()
+}
+\`\`\`
+
+## Marcar como concluída
+
+\`\`\`javascript
+function alternarConcluida(id) {
+  const tarefa = tarefas.find(t => t.id === id)
+  if (tarefa) tarefa.feita = !tarefa.feita
+  salvar()
+  renderizar()
+}
+\`\`\`
+
+## Remover tarefa
+
+\`\`\`javascript
+function remover(id) {
+  tarefas = tarefas.filter(t => t.id !== id)
+  salvar()
+  renderizar()
+}
+\`\`\`
+
+## Renderizar a lista
+
+A função \`renderizar()\` reconstrói a lista no DOM:
+
+\`\`\`javascript
+function renderizar() {
+  const lista = document.getElementById('lista')
+  lista.innerHTML = ''  // limpa a lista atual
+
+  tarefas.forEach(tarefa => {
+    const li = document.createElement('li')
+    li.className = tarefa.feita ? 'feita' : ''
+    li.innerHTML = \`
+      <span onclick="alternarConcluida(\${tarefa.id})">\${tarefa.texto}</span>
+      <button onclick="remover(\${tarefa.id})">×</button>
+    \`
+    lista.appendChild(li)
+  })
+
+  // atualiza contador
+  const pendentes = tarefas.filter(t => !t.feita).length
+  document.getElementById('contador').textContent = pendentes + ' pendentes'
+}
+\`\`\`
+
+## Fluxo completo
+
+\`\`\`
+Usuário digita → adicionar() → push para array → salvar() → renderizar() → DOM atualizado
+\`\`\`
+
+## Boas práticas
+
+1. **Nunca manipule o DOM diretamente** — sempre passe pelo array e re-renderize
+2. **Use IDs únicos** — Date.now() é uma boa opção para apps simples
+3. **Valide entradas** — não aceite tarefas vazias
+4. **Feedback visual** — use classes CSS para tarefas concluídas
+5. **Persistência** — salve sempre que o estado mudar
+
+## Melhorias possíveis
+
+- Filtros (todas / ativas / concluídas)
+- Editar tarefa (duplo clique)
+- Prioridade (alta, média, baixa)
+- Data de vencimento
+- Categorias
+`,
+    tasks: [
+      {
+        id: 'todo-quiz-1',
+        type: 'quiz',
+        title: 'Persistência de dados',
+        question: 'Por que usamos JSON.stringify() ao salvar no localStorage?',
+        options: [
+          'Para criptografar os dados',
+          'localStorage só aceita strings, então precisamos converter o array',
+          'Para comprimir os dados',
+          'Para validar o formato',
+        ],
+        correct: 1,
+        xp: 10,
+        successMessage: 'localStorage só armazena strings. JSON.stringify converte objeto→string e JSON.parse faz o inverso.',
+      },
+      {
+        id: 'todo-quiz-2',
+        type: 'quiz',
+        title: 'IDs únicos',
+        question: 'Por que usar Date.now() como ID de uma tarefa?',
+        options: [
+          'É mais rápido que outros métodos',
+          'Gera um número único baseado no momento atual',
+          'É o padrão do localStorage',
+          'Funciona apenas com arrays',
+        ],
+        correct: 1,
+        xp: 10,
+        successMessage: 'Date.now() retorna o timestamp atual em ms — praticamente único para cada ação!',
+      },
+      {
+        id: 'todo-fill-1',
+        type: 'fill',
+        title: 'Complete: remover tarefa',
+        text: 'Para remover uma tarefa pelo ID:\ntarefas = tarefas.___(t => t.id !== ___)',
+        blanks: ['filter', 'id'],
+        xp: 10,
+        successMessage: 'filter() cria um novo array sem o elemento removido!',
+      },
+      {
+        id: 'todo-bug-1',
+        type: 'bug',
+        title: 'Erro ao carregar tarefas',
+        description: 'As tarefas não carregam ao reabrir a página:',
+        lines: [
+          'function carregar() {',
+          '  const dados = localStorage.getItem("tarefas")',
+          '  tarefas = JSON.stringify(dados)',
+          '}',
+        ],
+        bugLine: 2,
+        explanation: 'Deve ser JSON.parse(dados), não JSON.stringify. stringify converte para string, parse converte de volta para objeto.',
+        xp: 20,
+        successMessage: 'stringify = objeto→string | parse = string→objeto. Não confunda!',
+      },
+      {
+        id: 'todo-drag-1',
+        type: 'drag',
+        title: 'Ordene: fluxo de adicionar tarefa',
+        description: 'Ordene as etapas para adicionar uma tarefa corretamente:',
+        blocks: [
+          'Usuário clica em "Adicionar"',
+          'Ler o texto do input',
+          'Criar objeto { id, texto, feita: false }',
+          'push() no array tarefas',
+          'salvar() no localStorage',
+          'renderizar() para atualizar o DOM',
+        ],
+        correctOrder: [0, 1, 2, 3, 4, 5],
+        xp: 20,
+        successMessage: 'Fluxo de estado → salvar → renderizar é a base de qualquer app!',
+      },
+      {
+        id: 'todo-code-1',
+        type: 'code',
+        title: 'Construa o app de tarefas',
+        description: 'Crie um to-do list completo com adicionar, concluir e remover tarefas.',
+        starterCode: `<style>
+  body { font-family: sans-serif; max-width: 400px; margin: 24px auto; padding: 0 16px; }
+  h1 { color: #f97316; }
+  .input-row { display: flex; gap: 8px; margin-bottom: 16px; }
+  input { flex: 1; padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; }
+  button { padding: 10px 16px; background: #f97316; color: white; border: none;
+    border-radius: 8px; cursor: pointer; font-weight: 700; }
+  ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  li { display: flex; align-items: center; gap: 8px; background: #f9fafb;
+    padding: 12px; border-radius: 8px; border: 1px solid #e5e7eb; }
+  li span { flex: 1; cursor: pointer; }
+  li.feita span { text-decoration: line-through; color: #9ca3af; }
+  li button { background: #fee2e2; color: #dc2626; padding: 4px 10px; font-size: 0.85rem; }
+  #contador { color: #6b7280; font-size: 0.9rem; margin-bottom: 12px; }
+</style>
+
+<h1>📝 Minhas Tarefas</h1>
+<div class="input-row">
+  <input id="input" placeholder="Nova tarefa..." onkeydown="if(event.key==='Enter') add()" />
+  <button onclick="add()">Adicionar</button>
+</div>
+<p id="contador"></p>
+<ul id="lista"></ul>
+
+<script>
+  let tarefas = JSON.parse(localStorage.getItem('tarefas') || '[]')
+
+  function save() { localStorage.setItem('tarefas', JSON.stringify(tarefas)) }
+
+  function render() {
+    const lista = document.getElementById('lista')
+    lista.innerHTML = ''
+    tarefas.forEach(t => {
+      const li = document.createElement('li')
+      if (t.feita) li.classList.add('feita')
+      li.innerHTML = \`<span onclick="toggle(\${t.id})">\${t.texto}</span>
+        <button onclick="remove(\${t.id})">×</button>\`
+      lista.appendChild(li)
+    })
+    const p = tarefas.filter(t => !t.feita).length
+    document.getElementById('contador').textContent = p + ' tarefa(s) pendente(s)'
+  }
+
+  function add() {
+    const input = document.getElementById('input')
+    const texto = input.value.trim()
+    if (!texto) return
+    tarefas.push({ id: Date.now(), texto, feita: false })
+    input.value = ''
+    save(); render()
+  }
+
+  function toggle(id) {
+    const t = tarefas.find(t => t.id === id)
+    if (t) t.feita = !t.feita
+    save(); render()
+  }
+
+  function remove(id) {
+    tarefas = tarefas.filter(t => t.id !== id)
+    save(); render()
+  }
+
+  render()
+</script>`,
+        hint: 'O app já está completo! Experimente adicionar filtros (todas/ativas/concluídas).',
+        successMessage: 'App de tarefas com localStorage funcionando! Um projeto real de portfólio.',
+        xp: 15,
+      },
+    ],
+  },
+
+  // ─── MÓDULO 20: Projeto Landing Page ─────────────────────────────────────
+  {
+    id: 'modulo-projeto-landing',
+    number: '20',
+    stageId: 'construtor',
+    stage: 'Projetos',
+    title: 'Projeto: Landing Page',
+    description: 'Construa uma landing page profissional e responsiva do zero.',
+    color: '#6366f1',
+    context: `## O que vamos construir?
+
+Uma **landing page profissional** completa com:
+- Hero section com headline e CTA
+- Seção de features (3 cards)
+- Seção de depoimento
+- Formulário de contato
+- Footer
+- Design responsivo
+- Animações com CSS
+
+## Estrutura HTML semântica
+
+\`\`\`html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produto Incrível</title>
+</head>
+<body>
+
+  <header class="navbar">...</header>
+
+  <main>
+    <section class="hero">...</section>
+    <section class="features">...</section>
+    <section class="depoimento">...</section>
+    <section class="contato">...</section>
+  </main>
+
+  <footer class="footer">...</footer>
+
+</body>
+</html>
+\`\`\`
+
+## Hero Section
+
+A primeira coisa que o usuário vê — deve impactar:
+
+\`\`\`html
+<section class="hero">
+  <div class="hero__content">
+    <h1 class="hero__title">Aprenda a programar<br><span>do zero ao emprego</span></h1>
+    <p class="hero__sub">O curso mais completo de HTML, CSS e JavaScript em português.</p>
+    <a href="#contato" class="btn-primary">Começar agora</a>
+  </div>
+</section>
+\`\`\`
+
+\`\`\`css
+.hero {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  padding: 120px 24px;
+  text-align: center;
+}
+
+.hero__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.hero__title span {
+  color: #fbbf24; /* destaque amarelo */
+}
+\`\`\`
+
+## Seção de Features (Cards)
+
+\`\`\`html
+<section class="features">
+  <h2>Por que nos escolher?</h2>
+  <div class="features__grid">
+    <div class="feature-card">
+      <span class="feature-card__icon">🎯</span>
+      <h3>Prático</h3>
+      <p>Projetos reais desde o primeiro dia.</p>
+    </div>
+    <!-- mais cards... -->
+  </div>
+</section>
+\`\`\`
+
+\`\`\`css
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  text-align: center;
+}
+\`\`\`
+
+## Animação de entrada com CSS
+
+\`\`\`css
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feature-card {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.feature-card:nth-child(2) { animation-delay: 0.1s; }
+.feature-card:nth-child(3) { animation-delay: 0.2s; }
+\`\`\`
+
+## Formulário de contato
+
+\`\`\`html
+<form id="form" class="form">
+  <input type="text"  name="nome"  placeholder="Seu nome"  required />
+  <input type="email" name="email" placeholder="Seu e-mail" required />
+  <textarea name="msg" placeholder="Sua mensagem" rows="4" required></textarea>
+  <button type="submit">Enviar mensagem</button>
+</form>
+\`\`\`
+
+\`\`\`javascript
+document.getElementById('form').addEventListener('submit', function(e) {
+  e.preventDefault()
+  const nome = this.nome.value
+  alert('Obrigado, ' + nome + '! Entraremos em contato em breve.')
+  this.reset()
+})
+\`\`\`
+
+## Checklist de uma boa landing page
+
+- [ ] Meta viewport configurada
+- [ ] Título e meta description
+- [ ] Hero com CTA claro
+- [ ] Design responsivo (mobile-first)
+- [ ] Imagens com alt text
+- [ ] Formulário com validação
+- [ ] Footer com informações de contato
+- [ ] Carregamento rápido (imagens otimizadas)
+`,
+    tasks: [
+      {
+        id: 'lp-quiz-1',
+        type: 'quiz',
+        title: 'Hero Section',
+        question: 'O que é uma "call to action" (CTA) em uma landing page?',
+        options: [
+          'O rodapé da página',
+          'Um botão ou link que guia o usuário para a ação desejada',
+          'O logo da empresa',
+          'A cor de fundo da página',
+        ],
+        correct: 1,
+        xp: 10,
+        successMessage: 'CTAs como "Começar agora" ou "Saiba mais" guiam o usuário para converter.',
+      },
+      {
+        id: 'lp-quiz-2',
+        type: 'quiz',
+        title: 'grid-template-columns com auto-fit',
+        question: 'O que faz "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))"?',
+        options: [
+          'Cria exatamente 3 colunas',
+          'Cria colunas automáticas que cabem no espaço, com mínimo de 250px',
+          'Esconde colunas menores que 250px',
+          'Fixa o layout em 250px de largura',
+        ],
+        correct: 1,
+        xp: 10,
+        successMessage: 'auto-fit + minmax = grid responsivo sem media queries! Uma das técnicas mais poderosas do CSS.',
+      },
+      {
+        id: 'lp-fill-1',
+        type: 'fill',
+        title: 'Complete a animação CSS',
+        text: '@___ fadeInUp {\n  from { opacity: 0; transform: translateY(30px); }\n  to   { opacity: ___; transform: translateY(0); }\n}',
+        blanks: ['keyframes', '1'],
+        xp: 10,
+        successMessage: '@keyframes define a animação, animation aplica ela no elemento!',
+      },
+      {
+        id: 'lp-bug-1',
+        type: 'bug',
+        title: 'Formulário não funciona',
+        description: 'O formulário recarrega a página ao enviar:',
+        lines: [
+          'form.addEventListener("submit", function(e) {',
+          '  const nome = this.nome.value',
+          '  alert("Obrigado, " + nome)',
+          '})',
+        ],
+        bugLine: 0,
+        explanation: 'Falta e.preventDefault() para impedir o comportamento padrão (recarregar a página).',
+        xp: 20,
+        successMessage: 'Sempre use e.preventDefault() em formulários controlados por JavaScript!',
+      },
+      {
+        id: 'lp-drag-1',
+        type: 'drag',
+        title: 'Ordene: estrutura de uma landing page',
+        description: 'Ordene as seções de uma landing page profissional:',
+        blocks: [
+          '<header> — Navbar com logo e links',
+          '<section class="hero"> — Headline e CTA',
+          '<section class="features"> — Benefícios/features',
+          '<section class="depoimento"> — Prova social',
+          '<section class="contato"> — Formulário',
+          '<footer> — Rodapé',
+        ],
+        correctOrder: [0, 1, 2, 3, 4, 5],
+        xp: 20,
+        successMessage: 'Estrutura de landing page profissional dominada!',
+      },
+      {
+        id: 'lp-code-1',
+        type: 'code',
+        title: 'Construa sua landing page',
+        description: 'Crie uma landing page completa com hero, 3 cards de features e formulário.',
+        starterCode: `<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', sans-serif; color: #1e293b; }
+  .hero { background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white; padding: 80px 24px; text-align: center; }
+  .hero h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900;
+    line-height: 1.2; margin-bottom: 16px; }
+  .hero h1 span { color: #fbbf24; }
+  .hero p { font-size: 1.1rem; margin-bottom: 32px; opacity: 0.9; }
+  .btn { display: inline-block; background: #fbbf24; color: #1e293b;
+    padding: 14px 32px; border-radius: 50px; font-weight: 800;
+    text-decoration: none; font-size: 1rem; transition: transform 0.2s; }
+  .btn:hover { transform: translateY(-2px); }
+  .features { padding: 80px 24px; background: #f8fafc; }
+  .features h2 { text-align: center; font-size: 2rem; margin-bottom: 48px;
+    font-weight: 800; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px; max-width: 900px; margin: 0 auto; }
+  .card { background: white; border-radius: 16px; padding: 32px; text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+  .card .icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+  .card p { color: #64748b; line-height: 1.6; }
+  .contato { padding: 80px 24px; max-width: 500px; margin: 0 auto; }
+  .contato h2 { font-size: 2rem; font-weight: 800; margin-bottom: 32px; text-align: center; }
+  form { display: flex; flex-direction: column; gap: 16px; }
+  form input, form textarea { padding: 14px; border: 2px solid #e2e8f0;
+    border-radius: 10px; font-size: 1rem; font-family: inherit; outline: none; }
+  form input:focus, form textarea:focus { border-color: #6366f1; }
+  form button { background: #6366f1; color: white; padding: 14px;
+    border: none; border-radius: 10px; font-size: 1rem; font-weight: 700;
+    cursor: pointer; }
+  footer { background: #1e293b; color: #94a3b8; text-align: center;
+    padding: 24px; font-size: 0.9rem; }
+</style>
+
+<section class="hero">
+  <h1>Aprenda a programar<br><span>do zero ao emprego</span></h1>
+  <p>O curso mais completo de desenvolvimento web em português.</p>
+  <a href="#contato" class="btn">Começar agora →</a>
+</section>
+
+<section class="features">
+  <h2>Por que nos escolher?</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🎯</div>
+      <h3>100% Prático</h3>
+      <p>Projetos reais desde o primeiro módulo.</p>
+    </div>
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Aprenda Rápido</h3>
+      <p>Metodologia otimizada para iniciantes.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏆</div>
+      <h3>Certificado</h3>
+      <p>Receba um certificado ao concluir.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contato" id="contato">
+  <h2>Entre em contato</h2>
+  <form id="form">
+    <input type="text"  name="nome"  placeholder="Seu nome"   required />
+    <input type="email" name="email" placeholder="Seu e-mail" required />
+    <textarea name="msg" rows="4"   placeholder="Sua mensagem" required></textarea>
+    <button type="submit">Enviar mensagem</button>
+  </form>
+</section>
+
+<footer>© 2025 Curso Iniciante — Todos os direitos reservados</footer>
+
+<script>
+  document.getElementById('form').addEventListener('submit', function(e) {
+    e.preventDefault()
+    alert('Obrigado, ' + this.nome.value + '! Entraremos em contato.')
+    this.reset()
+  })
+</script>`,
+        hint: 'A landing page já está completa! Personalize as cores, textos e adicione mais seções.',
+        successMessage: 'Landing page profissional construída! Você tem um projeto de portfólio pronto.',
+        xp: 15,
+      },
+    ],
+  },
 ]
 
 export const STAGES = [
@@ -4427,5 +6911,19 @@ export const STAGES = [
     subtitle: 'Manipulando o DOM e criando projetos reais',
     icon: '🏗️',
     color: '#06b6d4',
+  },
+  {
+    id: 'estudante',
+    name: 'CSS Avançado',
+    subtitle: 'Flexbox, Grid e design responsivo',
+    icon: '🎨',
+    color: '#a855f7',
+  },
+  {
+    id: 'praticante',
+    name: 'JS Avançado',
+    subtitle: 'Arrays, loops, funções e APIs',
+    icon: '⚡',
+    color: '#0ea5e9',
   },
 ]

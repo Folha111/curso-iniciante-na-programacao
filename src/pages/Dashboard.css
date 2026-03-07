@@ -82,8 +82,8 @@
 }
 
 .dash__nav-item--active {
-  background: rgba(99,102,241,0.15);
-  color: #818cf8;
+  background: color-mix(in srgb, var(--color-accent) 15%, transparent);
+  color: color-mix(in srgb, var(--color-accent) 90%, white);
 }
 
 /* Theme toggle */
@@ -508,7 +508,7 @@
 .dash__badge-chip--more {
   cursor: pointer;
   color: var(--color-accent);
-  border-color: rgba(59, 130, 246, 0.3);
+  border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
 }
 
 .dash__badge-chip-name {

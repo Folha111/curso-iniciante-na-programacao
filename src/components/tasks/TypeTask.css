@@ -96,7 +96,7 @@
 }
 
 .type-task__input:focus {
-  border-color: #6366f1;
+  border-color: var(--color-accent);
   background: #fff;
 }
 

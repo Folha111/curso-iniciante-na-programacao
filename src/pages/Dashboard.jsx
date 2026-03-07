@@ -2,6 +2,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useProgress } from '../context/ProgressContext'
 import { useModules } from '../context/ModulesContext'
+import { useLang } from '../context/LangContext'
+import translations from '../data/translations'
 import './Dashboard.css'
 
 function groupByStage(modules, stages) {
@@ -16,6 +18,7 @@ export default function Dashboard() {
   const navigate = useNavigate()
   const { isTaskDone, isModuleDone, isModuleUnlocked, xp, streak, badges, reviewQueue, weeklyXp, weeklyGoal } = useProgress()
   const { modules: MODULES, stages: STAGES } = useModules()
+  const { t, lang } = useLang()
 
   const totalTasks = MODULES.reduce((acc, m) => acc + m.tasks.length, 0)
   const doneTasks = MODULES.reduce(
@@ -34,13 +37,13 @@ export default function Dashboard() {
       {/* Top bar */}
       <header className="dash__header">
         <div>
-          <h1 className="dash__welcome">Olá, {user.name} 👋</h1>
-          <p className="dash__welcome-sub">Continue de onde parou.</p>
+          <h1 className="dash__welcome">{t('dashboard','greeting')}, {user.name} 👋</h1>
+          <p className="dash__welcome-sub">{t('dashboard','subtitle')}</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {streak > 0 && (
             <div className="dash__streak-pill">
-              🔥 {streak} {streak === 1 ? 'dia' : 'dias'}
+              🔥 {streak} {streak === 1 ? t('dashboard','day') : t('dashboard','days')}
             </div>
           )}
           <div className="dash__avatar">{user.name[0]}</div>
@@ -50,22 +53,22 @@ export default function Dashboard() {
       {/* Stats */}
       <div className="dash__stats">
         <div className="dash__stat-card">
-          <p className="dash__stat-label">Progresso geral</p>
+          <p className="dash__stat-label">{t('dashboard','overallProgress')}</p>
           <p className="dash__stat-value">{progress}%</p>
           <div className="dash__progress-bar">
             <div className="dash__progress-fill" style={{ width: `${progress}%` }} />
           </div>
         </div>
         <div className="dash__stat-card">
-          <p className="dash__stat-label">Tarefas concluídas</p>
+          <p className="dash__stat-label">{t('dashboard','tasksDone')}</p>
           <p className="dash__stat-value">{doneTasks} <span>/ {totalTasks}</span></p>
         </div>
         <div className="dash__stat-card">
-          <p className="dash__stat-label">Módulos completos</p>
+          <p className="dash__stat-label">{t('dashboard','modulesDone')}</p>
           <p className="dash__stat-value">{doneModules} <span>/ {MODULES.length}</span></p>
         </div>
         <div className="dash__stat-card">
-          <p className="dash__stat-label">XP acumulado</p>
+          <p className="dash__stat-label">{t('dashboard','xpAccumulated')}</p>
           <p className="dash__stat-value" style={{ color: 'var(--color-accent)' }}>{xp} <span style={{ fontSize: '14px', fontWeight: 500, color: 'var(--color-gray)' }}>XP</span></p>
         </div>
       </div>
@@ -74,8 +77,8 @@ export default function Dashboard() {
       {unlockedBadges.length > 0 && (
         <section className="dash__badges-section">
           <div className="dash__badges-header">
-            <h2 className="dash__section-title">Conquistas recentes</h2>
-            <Link to="/conquistas" className="dash__badges-link">Ver todas →</Link>
+            <h2 className="dash__section-title">{t('dashboard','recentAchievements')}</h2>
+            <Link to="/conquistas" className="dash__badges-link">{t('dashboard','viewAll')}</Link>
           </div>
           <div className="dash__badges-row">
             {unlockedBadges.slice(0, 5).map((b) => (
@@ -86,7 +89,7 @@ export default function Dashboard() {
             ))}
             {unlockedBadges.length > 5 && (
               <Link to="/conquistas" className="dash__badge-chip dash__badge-chip--more">
-                +{unlockedBadges.length - 5} mais
+                +{unlockedBadges.length - 5} {t('dashboard','more')}
               </Link>
             )}
           </div>
@@ -96,15 +99,15 @@ export default function Dashboard() {
       {/* Weekly Goal */}
       <section className="dash__weekly">
         <div className="dash__weekly-header">
-          <h2 className="dash__section-title">Meta semanal</h2>
-          <Link to="/perfil" className="dash__badges-link">Configurar →</Link>
+          <h2 className="dash__section-title">{t('dashboard','weeklyGoal')}</h2>
+          <Link to="/perfil" className="dash__badges-link">{t('dashboard','configure')}</Link>
         </div>
         <div className="dash__weekly-card">
           <div className="dash__weekly-info">
             <span className="dash__weekly-icon">🎯</span>
             <div>
-              <p className="dash__weekly-label">{weeklyXp} / {weeklyGoal} XP esta semana</p>
-              <p className="dash__weekly-sub">{weekPct >= 100 ? 'Meta atingida!' : `Faltam ${weeklyGoal - weeklyXp} XP para sua meta`}</p>
+              <p className="dash__weekly-label">{translations[lang]?.dashboard?.weeklyXpLabel(weeklyXp, weeklyGoal)}</p>
+              <p className="dash__weekly-sub">{weekPct >= 100 ? t('dashboard','goalReached') : translations[lang]?.dashboard?.goalRemaining(weeklyGoal - weeklyXp)}</p>
             </div>
             <span className="dash__weekly-pct">{weekPct}%</span>
           </div>
@@ -118,10 +121,10 @@ export default function Dashboard() {
       {reviewQueue.length > 0 && (
         <section className="dash__review">
           <div className="dash__badges-header">
-            <h2 className="dash__section-title">Fila de Revisão</h2>
-            <Link to="/revisao" className="dash__badges-link">Iniciar sessão →</Link>
+            <h2 className="dash__section-title">{t('dashboard','reviewQueue')}</h2>
+            <Link to="/revisao" className="dash__badges-link">{t('dashboard','startSession')}</Link>
           </div>
-          <p className="dash__review-sub">Tarefas onde você errou — vale a pena rever:</p>
+          <p className="dash__review-sub">{t('dashboard','reviewSub')}</p>
           <div className="dash__review-list">
             {reviewQueue.slice(0, 3).map((item) => (
               <div
@@ -146,7 +149,7 @@ export default function Dashboard() {
       {/* Continue */}
       {nextModule && (
         <section className="dash__continue">
-          <h2 className="dash__section-title">Continuar estudando</h2>
+          <h2 className="dash__section-title">{t('dashboard','nextModule')}</h2>
           <div className="dash__next-card" onClick={() => navigate(`/modulo/${nextModule.id}`)} style={{ cursor: 'pointer' }}>
             <div className="dash__next-badge" style={{ background: nextModule.color }}>{nextModule.number}</div>
             <div className="dash__next-info">
@@ -156,7 +159,7 @@ export default function Dashboard() {
               </p>
             </div>
             <button className="btn btn--primary dash__next-btn">
-              Continuar
+              {t('dashboard','continue')}
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
