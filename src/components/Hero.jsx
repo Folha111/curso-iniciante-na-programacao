@@ -21,8 +21,8 @@ export default function Hero() {
           </h1>
 
           <p className="hero__subtitle">
-            Um curso prático e direto para quem nunca escreveu uma linha de código
-            e quer criar seus primeiros projetos reais na web.
+            20 módulos progressivos com projetos reais, gamificação, jogos e uma
+            plataforma completa — para quem nunca escreveu uma linha de código.
           </p>
 
           <div className="hero__actions">
@@ -46,7 +46,7 @@ export default function Hero() {
               ))}
             </div>
             <p className="hero__trust-text">
-              <strong>+2.400 alunos</strong> já iniciaram a jornada
+              <strong>+2.400 alunos</strong> · 20 módulos · 6 tipos de tarefa
             </p>
           </div>
         </div>
@@ -114,10 +114,10 @@ export default function Hero() {
             <svg width="14" height="14" fill="#22c55e" viewBox="0 0 16 16">
               <path d="M13.5 2.5l-8 8-3-3L1 9l3.5 3.5 9.5-9.5-0.5-0.5z"/>
             </svg>
-            Deploy feito!
+            +150 XP ganhos!
           </div>
           <div className="hero__float hero__float--2">
-            🎯 Módulo 1 concluído
+            🔥 7 dias de streak
           </div>
         </div>
       </div>

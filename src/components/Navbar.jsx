@@ -23,6 +23,7 @@ export default function Navbar() {
         <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
           <li><a href="#about" onClick={() => setMenuOpen(false)}>Sobre</a></li>
           <li><a href="#curriculum" onClick={() => setMenuOpen(false)}>Conteúdo</a></li>
+          <li><a href="#features" onClick={() => setMenuOpen(false)}>Plataforma</a></li>
           <li><a href="#for-whom" onClick={() => setMenuOpen(false)}>Para quem</a></li>
           <li><a href="#testimonials" onClick={() => setMenuOpen(false)}>Depoimentos</a></li>
           <li className="navbar__links-mobile-cta">

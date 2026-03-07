@@ -1,17 +1,17 @@
 import './About.css'
 
 const stats = [
-  { value: '8',    label: 'Módulos',         sub: 'do básico ao deploy' },
-  { value: '40+',  label: 'Aulas práticas',  sub: 'com exercícios reais' },
-  { value: '100%', label: 'Gratuito',        sub: 'sem cobranças ocultas' },
-  { value: '0',    label: 'Pré-requisitos',  sub: 'qualquer um pode entrar' },
+  { value: '20',   label: 'Módulos',          sub: 'do básico ao deploy' },
+  { value: '6',    label: 'Tipos de tarefa',   sub: 'quiz, código, drag & drop…' },
+  { value: '100%', label: 'Gratuito',          sub: 'sem cobranças ocultas' },
+  { value: '0',    label: 'Pré-requisitos',    sub: 'qualquer um pode entrar' },
 ]
 
 const features = [
-  'Conteúdo em texto e vídeo, no seu ritmo',
-  'Projetos reais ao final de cada módulo',
-  'Comunidade ativa para tirar dúvidas',
-  'Certificado de conclusão digital',
+  'Aprenda com projetos reais em cada módulo',
+  'Sistema de XP, streaks e 11 conquistas desbloqueáveis',
+  'Jogos interativos, quiz e Modo Foco (Pomodoro)',
+  'Certificado digital de conclusão',
 ]
 
 export default function About() {
@@ -25,9 +25,8 @@ export default function About() {
             Programação explicada<br />como deveria ser
           </h2>
           <p className="section__description">
-            O Curso Iniciante foi criado para quem está dando seus primeiros passos no
-            desenvolvimento. Sem pré-requisitos, sem jargões — só o que você precisa
-            para criar projetos reais na web.
+            20 módulos progressivos que te levam do zero até publicar seus primeiros projetos
+            na internet — com gamificação, projetos reais e uma plataforma completa de aprendizado.
           </p>
 
           <ul className="about__features">

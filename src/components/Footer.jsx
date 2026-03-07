@@ -21,6 +21,7 @@ export default function Footer() {
           <ul>
             <li><a href="#about">Sobre</a></li>
             <li><a href="#curriculum">Conteúdo</a></li>
+            <li><a href="#features">Plataforma</a></li>
             <li><a href="#for-whom">Para quem</a></li>
             <li><a href="#cta">Inscrição</a></li>
           </ul>
