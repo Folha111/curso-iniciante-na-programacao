@@ -1,13 +1,28 @@
 import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { supabase } from '../lib/supabase'
 import './Login.css'
 
+function traduzirErro(msg = '') {
+  if (msg.includes('Invalid login credentials')) return 'E-mail ou senha incorretos.'
+  if (msg.includes('Email not confirmed')) return 'Confirme seu e-mail antes de entrar.'
+  if (msg.includes('User already registered') || msg.includes('already been registered')) return 'Este e-mail já está cadastrado.'
+  if (msg.includes('Password should be at least')) return 'A senha deve ter pelo menos 6 caracteres.'
+  if (msg.includes('Unable to validate email')) return 'E-mail inválido.'
+  if (msg.includes('signup is disabled')) return 'Cadastro temporariamente desativado.'
+  if (msg.includes('network') || msg.includes('fetch')) return 'Erro de conexão. Verifique sua internet.'
+  return 'Ocorreu um erro. Tente novamente.'
+}
+
 export default function Login() {
+  const [mode, setMode] = useState('login') // 'login' | 'register' | 'reset'
   const [showPassword, setShowPassword] = useState(false)
-  const [form, setForm] = useState({ email: '', password: '' })
+  const [form, setForm] = useState({ name: '', email: '', password: '' })
   const [error, setError] = useState('')
-  const { login } = useAuth()
+  const [loading, setLoading] = useState(false)
+  const [resetSent, setResetSent] = useState(false)
+  const { login, register } = useAuth()
   const navigate = useNavigate()
   const { state } = useLocation()
 
@@ -16,13 +31,30 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const ok = login(form.email, form.password)
-    if (ok) {
-      navigate(state?.from || '/dashboard')
-    } else {
-      setError('E-mail ou senha incorretos.')
+    setError('')
+    setLoading(true)
+    try {
+      if (mode === 'login') {
+        await login(form.email, form.password)
+        navigate(state?.from || '/dashboard')
+      } else if (mode === 'register') {
+        if (!form.name.trim()) { setError('Informe seu nome.'); return }
+        await register(form.email, form.password, form.name)
+        navigate('/checkout')
+      } else if (mode === 'reset') {
+        if (!form.email.trim()) { setError('Informe seu e-mail.'); setLoading(false); return }
+        const { error: resetErr } = await supabase.auth.resetPasswordForEmail(form.email, {
+          redirectTo: `${window.location.origin}/login`,
+        })
+        if (resetErr) throw resetErr
+        setResetSent(true)
+      }
+    } catch (err) {
+      setError(traduzirErro(err.message))
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -64,34 +96,63 @@ export default function Login() {
       <div className="login__panel login__panel--right">
         <div className="login__form-wrapper">
           <div className="login__form-header">
-            <h1 className="login__form-title">Bem-vindo de volta</h1>
+            <h1 className="login__form-title">
+              {mode === 'login' ? 'Bem-vindo de volta' : mode === 'register' ? 'Criar conta' : 'Recuperar senha'}
+            </h1>
             <p className="login__form-sub">
-              Não tem conta?{' '}
-              <a href="#cta" className="login__inline-link">
-                Inscreva-se grátis
-              </a>
+              {mode === 'login' ? (
+                <>Não tem conta?{' '}
+                  <button className="login__inline-link" onClick={() => { setMode('register'); setError('') }}>
+                    Criar conta
+                  </button>
+                </>
+              ) : mode === 'register' ? (
+                <>Já tem conta?{' '}
+                  <button className="login__inline-link" onClick={() => { setMode('login'); setError('') }}>
+                    Entrar
+                  </button>
+                </>
+              ) : (
+                <>Lembrou a senha?{' '}
+                  <button className="login__inline-link" onClick={() => { setMode('login'); setError(''); setResetSent(false) }}>
+                    Voltar ao login
+                  </button>
+                </>
+              )}
             </p>
           </div>
 
-          {/* Social login */}
-          <button className="login__google-btn" type="button">
-            <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
-              <path d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3 12.9 3 4 11.9 4 23s8.9 20 20 20 20-8.9 20-20c0-1.3-.2-2.7-.5-4z" fill="#FFC107"/>
-              <path d="M6.3 14.7l7 5.1C15.2 16.5 19.3 14 24 14c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 5.1 29.6 3 24 3c-7.6 0-14.2 4.3-17.7 10.7z" fill="#FF3D00"/>
-              <path d="M24 43c5.4 0 10.3-1.9 14-5.1l-6.5-5.3C29.7 34.4 27 35.5 24 35.5c-6 0-11.1-4-12.9-9.5l-7 5.4C7.8 38.7 15.3 43 24 43z" fill="#4CAF50"/>
-              <path d="M44.5 20H24v8.5h11.8c-.9 2.6-2.6 4.8-4.8 6.3l6.5 5.3C41.5 36.5 44.5 30.1 44.5 23c0-1.3-.2-2.7-.5-4z" fill="#1976D2"/>
-            </svg>
-            Continuar com Google
-          </button>
+          {mode === 'reset' && resetSent && (
+            <div className="login__reset-success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              <div>
+                <p><strong>E-mail enviado!</strong></p>
+                <p>Verifique sua caixa de entrada e clique no link para criar uma nova senha.</p>
+              </div>
+            </div>
+          )}
 
-          <div className="login__divider">
-            <span>ou continue com e-mail</span>
-          </div>
-
-          {/* Form */}
           {error && <p className="login__error">{error}</p>}
 
           <form className="login__form" onSubmit={handleSubmit}>
+            {mode === 'register' && (
+              <div className="login__field">
+                <label htmlFor="name" className="login__label">Nome</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Seu nome completo"
+                  className="login__input"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            )}
+
             <div className="login__field">
               <label htmlFor="email" className="login__label">E-mail</label>
               <input
@@ -107,22 +168,27 @@ export default function Login() {
               />
             </div>
 
-            <div className="login__field">
+            {mode !== 'reset' && <div className="login__field">
               <div className="login__label-row">
                 <label htmlFor="password" className="login__label">Senha</label>
-                <a href="#" className="login__forgot">Esqueci minha senha</a>
+                {mode === 'login' && (
+                  <button type="button" className="login__forgot" onClick={() => { setMode('reset'); setError(''); setResetSent(false) }}>
+                    Esqueci minha senha
+                  </button>
+                )}
               </div>
               <div className="login__input-wrap">
                 <input
                   id="password"
                   name="password"
                   type={showPassword ? 'text' : 'password'}
-                  autoComplete="current-password"
+                  autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                   placeholder="••••••••"
                   className="login__input"
                   value={form.password}
                   onChange={handleChange}
                   required
+                  minLength={6}
                 />
                 <button
                   type="button"
@@ -143,10 +209,10 @@ export default function Login() {
                   )}
                 </button>
               </div>
-            </div>
+            </div>}
 
-            <button type="submit" className="btn btn--primary login__submit">
-              Entrar na minha conta
+            <button type="submit" className="btn btn--primary login__submit" disabled={loading || (mode === 'reset' && resetSent)}>
+              {loading ? 'Aguarde...' : mode === 'login' ? 'Entrar na minha conta' : mode === 'register' ? 'Criar conta e pagar' : 'Enviar link de recuperação'}
             </button>
           </form>
 

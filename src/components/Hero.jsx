@@ -11,7 +11,7 @@ export default function Hero() {
         <div className="hero__content">
           <span className="hero__badge">
             <span className="hero__badge-dot" />
-            Grátis · Online · Sem pré-requisitos
+            Acesso vitalício · Garantia de 7 dias · Sem pré-requisitos
           </span>
 
           <h1 className="hero__title">
@@ -21,13 +21,13 @@ export default function Hero() {
           </h1>
 
           <p className="hero__subtitle">
-            20 módulos progressivos com projetos reais, gamificação, jogos e uma
-            plataforma completa — para quem nunca escreveu uma linha de código.
+            20 módulos progressivos com projetos reais, gamificação e uma plataforma
+            completa — para quem nunca escreveu uma linha de código e quer entrar na área de tecnologia.
           </p>
 
           <div className="hero__actions">
-            <a href="#cta" className="btn btn--primary hero__btn-main">
-              Começar agora
+            <a href="/checkout" className="btn btn--primary hero__btn-main">
+              Quero entrar na área de tech
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

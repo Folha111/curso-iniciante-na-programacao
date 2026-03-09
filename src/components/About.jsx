@@ -3,7 +3,7 @@ import './About.css'
 const stats = [
   { value: '20',   label: 'Módulos',          sub: 'do básico ao deploy' },
   { value: '6',    label: 'Tipos de tarefa',   sub: 'quiz, código, drag & drop…' },
-  { value: '100%', label: 'Gratuito',          sub: 'sem cobranças ocultas' },
+  { value: 'R$40', label: 'Pagamento único',    sub: 'sem mensalidade, acesso vitalício' },
   { value: '0',    label: 'Pré-requisitos',    sub: 'qualquer um pode entrar' },
 ]
 

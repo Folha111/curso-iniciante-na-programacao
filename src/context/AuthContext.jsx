@@ -1,120 +1,145 @@
-import { createContext, useContext, useState, useMemo, useCallback } from 'react'
-
-const USERS = [
-  { email: 'bernardosch.borba@hotmail.com', password: '123456', name: 'Bernardo', role: 'admin' },
-  { email: 'admin@curso.com',               password: 'admin123',  name: 'Admin',    role: 'admin' },
-  { email: '123@gmail.com',                 password: '123',       name: '123',      role: 'admin' },
-  { email: 'soletti@gmail.com',             password: '123',       name: 'Soletti',  role: 'admin' },
-  { email: 'aluno@curso.com',               password: 'aluno123',  name: 'Aluno Demo', role: 'aluno' },
-  { email: 'aluno@gmail.com',               password: '123',       name: 'Aluno',    role: 'aluno' },
-]
-
-export { USERS }
-
-function loadUsersFromStorage() {
-  try {
-    const raw = localStorage.getItem('users_data')
-    const stored = raw ? JSON.parse(raw) : []
-    // Merge: keep stored users but always include hardcoded USERS
-    const storedEmails = stored.map((u) => u.email)
-    const extra = stored.filter((u) => !USERS.find((b) => b.email === u.email))
-    const merged = [...USERS, ...extra]
-    localStorage.setItem('users_data', JSON.stringify(merged))
-    return merged
-  } catch {
-    return USERS
-  }
-}
+import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { supabase } from '../lib/supabase'
 
 const AuthContext = createContext(null)
 
+function buildUser(supabaseUser, profile) {
+  return {
+    id: supabaseUser.id,
+    email: supabaseUser.email,
+    name: profile?.name || supabaseUser.user_metadata?.name || supabaseUser.email,
+    role: profile?.role || supabaseUser.user_metadata?.role || 'aluno',
+    plan: profile?.plan || supabaseUser.user_metadata?.plan || 'free',
+    avatar: profile?.avatar_url || supabaseUser.user_metadata?.avatar_url || null,
+  }
+}
+
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('user')
-    return saved ? JSON.parse(saved) : null
-  })
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  const [usersData, setUsersData] = useState(loadUsersFromStorage)
+  async function fetchAndSetUser(supabaseUser) {
+    if (!supabaseUser) { setUser(null); return }
+    let { data: profile } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', supabaseUser.id)
+      .single()
 
-  const users = useMemo(
-    () => usersData.map(({ password: _password, ...rest }) => rest),
-    [usersData]
-  )
-
-  const login = useCallback((email, password) => {
-    const currentUsers = loadUsersFromStorage()
-    const found = currentUsers.find((u) => u.email === email && u.password === password)
-    if (found) {
-      const userData = { email: found.email, name: found.name, role: found.role }
-      localStorage.setItem('user', JSON.stringify(userData))
-      setUser(userData)
-      return true
+    // Cria perfil se não existir (caso o trigger falhe)
+    if (!profile) {
+      const { data: newProfile } = await supabase
+        .from('profiles')
+        .insert({
+          id: supabaseUser.id,
+          email: supabaseUser.email,
+          name: supabaseUser.user_metadata?.name || supabaseUser.email,
+          role: supabaseUser.user_metadata?.role || 'aluno',
+          plan: supabaseUser.user_metadata?.plan || 'free',
+        })
+        .select()
+        .single()
+      profile = newProfile
     }
-    return false
+
+    setUser(buildUser(supabaseUser, profile))
+  }
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      fetchAndSetUser(session?.user ?? null).finally(() => setLoading(false))
+    })
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      fetchAndSetUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
   }, [])
 
-  const logout = useCallback(() => {
-    localStorage.removeItem('user')
+  const login = useCallback(async (email, password) => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    if (error) throw new Error(error.message)
+  }, [])
+
+  const register = useCallback(async (email, password, name) => {
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { name, role: 'aluno', plan: 'free' } },
+    })
+    if (error) throw new Error(error.message)
+  }, [])
+
+  const logout = useCallback(async () => {
+    await supabase.auth.signOut()
     setUser(null)
   }, [])
 
-  const addUser = useCallback((userData) => {
-    setUsersData((prev) => {
-      const next = [...prev, userData]
-      localStorage.setItem('users_data', JSON.stringify(next))
-      return next
-    })
+  const updateUser = useCallback(async (updates) => {
+    if (!user) return
+    await supabase.from('profiles').update(updates).eq('id', user.id)
+    setUser((prev) => ({ ...prev, ...updates }))
+  }, [user])
+
+  const refreshUser = useCallback(async () => {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session?.user) await fetchAndSetUser(session.user)
   }, [])
 
-  const removeUser = useCallback((email) => {
-    setUsersData((prev) => {
-      const next = prev.filter((u) => u.email !== email)
-      localStorage.setItem('users_data', JSON.stringify(next))
-      return next
-    })
+  const forceSetPlan = useCallback(async (plan) => {
+    setUser((prev) => prev ? { ...prev, plan } : prev)
+    // Persiste no auth metadata para sobreviver a re-fetches
+    await supabase.auth.updateUser({ data: { plan } })
   }, [])
 
-  const updateUserRole = useCallback((email, role) => {
-    setUsersData((prev) => {
-      const next = prev.map((u) => (u.email === email ? { ...u, role } : u))
-      localStorage.setItem('users_data', JSON.stringify(next))
-      return next
-    })
-    setUser((prev) => {
-      if (prev && prev.email === email) {
-        const updated = { ...prev, role }
-        localStorage.setItem('user', JSON.stringify(updated))
-        return updated
-      }
-      return prev
-    })
+  // Admin: list all users from profiles table
+  const [users, setUsers] = useState([])
+  const fetchUsers = useCallback(async () => {
+    const { data } = await supabase.from('profiles').select('*').order('created_at')
+    setUsers(data || [])
   }, [])
 
-  const updateUser = useCallback((updates) => {
-    setUsersData((prev) => {
-      const next = prev.map((u) =>
-        u.email === JSON.parse(localStorage.getItem('user') || '{}').email
-          ? { ...u, ...updates }
-          : u
-      )
-      localStorage.setItem('users_data', JSON.stringify(next))
-      return next
+  const addUser = useCallback(async (userData) => {
+    // Admin user creation via Edge Function
+    const { data, error } = await supabase.functions.invoke('admin-create-user', {
+      body: userData,
     })
-    setUser((prev) => {
-      if (!prev) return prev
-      const updated = { ...prev, ...updates }
-      localStorage.setItem('user', JSON.stringify(updated))
-      return updated
-    })
-  }, [])
+    if (error) throw new Error(error.message)
+    await fetchUsers()
+    return data
+  }, [fetchUsers])
 
-  const value = useMemo(
-    () => ({ user, login, logout, users, addUser, removeUser, updateUserRole, updateUser }),
-    [user, login, logout, users, addUser, removeUser, updateUserRole, updateUser]
-  )
+  const removeUser = useCallback(async (email) => {
+    const { error } = await supabase.functions.invoke('admin-delete-user', {
+      body: { email },
+    })
+    if (error) throw new Error(error.message)
+    await fetchUsers()
+  }, [fetchUsers])
+
+  const updateUserRole = useCallback(async (email, role) => {
+    await supabase.from('profiles').update({ role }).eq('email', email)
+    await fetchUsers()
+  }, [fetchUsers])
+
+  if (loading) return null
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{
+      user,
+      login,
+      register,
+      logout,
+      updateUser,
+      refreshUser,
+      forceSetPlan,
+      users,
+      fetchUsers,
+      addUser,
+      removeUser,
+      updateUserRole,
+    }}>
       {children}
     </AuthContext.Provider>
   )

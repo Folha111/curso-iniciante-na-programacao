@@ -33,10 +33,11 @@ import Projetos from './pages/Projetos'
 import Projeto from './pages/Projeto'
 import Configuracoes from './pages/Configuracoes'
 import Foco from './pages/Foco'
+import Checkout from './pages/Checkout'
 
 function Home() {
   const { user } = useAuth()
-  if (user) {
+  if (user?.plan === 'paid' || user?.role === 'admin') {
     const last = localStorage.getItem('last_path')
     return <Navigate to={last || '/dashboard'} replace />
   }
@@ -67,6 +68,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/checkout" element={<Checkout />} />
               <Route
                 element={
                   <ProtectedRoute>

@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="container navbar__inner">
-        <a href="#" className="navbar__logo">
+        <a href="/" className="navbar__logo">
           <span className="navbar__logo-icon">{'{}'}</span>
           <span className="navbar__logo-text">Curso Iniciante</span>
         </a>
@@ -29,7 +29,7 @@ export default function Navbar() {
           <li className="navbar__links-mobile-cta">
             <Link to="/login" onClick={() => setMenuOpen(false)} className="navbar__mobile-login">Entrar</Link>
             <a href="#cta" onClick={() => setMenuOpen(false)} className="btn btn--primary navbar__mobile-signup">
-              Começar grátis
+              Garantir minha vaga →
             </a>
           </li>
         </ul>
@@ -37,7 +37,7 @@ export default function Navbar() {
         <div className="navbar__actions">
           <Link to="/login" className="navbar__login-link">Entrar</Link>
           <a href="#cta" className="btn btn--primary navbar__cta">
-            Começar grátis
+            Garantir minha vaga →
           </a>
         </div>
 
