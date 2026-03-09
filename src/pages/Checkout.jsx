@@ -242,6 +242,14 @@ export default function Checkout() {
       {/* Right — payment form */}
       <div className="checkout__payment">
         <div className="checkout__payment-inner">
+          {status === 'loading' && (
+            <div className="checkout__feedback">
+              <div className="checkout__loading-spinner" />
+              <h2>Processando pagamento...</h2>
+              <p>Aguarde, estamos gerando seu PIX.</p>
+            </div>
+          )}
+
           {status === 'success' && (
             <div className="checkout__feedback checkout__feedback--success">
               <div className="checkout__feedback-icon">
@@ -272,7 +280,7 @@ export default function Checkout() {
             </div>
           )}
 
-          {(status === 'idle' || status === 'loading' || status === 'error') && (
+          {(status === 'idle' || status === 'error') && (
             <>
               <div className="checkout__payment-header">
                 <h2 className="checkout__payment-title">Finalizar compra</h2>
