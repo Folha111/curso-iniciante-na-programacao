@@ -46,7 +46,7 @@ export default function Dashboard() {
               🔥 {streak} {streak === 1 ? t('dashboard','day') : t('dashboard','days')}
             </div>
           )}
-          <div className="dash__avatar">{user.name[0]}</div>
+          <div className="dash__avatar">{user.name?.[0]?.toUpperCase() || '?'}</div>
         </div>
       </header>
 

@@ -168,7 +168,7 @@ export default function Configuracoes() {
             <label className="config__avatar">
               {user.avatar
                 ? <img src={user.avatar} alt="avatar" className="config__avatar-img" />
-                : <span className="config__avatar-letter">{user.name[0].toUpperCase()}</span>
+                : <span className="config__avatar-letter">{user.name?.[0]?.toUpperCase() || '?'}</span>
               }
               <span className="config__avatar-overlay">📷</span>
               <input type="file" accept="image/*" className="config__avatar-input" onChange={handleAvatarChange} />

@@ -79,8 +79,14 @@ export function AuthProvider({ children }) {
 
   const updateUser = useCallback(async (updates) => {
     if (!user) return
-    await supabase.from('profiles').update(updates).eq('id', user.id)
-    setUser((prev) => ({ ...prev, ...updates }))
+    const { password, ...profileUpdates } = updates
+    if (Object.keys(profileUpdates).length > 0) {
+      await supabase.from('profiles').update(profileUpdates).eq('id', user.id)
+    }
+    if (password) {
+      await supabase.auth.updateUser({ password })
+    }
+    setUser((prev) => ({ ...prev, ...profileUpdates }))
   }, [user])
 
   const refreshUser = useCallback(async () => {

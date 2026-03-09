@@ -66,7 +66,7 @@ export default function Leaderboard() {
                   <div key={entry.email} className={`leaderboard__podium-slot leaderboard__podium-slot--${rankStr}`}>
                     <div className="leaderboard__podium-medal">{MEDALS[rank - 1]}</div>
                     <div className="leaderboard__podium-avatar">
-                      {entry.name[0].toUpperCase()}
+                      {entry.name?.[0]?.toUpperCase() || '?'}
                     </div>
                     <p className="leaderboard__podium-name">{entry.name}</p>
                     <p className="leaderboard__podium-xp">{entry.xp} XP</p>
@@ -87,7 +87,7 @@ export default function Leaderboard() {
                     {i < 3 ? MEDALS[i] : `#${i + 1}`}
                   </span>
                   <div className="leaderboard__avatar">
-                    {entry.name[0].toUpperCase()}
+                    {entry.name?.[0]?.toUpperCase() || '?'}
                   </div>
                   <span className="leaderboard__name">
                     {entry.name}

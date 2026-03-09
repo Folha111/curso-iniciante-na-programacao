@@ -83,7 +83,7 @@ function TabOverview({ modules, users }) {
                 <tr key={u.email}>
                   <td>
                     <div className="adm__user-name">
-                      <span className="adm__avatar">{u.name[0]}</span>
+                      <span className="adm__avatar">{u.name?.[0]?.toUpperCase() || '?'}</span>
                       {u.name}
                     </div>
                   </td>
@@ -471,7 +471,7 @@ function TabUsers({ users, currentUser, addUser, removeUser, updateUserRole }) {
               <tr key={u.email}>
                 <td>
                   <div className="adm__user-name">
-                    <span className="adm__avatar">{u.name[0]}</span>
+                    <span className="adm__avatar">{u.name?.[0]?.toUpperCase() || '?'}</span>
                     {u.name}
                   </div>
                 </td>

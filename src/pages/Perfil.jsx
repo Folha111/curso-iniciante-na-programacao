@@ -69,7 +69,7 @@ export default function Perfil() {
         <label className="perfil__avatar" title="Clique para alterar a foto">
           {user.avatar
             ? <img src={user.avatar} alt="Foto de perfil" className="perfil__avatar-img" />
-            : user.name[0].toUpperCase()
+            : (user.name?.[0]?.toUpperCase() || '?')
           }
           <span className="perfil__avatar-overlay">📷</span>
           <input

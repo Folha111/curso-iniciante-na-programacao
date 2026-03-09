@@ -148,7 +148,7 @@ function Comments({ moduleId, user }) {
       <p className="module-page__notes-hint">Compartilhe dúvidas, dicas ou insights com outros alunos.</p>
 
       <form className="module-page__comment-form" onSubmit={handleSubmit}>
-        <div className="module-page__comment-avatar">{user.name[0]}</div>
+        <div className="module-page__comment-avatar">{user.name?.[0]?.toUpperCase() || '?'}</div>
         <textarea
           className="module-page__comment-input"
           value={text}
