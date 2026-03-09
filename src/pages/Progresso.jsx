@@ -44,7 +44,7 @@ export default function Progresso() {
           const unlocked = isModuleUnlocked(mod.id)
           const modDone = isModuleDone(mod.id)
           const modTasksDone = mod.tasks.filter((t) => isTaskDone(mod.id, t.id)).length
-          const pct = Math.round((modTasksDone / mod.tasks.length) * 100)
+          const pct = mod.tasks.length > 0 ? Math.round((modTasksDone / mod.tasks.length) * 100) : 0
 
           return (
             <div key={mod.id} className={`prog__module ${!unlocked ? 'prog__module--locked' : ''}`}>
@@ -88,7 +88,7 @@ export default function Progresso() {
                         }
                       </span>
                       <span className="prog__task-title">{task.title}</span>
-                      <span className="prog__task-type">{task.type === 'quiz' ? 'Quiz' : 'Código'}</span>
+                      <span className="prog__task-type">{{ quiz: 'Quiz', fill: 'Preencher', type: 'Digitação', bug: 'Bug', drag: 'Ordenar', code: 'Código' }[task.type] || task.type}</span>
                     </div>
                   )
                 })}

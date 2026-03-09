@@ -6912,18 +6912,4 @@ export const STAGES = [
     icon: '🏗️',
     color: '#06b6d4',
   },
-  {
-    id: 'estudante',
-    name: 'CSS Avançado',
-    subtitle: 'Flexbox, Grid e design responsivo',
-    icon: '🎨',
-    color: '#a855f7',
-  },
-  {
-    id: 'praticante',
-    name: 'JS Avançado',
-    subtitle: 'Arrays, loops, funções e APIs',
-    icon: '⚡',
-    color: '#0ea5e9',
-  },
 ]

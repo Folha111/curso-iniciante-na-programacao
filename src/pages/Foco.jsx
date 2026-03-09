@@ -152,9 +152,9 @@ export default function Foco() {
   function handleSaveSettings(e) {
     e.preventDefault()
     const next = {
-      focus: Math.max(1, Math.min(90, Number(settingsInput.focus))),
-      short_break: Math.max(1, Math.min(30, Number(settingsInput.short_break))),
-      long_break: Math.max(1, Math.min(60, Number(settingsInput.long_break))),
+      focus: Math.max(1, Math.min(90, Number(settingsInput.focus) || 25)),
+      short_break: Math.max(1, Math.min(30, Number(settingsInput.short_break) || 5)),
+      long_break: Math.max(1, Math.min(60, Number(settingsInput.long_break) || 15)),
     }
     setDurations(next)
     localStorage.setItem('foco_settings', JSON.stringify(next))

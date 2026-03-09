@@ -171,10 +171,10 @@ function Comments({ moduleId, user }) {
         {comments.map((c) => (
           <div key={c.id} className="module-page__comment">
             <div className="module-page__comment-meta">
-              <div className="module-page__comment-avatar module-page__comment-avatar--sm">{c.user[0]}</div>
+              <div className="module-page__comment-avatar module-page__comment-avatar--sm">{c.user?.[0]?.toUpperCase() || '?'}</div>
               <strong className="module-page__comment-author">{c.user}</strong>
               <span className="module-page__comment-date">{c.date}</span>
-              {c.user === user.name && (
+              {(c.user === user.name || user.role === 'admin') && (
                 <button className="module-page__comment-delete" onClick={() => handleDelete(c.id)} title="Excluir">✕</button>
               )}
             </div>
