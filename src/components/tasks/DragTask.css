@@ -193,3 +193,28 @@
   color: #991b1b;
   border: 1px solid rgba(239, 68, 68, 0.2);
 }
+
+@media (max-width: 480px) {
+  .drag-task {
+    padding: var(--space-4);
+  }
+
+  .drag-task__block {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.8rem;
+  }
+
+  .drag-task__block-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .drag-task__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .drag-task__toolbar .btn {
+    width: 100%;
+  }
+}

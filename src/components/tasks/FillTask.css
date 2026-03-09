@@ -189,3 +189,22 @@
   color: #b91c1c;
   border: 1px solid rgba(239,68,68,0.15);
 }
+
+@media (max-width: 480px) {
+  .fill-task {
+    padding: var(--space-4);
+  }
+
+  .fill-task__code {
+    padding: 14px 16px;
+    font-size: 0.8rem;
+  }
+
+  .fill-task__toolbar {
+    flex-wrap: wrap;
+  }
+
+  .fill-task__btn {
+    width: 100%;
+  }
+}

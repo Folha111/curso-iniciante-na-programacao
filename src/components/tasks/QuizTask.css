@@ -163,3 +163,23 @@
   border-color: #94a3b8;
   color: var(--color-dark, #0f172a);
 }
+
+@media (max-width: 480px) {
+  .quiz-task {
+    padding: 16px;
+  }
+
+  .quiz-task__question {
+    font-size: 15px;
+  }
+
+  .quiz-task__option {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .quiz-task__submit,
+  .quiz-task__retry {
+    width: 100%;
+  }
+}
