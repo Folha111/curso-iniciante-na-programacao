@@ -63,12 +63,13 @@ export function AuthProvider({ children }) {
   }, [])
 
   const register = useCallback(async (email, password, name) => {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { name, role: 'aluno', plan: 'free' } },
     })
     if (error) throw new Error(error.message)
+    return data // { user, session }
   }, [])
 
   const logout = useCallback(async () => {

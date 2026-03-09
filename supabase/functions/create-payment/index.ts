@@ -23,27 +23,31 @@ serve(async (req) => {
 
     console.log('formData recebido:', JSON.stringify(formData))
 
+    const isPix = formData.payment_method_id === 'pix' || body.paymentMethod === 'bank_transfer'
+
+    const payer: Record<string, unknown> = {
+      email: formData.payer?.email || userEmail,
+      first_name: userName?.split(' ')[0] || 'Aluno',
+      last_name: userName?.split(' ').slice(1).join(' ') || '',
+    }
+
+    // CPF é obrigatório para PIX no Brasil
+    if (formData.payer?.identification?.number) {
+      payer.identification = formData.payer.identification
+    }
+
     const paymentBody: Record<string, unknown> = {
-      transaction_amount: 39.99, // sempre fixo, ignora o valor do brick
+      transaction_amount: 39.99,
       description: 'Curso Completo de Programação',
-      payment_method_id: formData.payment_method_id,
-      payer: {
-        email: formData.payer?.email || userEmail,
-        first_name: userName?.split(' ')[0] || 'Aluno',
-        last_name: userName?.split(' ').slice(1).join(' ') || '',
-      },
+      payment_method_id: isPix ? 'pix' : formData.payment_method_id,
+      payer,
     }
 
     // Dados de cartão
     if (formData.token) {
       paymentBody.token = formData.token
       paymentBody.installments = Number(formData.installments) || 1
-      paymentBody.issuer_id = formData.issuer_id
-    }
-
-    // CPF/identificação
-    if (formData.payer?.identification?.number) {
-      (paymentBody.payer as Record<string, unknown>).identification = formData.payer.identification
+      paymentBody.issuer_id = formData.issuer_id ? Number(formData.issuer_id) : undefined
     }
 
     console.log('Enviando para MP:', JSON.stringify(paymentBody))
@@ -88,9 +92,10 @@ serve(async (req) => {
 
     const result: Record<string, unknown> = { status: payment.status }
 
-    if (payment.payment_method_id === 'pix') {
+    if (payment.payment_method_id === 'pix' || payment.payment_type_id === 'bank_transfer') {
       result.pixQrCode = payment.point_of_interaction?.transaction_data?.qr_code
       result.pixQrCodeBase64 = payment.point_of_interaction?.transaction_data?.qr_code_base64
+      result.pixExpiresAt = payment.date_of_expiration
     }
 
     return new Response(JSON.stringify(result), {

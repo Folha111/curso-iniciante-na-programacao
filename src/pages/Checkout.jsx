@@ -95,14 +95,14 @@ export default function Checkout() {
       userEmail = user.email
       userName = user.name
     } else {
-      // Tenta criar conta, se já existe faz login
+      // Tenta criar conta
       try {
-        await register(form.email, form.password, form.name)
-        const { data: { session } } = await supabase.auth.getSession()
-        userId = session?.user?.id
+        const { user: newUser, session } = await register(form.email, form.password, form.name)
+        userId = newUser?.id || session?.user?.id
         userEmail = form.email
         userName = form.name
       } catch {
+        // Signup falhou (e-mail já existe ou outro erro) — tenta login
         try {
           await login(form.email, form.password)
           const { data: { session } } = await supabase.auth.getSession()
@@ -110,7 +110,7 @@ export default function Checkout() {
           userEmail = form.email
           userName = form.name
         } catch {
-          setErrorMsg('Este e-mail já está cadastrado. Verifique sua senha ou acesse /login antes de comprar.')
+          setErrorMsg('E-mail ou senha incorretos. Se já tem conta, acesse /login primeiro.')
           setStatus('error')
           return
         }
@@ -118,7 +118,7 @@ export default function Checkout() {
     }
 
     if (!userId) {
-      setErrorMsg('Erro ao criar conta. Tente novamente.')
+      setErrorMsg('Não foi possível autenticar. Desative a confirmação de e-mail no Supabase ou acesse /login primeiro.')
       setStatus('error')
       return
     }
