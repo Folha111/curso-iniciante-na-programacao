@@ -66,12 +66,44 @@ export default function Checkout() {
   const pendingUserId = useRef(null)
   const pendingUserEmail = useRef(null)
   const pendingUserName = useRef(null)
+  const pollingRef = useRef(null)
 
   useEffect(() => {
     if (user?.plan === 'paid' && user?.role !== 'admin') {
       navigate('/dashboard', { replace: true })
     }
   }, [user, navigate])
+
+  // Poll Supabase every 5s while waiting for PIX confirmation
+  useEffect(() => {
+    if (status !== 'pix' || !pendingUserId.current) return
+
+    let attempts = 0
+    const MAX_ATTEMPTS = 72 // 6 minutes
+
+    pollingRef.current = setInterval(async () => {
+      attempts++
+      if (attempts > MAX_ATTEMPTS) {
+        clearInterval(pollingRef.current)
+        return
+      }
+      try {
+        const { data } = await supabase
+          .from('profiles')
+          .select('plan')
+          .eq('id', pendingUserId.current)
+          .single()
+        if (data?.plan === 'paid') {
+          clearInterval(pollingRef.current)
+          await forceSetPlan('paid')
+          setStatus('success')
+          setTimeout(() => navigate('/dashboard'), 2500)
+        }
+      } catch { /* ignore */ }
+    }, 5000)
+
+    return () => clearInterval(pollingRef.current)
+  }, [status, forceSetPlan, navigate])
 
   const handleChange = (e) => {
     setErrorMsg('')
@@ -276,7 +308,7 @@ export default function Checkout() {
                   Copiar
                 </button>
               </div>
-              <p className="checkout__pix-note">Aguardando pagamento... O acesso será liberado em instantes.</p>
+              <p className="checkout__pix-note">Verificando pagamento automaticamente... Você será redirecionado assim que confirmarmos.</p>
             </div>
           )}
 
