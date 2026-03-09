@@ -82,10 +82,12 @@ export default function Checkout() {
     setStatus('loading')
     setErrorMsg('')
 
-    // Validate account fields
-    if (!form.name.trim()) { setErrorMsg('Informe seu nome.'); setStatus('idle'); return }
-    if (!form.email.trim()) { setErrorMsg('Informe seu e-mail.'); setStatus('idle'); return }
-    if (form.password.length < 6) { setErrorMsg('A senha deve ter pelo menos 6 caracteres.'); setStatus('idle'); return }
+    // Validate account fields (only when not logged in)
+    if (!user) {
+      if (!form.name.trim()) { setErrorMsg('Informe seu nome.'); setStatus('error'); return }
+      if (!form.email.trim()) { setErrorMsg('Informe seu e-mail.'); setStatus('error'); return }
+      if (form.password.length < 6) { setErrorMsg('A senha deve ter pelo menos 6 caracteres.'); setStatus('error'); return }
+    }
 
     let userId, userEmail, userName
 
@@ -343,6 +345,7 @@ export default function Checkout() {
                     creditCard: 'all',
                     debitCard: 'all',
                     bankTransfer: 'all',
+                    ticket: 'all',
                   },
                 }}
                 onSubmit={onSubmit}
