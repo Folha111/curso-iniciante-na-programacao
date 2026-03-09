@@ -1,12 +1,13 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
-const MP_ACCESS_TOKEN = Deno.env.get('MP_ACCESS_TOKEN')!
-const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
-const SUPABASE_SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+const MP_ACCESS_TOKEN = Deno.env.get('MP_ACCESS_TOKEN')
+const SUPABASE_URL = Deno.env.get('SUPABASE_URL')
+const SUPABASE_SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
+const ALLOWED_ORIGIN = Deno.env.get('ALLOWED_ORIGIN') || '*'
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
@@ -16,22 +17,29 @@ serve(async (req) => {
   }
 
   try {
-    if (!MP_ACCESS_TOKEN) throw new Error('MP_ACCESS_TOKEN não configurado')
+    if (!MP_ACCESS_TOKEN || !SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+      throw new Error('Configuração do servidor incompleta.')
+    }
 
     const body = await req.json()
     const { formData, userId, userEmail, userName } = body
 
-    console.log('formData recebido:', JSON.stringify(formData))
+    // Input validation
+    if (!userId || !userEmail || !formData) {
+      return new Response(JSON.stringify({ error: 'Dados inválidos.' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      })
+    }
 
     const isPix = formData.payment_method_id === 'pix' || body.paymentMethod === 'bank_transfer'
 
     const payer: Record<string, unknown> = {
       email: formData.payer?.email || userEmail,
-      first_name: userName?.split(' ')[0] || 'Aluno',
-      last_name: userName?.split(' ').slice(1).join(' ') || '',
+      first_name: (userName || '').split(' ')[0] || 'Aluno',
+      last_name: (userName || '').split(' ').slice(1).join(' ') || '',
     }
 
-    // CPF é obrigatório para PIX no Brasil
     if (formData.payer?.identification?.number) {
       payer.identification = formData.payer.identification
     }
@@ -43,14 +51,11 @@ serve(async (req) => {
       payer,
     }
 
-    // Dados de cartão
     if (formData.token) {
       paymentBody.token = formData.token
       paymentBody.installments = Number(formData.installments) || 1
       paymentBody.issuer_id = formData.issuer_id ? Number(formData.issuer_id) : undefined
     }
-
-    console.log('Enviando para MP:', JSON.stringify(paymentBody))
 
     const mpResponse = await fetch('https://api.mercadopago.com/v1/payments', {
       method: 'POST',
@@ -63,10 +68,9 @@ serve(async (req) => {
     })
 
     const payment = await mpResponse.json()
-    console.log('Resposta MP:', JSON.stringify(payment))
 
     if (!mpResponse.ok) {
-      throw new Error(payment.message || payment.error || `Erro MP: ${mpResponse.status}`)
+      throw new Error('Pagamento não processado. Verifique os dados e tente novamente.')
     }
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY)
@@ -102,7 +106,6 @@ serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
   } catch (err) {
-    console.error('Erro:', err)
     return new Response(JSON.stringify({ error: (err as Error).message }), {
       status: 400,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
