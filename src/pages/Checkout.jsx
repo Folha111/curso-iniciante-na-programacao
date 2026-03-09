@@ -280,87 +280,84 @@ export default function Checkout() {
             </div>
           )}
 
-          {(status === 'idle' || status === 'error') && (
-            <>
-              <div className="checkout__payment-header">
-                <h2 className="checkout__payment-title">Finalizar compra</h2>
-                <p className="checkout__payment-sub">Crie sua conta e acesse o curso agora</p>
-              </div>
+          <div style={{ display: status === 'idle' || status === 'error' ? 'block' : 'none' }}>
+            <div className="checkout__payment-header">
+              <h2 className="checkout__payment-title">Finalizar compra</h2>
+              <p className="checkout__payment-sub">Crie sua conta e acesse o curso agora</p>
+            </div>
 
-              {status === 'error' && (
-                <div className="checkout__error">{errorMsg}</div>
-              )}
+            {status === 'error' && (
+              <div className="checkout__error">{errorMsg}</div>
+            )}
 
-              {/* Campos de conta — só mostra se não está logado */}
-              {!user && (
-                <div className="checkout__account-fields">
-                  <p className="checkout__section-label">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    Seus dados de acesso
-                  </p>
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder="Seu nome completo"
-                    className="checkout__input"
-                    value={form.name}
-                    onChange={handleChange}
-                  />
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="seuemail@exemplo.com"
-                    className="checkout__input"
-                    value={form.email}
-                    onChange={handleChange}
-                  />
-                  <input
-                    name="password"
-                    type="password"
-                    placeholder="Crie uma senha (mín. 6 caracteres)"
-                    className="checkout__input"
-                    value={form.password}
-                    onChange={handleChange}
-                  />
-                  <p className="checkout__login-hint">
-                    Já tem conta? <a href="/login">Entrar aqui</a>
-                  </p>
-                </div>
-              )}
-
-              {user && (
-                <div className="checkout__logged-as">
+            {!user && (
+              <div className="checkout__account-fields">
+                <p className="checkout__section-label">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
                   </svg>
-                  Comprando como <strong>{user.email}</strong>
-                </div>
-              )}
+                  Seus dados de acesso
+                </p>
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Seu nome completo"
+                  className="checkout__input"
+                  value={form.name}
+                  onChange={handleChange}
+                />
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="seuemail@exemplo.com"
+                  className="checkout__input"
+                  value={form.email}
+                  onChange={handleChange}
+                />
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="Crie uma senha (mín. 6 caracteres)"
+                  className="checkout__input"
+                  value={form.password}
+                  onChange={handleChange}
+                />
+                <p className="checkout__login-hint">
+                  Já tem conta? <a href="/login">Entrar aqui</a>
+                </p>
+              </div>
+            )}
 
-              <p className="checkout__section-label">
+            {user && (
+              <div className="checkout__logged-as">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+                  <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
                 </svg>
-                Dados de pagamento
-              </p>
+                Comprando como <strong>{user.email}</strong>
+              </div>
+            )}
 
-              <Payment
-                initialization={{ amount: COURSE_PRICE }}
-                customization={{
-                  paymentMethods: {
-                    creditCard: 'all',
-                    debitCard: 'all',
-                    bankTransfer: 'all',
-                    ticket: 'all',
-                  },
-                }}
-                onSubmit={onSubmit}
-                onError={onError}
-              />
-            </>
-          )}
+            <p className="checkout__section-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
+              Dados de pagamento
+            </p>
+
+            <Payment
+              initialization={{ amount: COURSE_PRICE }}
+              customization={{
+                paymentMethods: {
+                  creditCard: 'all',
+                  debitCard: 'all',
+                  bankTransfer: 'all',
+                  ticket: 'all',
+                },
+              }}
+              onSubmit={onSubmit}
+              onError={onError}
+            />
+          </div>
         </div>
       </div>
     </div>
