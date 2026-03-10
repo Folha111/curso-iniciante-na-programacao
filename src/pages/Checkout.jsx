@@ -201,6 +201,7 @@ export default function Checkout() {
   }
 
   return (
+    <>
     <div className="checkout">
       {/* Left — course summary */}
       <div className="checkout__summary">
@@ -395,5 +396,6 @@ export default function Checkout() {
       </div>
     </div>
     <WhatsappFab />
+    </>
   )
 }
