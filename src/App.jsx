@@ -8,6 +8,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import ProtectedAdminRoute from './components/ProtectedAdminRoute'
 import AppLayout from './components/AppLayout'
 import Navbar from './components/Navbar'
+import WhatsappFab from './components/WhatsappFab'
 import Hero from './components/Hero'
 import About from './components/About'
 import Curriculum from './components/Curriculum'
@@ -54,6 +55,7 @@ function Home() {
         <CallToAction />
       </main>
       <Footer />
+      <WhatsappFab />
     </>
   )
 }

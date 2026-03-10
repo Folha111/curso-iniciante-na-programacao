@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { initMercadoPago, Payment } from '@mercadopago/sdk-react'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
+import WhatsappFab from '../components/WhatsappFab'
 import './Checkout.css'
 
 const COURSE_PRICE = 39.99
@@ -393,5 +394,6 @@ export default function Checkout() {
         </div>
       </div>
     </div>
+    <WhatsappFab />
   )
 }

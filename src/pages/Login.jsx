@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
+import WhatsappFab from '../components/WhatsappFab'
 import './Login.css'
 
 function traduzirErro(msg = '') {
@@ -224,5 +225,6 @@ export default function Login() {
         </div>
       </div>
     </div>
+    <WhatsappFab />
   )
 }
