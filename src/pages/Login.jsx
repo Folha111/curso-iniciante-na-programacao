@@ -60,6 +60,7 @@ export default function Login() {
   }
 
   return (
+    <>
     <div className="login">
       {/* Left panel — branding */}
       <div className="login__panel login__panel--left">
@@ -226,5 +227,6 @@ export default function Login() {
       </div>
     </div>
     <WhatsappFab />
+    </>
   )
 }

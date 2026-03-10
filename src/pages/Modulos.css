@@ -366,6 +366,302 @@
   opacity: 0.9;
 }
 
+/* ══════════════════════════════════════
+   VIEW TOGGLE
+══════════════════════════════════════ */
+.modulos__header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.modulos__view-toggle {
+  display: flex;
+  align-items: center;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  gap: 2px;
+}
+
+.modulos__view-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-gray);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.modulos__view-btn:hover {
+  color: var(--color-dark);
+}
+
+.modulos__view-btn--active {
+  background: var(--color-white);
+  color: var(--color-dark);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+
+/* ══════════════════════════════════════
+   DUOLINGO MAP
+══════════════════════════════════════ */
+
+/* Centering wrapper inside .modulos flex column */
+.duo-map-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Outer container — fixed width, centered */
+.duo-map {
+  width: 420px;
+  flex-shrink: 0;
+  padding: 0 0 80px;
+}
+
+/* Relative canvas where everything is absolutely placed */
+.duo-map__canvas {
+  position: relative;
+  width: 100%;
+}
+
+/* SVG trail — sits behind all elements */
+.duo-map__svg {
+  position: absolute;
+  top: 0; left: 0;
+  pointer-events: none;
+}
+
+/* ── Stage milestone banner ── */
+.duo-map__milestone {
+  position: absolute;
+  left: 10px; right: 10px;
+  height: 64px;
+  background: color-mix(in srgb, var(--sc) 9%, var(--color-white));
+  border: 1.5px solid color-mix(in srgb, var(--sc) 22%, transparent);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  z-index: 4;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.duo-map__milestone::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  background: var(--sc);
+  border-radius: 18px 0 0 18px;
+}
+
+.duo-map__ms-icon {
+  font-size: 26px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.duo-map__ms-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.duo-map__ms-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-dark);
+  letter-spacing: -0.01em;
+}
+
+.duo-map__ms-sub {
+  font-size: 11px;
+  color: var(--color-gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.duo-map__ms-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 11px;
+  border-radius: 20px;
+  background: var(--color-bg-alt);
+  color: var(--color-gray);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.duo-map__ms-badge--done {
+  background: rgba(34, 197, 94, 0.12);
+  color: #16a34a;
+}
+
+/* ── Module node ── */
+.duo-map__node {
+  position: absolute;
+  width: 130px;       /* wider than circle to allow label overflow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 5;         /* above milestone banners */
+  /* no transition on position */
+}
+
+.duo-map__node--locked {
+  cursor: default;
+}
+
+/* ─── The 3-D circle ─── */
+.duo-map__node-circle {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--nc, #94a3b8);
+  /* 3-D shadow: thick bottom shadow + subtle inner highlight */
+  box-shadow:
+    0 7px 0 color-mix(in srgb, var(--nc, #94a3b8) 65%, #000),
+    0 9px 18px rgba(0,0,0,0.18),
+    inset 0 -4px 8px rgba(0,0,0,0.15),
+    inset 0 4px 10px rgba(255,255,255,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.12s ease, transform 0.12s ease;
+  flex-shrink: 0;
+}
+
+/* hover — lift */
+.duo-map__node:not(.duo-map__node--locked):hover .duo-map__node-circle {
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 0 color-mix(in srgb, var(--nc, #94a3b8) 65%, #000),
+    0 14px 24px rgba(0,0,0,0.22),
+    inset 0 -4px 8px rgba(0,0,0,0.15),
+    inset 0 4px 10px rgba(255,255,255,0.18);
+}
+
+/* press — sink */
+.duo-map__node:not(.duo-map__node--locked):active .duo-map__node-circle {
+  transform: translateY(5px);
+  box-shadow:
+    0 2px 0 color-mix(in srgb, var(--nc, #94a3b8) 65%, #000),
+    0 3px 8px rgba(0,0,0,0.15),
+    inset 0 -4px 8px rgba(0,0,0,0.15);
+}
+
+/* locked — dim */
+.duo-map__node--locked .duo-map__node-circle {
+  opacity: 0.55;
+  box-shadow:
+    0 5px 0 color-mix(in srgb, var(--nc, #94a3b8) 65%, #000),
+    0 6px 12px rgba(0,0,0,0.12);
+}
+
+/* next — pulse ring */
+.duo-map__node--next .duo-map__node-circle {
+  animation: duo-pulse 2s ease-in-out infinite;
+}
+
+@keyframes duo-pulse {
+  0%, 100% {
+    box-shadow:
+      0 7px 0 color-mix(in srgb, var(--nc, #ccc) 65%, #000),
+      0 0 0 0 color-mix(in srgb, var(--nc, #ccc) 30%, transparent),
+      0 9px 18px rgba(0,0,0,0.18),
+      inset 0 -4px 8px rgba(0,0,0,0.15),
+      inset 0 4px 10px rgba(255,255,255,0.18);
+  }
+  50% {
+    box-shadow:
+      0 7px 0 color-mix(in srgb, var(--nc, #ccc) 65%, #000),
+      0 0 0 14px color-mix(in srgb, var(--nc, #ccc) 18%, transparent),
+      0 9px 18px rgba(0,0,0,0.18),
+      inset 0 -4px 8px rgba(0,0,0,0.15),
+      inset 0 4px 10px rgba(255,255,255,0.18);
+  }
+}
+
+/* Number inside circle */
+.duo-map__node-num {
+  font-size: 22px;
+  font-weight: 900;
+  color: white;
+  font-family: var(--font-mono);
+  letter-spacing: -0.03em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Title label below circle */
+.duo-map__node-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-gray);
+  text-align: center;
+  line-height: 1.35;
+  max-width: 124px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s;
+}
+
+.duo-map__node--done .duo-map__node-label,
+.duo-map__node--next .duo-map__node-label,
+.duo-map__node--progress .duo-map__node-label {
+  color: var(--color-dark);
+}
+
+/* CTA pill under label */
+.duo-map__node-cta {
+  font-size: 11px;
+  font-weight: 800;
+  color: white;
+  background: var(--nc, var(--color-accent));
+  padding: 4px 13px;
+  border-radius: 20px;
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--nc, var(--color-accent)) 65%, #000);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* dark mode adjustments */
+[data-theme="dark"] .duo-map__milestone {
+  background: color-mix(in srgb, var(--sc) 12%, var(--color-bg-alt));
+}
+
+/* responsive — shrink on small screens */
+@media (max-width: 480px) {
+  .duo-map {
+    width: 100%;
+    padding: 0 8px 60px;
+  }
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .modulos__stage-right {
