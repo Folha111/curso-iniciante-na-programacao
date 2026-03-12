@@ -1,3 +1,27 @@
+/* ── Keyframes ─────────────────────────────────── */
+@keyframes termos-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes termos-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Page ───────────────────────────────────────── */
 .termos {
   padding: var(--space-20) 0 var(--space-24);
   background: var(--color-white);
@@ -14,6 +38,7 @@
   margin-bottom: var(--space-12);
   padding-bottom: var(--space-8);
   border-bottom: 1px solid var(--color-border);
+  animation: termos-fade-down 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .termos__eyebrow {
@@ -23,6 +48,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: var(--space-3);
+  animation: termos-fade-down 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
 .termos__title {
@@ -31,11 +57,13 @@
   color: var(--color-dark);
   line-height: 1.2;
   margin-bottom: var(--space-3);
+  animation: termos-fade-down 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
 .termos__updated {
   font-size: var(--text-sm);
   color: var(--color-gray);
+  animation: termos-fade-down 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
 
 .termos__content {
@@ -79,6 +107,19 @@
 .termos__section strong {
   color: var(--color-dark);
   font-weight: 600;
+}
+
+/* ── Section scroll reveal ──────────────────────── */
+.termos__section {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.termos__section--visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 640px) {

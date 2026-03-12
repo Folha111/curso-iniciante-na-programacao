@@ -1,10 +1,29 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import './TermosDeUso.css'
 
 export default function TermosDeUso() {
-  useEffect(() => { window.scrollTo(0, 0) }, [])
+  const sectionsRef = useRef([])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('termos__section--visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+
+    sectionsRef.current.forEach((el) => { if (el) observer.observe(el) })
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <>
@@ -19,7 +38,7 @@ export default function TermosDeUso() {
 
           <div className="termos__content">
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>1. Aceitação dos Termos</h2>
               <p>
                 Ao acessar ou utilizar a plataforma <strong>Curso Iniciante em Programação</strong>
@@ -33,7 +52,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>2. Descrição do Serviço</h2>
               <p>
                 O Curso Iniciante em Programação é uma plataforma educacional online que oferece:
@@ -48,7 +67,7 @@ export default function TermosDeUso() {
               </ul>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>3. Cadastro e Conta</h2>
               <p>
                 Para acessar o conteúdo completo da Plataforma, é necessário criar uma conta com
@@ -66,7 +85,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>4. Pagamento e Acesso</h2>
               <p>
                 O acesso ao curso é concedido mediante pagamento único de <strong>R$&nbsp;39,99</strong>,
@@ -85,7 +104,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>5. Garantia e Reembolso</h2>
               <p>
                 O Curso Iniciante oferece <strong>garantia incondicional de 7 (sete) dias</strong> a
@@ -103,7 +122,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>6. Acesso Vitalício</h2>
               <p>
                 O acesso ao conteúdo adquirido é <strong>vitalício</strong>, enquanto a Plataforma
@@ -117,7 +136,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>7. Propriedade Intelectual</h2>
               <p>
                 Todo o conteúdo disponibilizado na Plataforma — incluindo textos, vídeos, imagens,
@@ -141,7 +160,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>8. Conduta do Usuário</h2>
               <p>
                 O Usuário concorda em não utilizar a Plataforma para:
@@ -159,7 +178,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>9. Privacidade e Dados</h2>
               <p>
                 O Curso Iniciante coleta e utiliza dados pessoais conforme descrito na Política de
@@ -178,7 +197,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>10. Disponibilidade do Serviço</h2>
               <p>
                 O Curso Iniciante envida esforços para manter a Plataforma disponível 24 horas por
@@ -192,7 +211,7 @@ export default function TermosDeUso() {
               </ul>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>11. Limitação de Responsabilidade</h2>
               <p>
                 O conteúdo da Plataforma tem finalidade exclusivamente educacional. O Curso Iniciante
@@ -206,7 +225,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>12. Alterações nos Termos</h2>
               <p>
                 O Curso Iniciante reserva-se o direito de alterar estes Termos de Uso a qualquer
@@ -216,7 +235,7 @@ export default function TermosDeUso() {
               </p>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>13. Contato e Suporte</h2>
               <p>
                 Para dúvidas, suporte ou solicitações relacionadas a estes Termos, entre em contato:
@@ -227,7 +246,7 @@ export default function TermosDeUso() {
               </ul>
             </section>
 
-            <section className="termos__section">
+            <section className="termos__section" ref={el => sectionsRef.current.push(el)}>
               <h2>14. Lei Aplicável e Foro</h2>
               <p>
                 Estes Termos são regidos pelas leis da República Federativa do Brasil. Para dirimir
