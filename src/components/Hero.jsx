@@ -21,7 +21,7 @@ export default function Hero() {
           </h1>
 
           <p className="hero__subtitle">
-            20 módulos progressivos com projetos reais, gamificação e uma plataforma
+            21 módulos progressivos com projetos reais, gamificação e uma plataforma
             completa — para quem nunca escreveu uma linha de código e quer entrar na área de tecnologia.
           </p>
 
@@ -46,7 +46,7 @@ export default function Hero() {
               ))}
             </div>
             <p className="hero__trust-text">
-              <strong>+2.400 alunos</strong> · 20 módulos · 6 tipos de tarefa
+              <strong>+2.400 alunos</strong> · 21 módulos · 6 tipos de tarefa
             </p>
           </div>
         </div>

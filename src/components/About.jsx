@@ -1,7 +1,7 @@
 import './About.css'
 
 const stats = [
-  { value: '20',   label: 'Módulos',          sub: 'do básico ao deploy' },
+  { value: '21',   label: 'Módulos',          sub: 'do básico ao deploy' },
   { value: '6',    label: 'Tipos de tarefa',   sub: 'quiz, código, drag & drop…' },
   { value: 'R$40', label: 'Pagamento único',    sub: 'sem mensalidade, acesso vitalício' },
   { value: '0',    label: 'Pré-requisitos',    sub: 'qualquer um pode entrar' },
@@ -25,7 +25,7 @@ export default function About() {
             Programação explicada<br />como deveria ser
           </h2>
           <p className="section__description">
-            20 módulos progressivos que te levam do zero até publicar seus primeiros projetos
+            21 módulos progressivos que te levam do zero até publicar seus primeiros projetos
             na internet — com gamificação, projetos reais e uma plataforma completa de aprendizado.
           </p>
 
