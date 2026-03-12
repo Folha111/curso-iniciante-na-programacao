@@ -24,9 +24,9 @@ const profiles = [
     gradient: 'linear-gradient(135deg, #ec4899, #8b5cf6)',
     title: 'Designers e criativos',
     description:
-      'Trabalha com design ou conteúdo e quer entender o lado técnico para colaborar melhor.',
+      'Cansado de depender de um dev para mudar a cor de um botão? Aprenda a fazer você mesmo — e entenda por que o código nunca fica igual ao Figma.',
     fit: 'Perfeito se você',
-    items: ['Já usa Figma, Canva ou Adobe', 'Quer fazer pequenas alterações em sites', 'Precisa conversar com devs com mais confiança'],
+    items: ['Quer editar sites sem precisar de ajuda', 'Sente que perde tempo explicando o óbvio para devs', 'Quer entender CSS, layouts e responsividade na prática'],
   },
   {
     emoji: '📚',
