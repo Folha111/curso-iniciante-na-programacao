@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { ModulesProvider } from './context/ModulesContext'
@@ -11,33 +12,37 @@ import AppLayout from './components/AppLayout'
 import Navbar from './components/Navbar'
 import WhatsappFab from './components/WhatsappFab'
 import Hero from './components/Hero'
-import About from './components/About'
-import Curriculum from './components/Curriculum'
-import ForWhom from './components/ForWhom'
-import Features from './components/Features'
-import AppPreview from './components/AppPreview'
-import Testimonials from './components/Testimonials'
-import CallToAction from './components/CallToAction'
-import Footer from './components/Footer'
-import Login from './pages/Login'
-import Dashboard from './pages/Dashboard'
-import Module from './pages/Module'
-import Games from './pages/Games'
-import Quiz from './pages/Quiz'
-import Modulos from './pages/Modulos'
-import Progresso from './pages/Progresso'
-import Certificado from './pages/Certificado'
-import Admin from './pages/Admin'
-import Conquistas from './pages/Conquistas'
-import Leaderboard from './pages/Leaderboard'
-import Perfil from './pages/Perfil'
-import Revisao from './pages/Revisao'
-import Projetos from './pages/Projetos'
-import Projeto from './pages/Projeto'
-import Configuracoes from './pages/Configuracoes'
-import Foco from './pages/Foco'
-import Checkout from './pages/Checkout'
-import TermosDeUso from './pages/TermosDeUso'
+
+// Landing — abaixo do fold, lazy
+const About        = lazy(() => import('./components/About'))
+const Curriculum   = lazy(() => import('./components/Curriculum'))
+const ForWhom      = lazy(() => import('./components/ForWhom'))
+const Features     = lazy(() => import('./components/Features'))
+const AppPreview   = lazy(() => import('./components/AppPreview'))
+const Testimonials = lazy(() => import('./components/Testimonials'))
+const CallToAction = lazy(() => import('./components/CallToAction'))
+const Footer       = lazy(() => import('./components/Footer'))
+
+// Páginas — todas lazy
+const Login        = lazy(() => import('./pages/Login'))
+const Checkout     = lazy(() => import('./pages/Checkout'))
+const TermosDeUso  = lazy(() => import('./pages/TermosDeUso'))
+const Dashboard    = lazy(() => import('./pages/Dashboard'))
+const Module       = lazy(() => import('./pages/Module'))
+const Games        = lazy(() => import('./pages/Games'))
+const Quiz         = lazy(() => import('./pages/Quiz'))
+const Modulos      = lazy(() => import('./pages/Modulos'))
+const Progresso    = lazy(() => import('./pages/Progresso'))
+const Certificado  = lazy(() => import('./pages/Certificado'))
+const Admin        = lazy(() => import('./pages/Admin'))
+const Conquistas   = lazy(() => import('./pages/Conquistas'))
+const Leaderboard  = lazy(() => import('./pages/Leaderboard'))
+const Perfil       = lazy(() => import('./pages/Perfil'))
+const Revisao      = lazy(() => import('./pages/Revisao'))
+const Projetos     = lazy(() => import('./pages/Projetos'))
+const Projeto      = lazy(() => import('./pages/Projeto'))
+const Configuracoes = lazy(() => import('./pages/Configuracoes'))
+const Foco         = lazy(() => import('./pages/Foco'))
 
 function Home() {
   const { user } = useAuth()
@@ -50,15 +55,19 @@ function Home() {
       <Navbar />
       <main>
         <Hero />
-        <About />
-        <Curriculum />
-        <Features />
-        <AppPreview />
-        <ForWhom />
-        <Testimonials />
-        <CallToAction />
+        <Suspense fallback={null}>
+          <About />
+          <Curriculum />
+          <Features />
+          <AppPreview />
+          <ForWhom />
+          <Testimonials />
+          <CallToAction />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
       <WhatsappFab />
     </>
   )
@@ -72,6 +81,7 @@ export default function App() {
         <ModulesProvider>
           <ProgressProvider>
             <MissoesProvider>
+            <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
@@ -109,6 +119,7 @@ export default function App() {
                 />
               </Route>
             </Routes>
+            </Suspense>
             </MissoesProvider>
           </ProgressProvider>
         </ModulesProvider>
