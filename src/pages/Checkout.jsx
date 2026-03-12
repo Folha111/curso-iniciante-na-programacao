@@ -213,13 +213,38 @@ export default function Checkout() {
         <div className="checkout__product">
           <p className="checkout__product-label">Você está adquirindo</p>
           <h1 className="checkout__product-title">Curso Completo de Programação</h1>
-          <div className="checkout__price">
-            <span className="checkout__price-from">De R$ 99,99</span>
-            <div className="checkout__price-main">
-              <span className="checkout__price-currency">R$</span>
-              <span className="checkout__price-value">39,99</span>
+
+          <div className="checkout__price-card">
+            <div className="checkout__price-card-shine" aria-hidden="true" />
+
+            <div className="checkout__price-top">
+              <span className="checkout__price-badge">🔥 Oferta especial</span>
+              <span className="checkout__price-saving">Economize R$&nbsp;60</span>
             </div>
-            <span className="checkout__price-note">pagamento único · acesso vitalício</span>
+
+            <div className="checkout__price-main">
+              <span className="checkout__price-from">R$&nbsp;99,99</span>
+              <div className="checkout__price-value-wrap">
+                <span className="checkout__price-currency">R$</span>
+                <span className="checkout__price-value">39</span>
+                <span className="checkout__price-cents">,99</span>
+              </div>
+            </div>
+
+            <div className="checkout__price-pills">
+              <span className="checkout__price-pill">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Pagamento único
+              </span>
+              <span className="checkout__price-pill">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Acesso vitalício
+              </span>
+              <span className="checkout__price-pill">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                7 dias de garantia
+              </span>
+            </div>
           </div>
         </div>
 
