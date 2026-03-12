@@ -48,7 +48,7 @@ export default function Login() {
       } else if (mode === 'reset') {
         if (!form.email.trim()) { setError('Informe seu e-mail.'); setLoading(false); return }
         const { error: resetErr } = await supabase.auth.resetPasswordForEmail(form.email, {
-          redirectTo: `${window.location.origin}/login`,
+          redirectTo: `${window.location.origin}/reset-password`,
         })
         if (resetErr) throw resetErr
         setResetSent(true)
@@ -240,8 +240,8 @@ export default function Login() {
 
           <p className="login__terms">
             Ao entrar, você concorda com nossos{' '}
-            <a href="#">Termos de Uso</a> e{' '}
-            <a href="#">Política de Privacidade</a>.
+            <a href="/termos">Termos de Uso</a> e{' '}
+            <a href="/privacidade">Política de Privacidade</a>.
           </p>
         </div>
       </div>

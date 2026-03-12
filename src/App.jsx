@@ -26,7 +26,9 @@ const Footer       = lazy(() => import('./components/Footer'))
 // Páginas — todas lazy
 const Login        = lazy(() => import('./pages/Login'))
 const Checkout     = lazy(() => import('./pages/Checkout'))
-const TermosDeUso  = lazy(() => import('./pages/TermosDeUso'))
+const TermosDeUso    = lazy(() => import('./pages/TermosDeUso'))
+const Privacidade    = lazy(() => import('./pages/Privacidade'))
+const ResetPassword  = lazy(() => import('./pages/ResetPassword'))
 const Dashboard    = lazy(() => import('./pages/Dashboard'))
 const Module       = lazy(() => import('./pages/Module'))
 const Games        = lazy(() => import('./pages/Games'))
@@ -87,6 +89,8 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/termos" element={<TermosDeUso />} />
+              <Route path="/privacidade" element={<Privacidade />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route
                 element={
                   <ProtectedRoute>

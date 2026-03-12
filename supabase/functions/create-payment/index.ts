@@ -92,6 +92,11 @@ serve(async (req) => {
           plan: 'paid',
           paid_at: new Date().toISOString(),
         })
+
+      // Dispara email de boas-vindas (fire-and-forget)
+      supabase.functions.invoke('welcome-email', {
+        body: { userEmail, userName },
+      }).catch(() => { /* não bloqueia o pagamento se o email falhar */ })
     }
 
     const result: Record<string, unknown> = { status: payment.status }

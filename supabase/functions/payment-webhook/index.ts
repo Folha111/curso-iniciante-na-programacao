@@ -81,10 +81,19 @@ serve(async (req) => {
       .update({ status: 'approved' })
       .eq('mp_payment_id', String(paymentId))
 
-    await supabase
+    const { data: profile } = await supabase
       .from('profiles')
       .update({ plan: 'paid', paid_at: new Date().toISOString() })
       .eq('id', paymentRecord.user_id)
+      .select('email, name')
+      .single()
+
+    // Dispara email de boas-vindas (fire-and-forget)
+    if (profile?.email) {
+      supabase.functions.invoke('welcome-email', {
+        body: { userEmail: profile.email, userName: profile.name },
+      }).catch(() => {})
+    }
 
     return new Response('ok', { status: 200 })
   } catch (err) {

@@ -89,13 +89,13 @@ export default function TermosDeUso() {
               <h2>4. Pagamento e Acesso</h2>
               <p>
                 O acesso ao curso é concedido mediante pagamento único de <strong>R$&nbsp;39,99</strong>,
-                processado via Mercado Pago (cartão de crédito, débito, PIX ou boleto).
+                processado via Mercado Pago (cartão de crédito, débito ou PIX).
               </p>
               <ul>
                 <li>O pagamento é único — sem mensalidades ou cobranças recorrentes</li>
                 <li>O acesso é liberado imediatamente após a confirmação do pagamento</li>
                 <li>Pagamentos via PIX são confirmados em até 30 minutos</li>
-                <li>Em caso de pagamento por boleto, o acesso é liberado após compensação bancária (até 3 dias úteis)</li>
+                <li>Pagamentos via PIX podem levar até 30 minutos para confirmação automática</li>
               </ul>
               <p>
                 O Curso Iniciante não armazena dados de cartão de crédito. Todas as transações
