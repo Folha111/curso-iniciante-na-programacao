@@ -15,6 +15,7 @@ import About from './components/About'
 import Curriculum from './components/Curriculum'
 import ForWhom from './components/ForWhom'
 import Features from './components/Features'
+import AppPreview from './components/AppPreview'
 import Testimonials from './components/Testimonials'
 import CallToAction from './components/CallToAction'
 import Footer from './components/Footer'
@@ -51,6 +52,7 @@ function Home() {
         <About />
         <Curriculum />
         <Features />
+        <AppPreview />
         <ForWhom />
         <Testimonials />
         <CallToAction />
