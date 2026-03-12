@@ -47,7 +47,7 @@ const STORIES = [
 ]
 
 const INCLUDES = [
-  '20 módulos do zero ao deploy',
+  '21 módulos do zero ao deploy',
   '6 tipos de tarefa (quiz, código, drag & drop…)',
   'Sistema de XP, streaks e 11 conquistas',
   'Jogos interativos e Modo Foco',
@@ -231,7 +231,7 @@ export default function Checkout() {
           </div>
           <div className="checkout__social-sep" />
           <div className="checkout__social-item">
-            <span className="checkout__social-num">20</span>
+            <span className="checkout__social-num">21</span>
             <span className="checkout__social-label">módulos</span>
           </div>
           <div className="checkout__social-sep" />

@@ -37,6 +37,7 @@ import Projeto from './pages/Projeto'
 import Configuracoes from './pages/Configuracoes'
 import Foco from './pages/Foco'
 import Checkout from './pages/Checkout'
+import TermosDeUso from './pages/TermosDeUso'
 
 function Home() {
   const { user } = useAuth()
@@ -75,6 +76,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/termos" element={<TermosDeUso />} />
               <Route
                 element={
                   <ProtectedRoute>

@@ -40,7 +40,7 @@ export default function Footer() {
           <p className="footer__group-label">Legal</p>
           <ul>
             <li><a href="#">Privacidade</a></li>
-            <li><a href="#">Termos de uso</a></li>
+            <li><a href="/termos">Termos de uso</a></li>
           </ul>
         </div>
       </div>
