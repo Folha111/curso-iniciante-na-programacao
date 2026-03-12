@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import DOMPurify from 'dompurify'
 import { useProgress } from '../context/ProgressContext'
 import './Revisao.css'
 
@@ -84,7 +85,7 @@ function FillReview({ item, onAnswer }) {
       </div>
       <p className="rev-card__question">{task.title || item.taskTitle}</p>
       {task.description && (
-        <p className="rev-card__desc" dangerouslySetInnerHTML={{ __html: task.description }} />
+        <p className="rev-card__desc" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(task.description) }} />
       )}
       <div className="rev-fill__code">
         {parts.map((part, i) => (

@@ -6,9 +6,10 @@ import WhatsappFab from '../components/WhatsappFab'
 import './Login.css'
 
 function traduzirErro(msg = '') {
-  if (msg.includes('Invalid login credentials')) return 'E-mail ou senha incorretos.'
-  if (msg.includes('Email not confirmed')) return 'Confirme seu e-mail antes de entrar.'
-  if (msg.includes('User already registered') || msg.includes('already been registered')) return 'Este e-mail já está cadastrado.'
+  if (msg.includes('Invalid login credentials')) return 'Email ou senha incorretos.'
+  if (msg.includes('Email not confirmed')) return 'Email não confirmado. Verifique sua caixa de entrada.'
+  if (msg.includes('User already registered') || msg.includes('already been registered')) return 'Não foi possível criar a conta. Tente outro email.'
+  if (msg.includes('user not found') || msg.includes('no user')) return 'Email ou senha incorretos.'
   if (msg.includes('Password should be at least')) return 'A senha deve ter pelo menos 6 caracteres.'
   if (msg.includes('Unable to validate email')) return 'E-mail inválido.'
   if (msg.includes('signup is disabled')) return 'Cadastro temporariamente desativado.'

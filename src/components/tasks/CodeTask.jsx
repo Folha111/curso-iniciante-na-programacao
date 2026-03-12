@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
+import DOMPurify from 'dompurify'
 import { useProgress } from '../../context/ProgressContext'
 import './CodeTask.css'
 
@@ -45,7 +46,7 @@ export default function CodeTask({ task, moduleId, index }) {
         {alreadyDone && <span className="code-task__done-badge">Concluída</span>}
       </div>
       <h3 className="code-task__title">{task.title}</h3>
-      <p className="code-task__desc" dangerouslySetInnerHTML={{ __html: task.description }} />
+      <p className="code-task__desc" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(task.description) }} />
 
       <div className="code-task__editor-area">
         <div className="code-task__pane">

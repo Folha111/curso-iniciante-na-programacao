@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
+import DOMPurify from 'dompurify'
 import { useProgress } from '../../context/ProgressContext'
 import './BugTask.css'
 
@@ -48,7 +49,7 @@ export default function BugTask({ task, moduleId, index }) {
         {alreadyDone && <span className="bug-task__done-badge">Concluída</span>}
       </div>
       <h3 className="bug-task__title">{task.title}</h3>
-      <p className="bug-task__desc" dangerouslySetInnerHTML={{ __html: task.description }} />
+      <p className="bug-task__desc" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(task.description) }} />
 
       <div className="bug-task__warning">
         🐛 O código abaixo tem um erro. Encontre e corrija!

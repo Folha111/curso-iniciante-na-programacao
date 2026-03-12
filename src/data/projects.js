@@ -1,3 +1,17 @@
+function safeMathEval(expr) {
+  try {
+    const sanitized = String(expr).replace(/[^0-9+\-*/().%\s]/g, '');
+    if (!sanitized.trim()) return '0';
+    // Use Function constructor in a controlled way - only allows math operators
+    // eslint-disable-next-line no-new-func
+    const result = new Function('"use strict"; return (' + sanitized + ')')();
+    if (!isFinite(result)) return 'Erro';
+    return String(result);
+  } catch {
+    return 'Erro';
+  }
+}
+
 export const PROJECTS = [
   {
     id: 'cartao-apresentacao',
@@ -819,7 +833,7 @@ if (val === '+/-') {
 // Calcular resultado
 if (val === '=') {
   try {
-    expressao = String(eval(expressao))
+    expressao = safeMathEval(expressao)
     display.textContent = expressao
   } catch {
     display.textContent = 'Erro'
@@ -890,7 +904,7 @@ if (val === '=') {
           }
           return false
         },
-        hint: 'if(["+","-","*","/"].includes(val)){expressao+=val;display.textContent=expressao;} if(val==="="){try{expressao=String(eval(expressao));display.textContent=expressao;}catch{display.textContent="Erro";expressao="";}}',
+        hint: 'if(["+","-","*","/"].includes(val)){expressao+=val;display.textContent=expressao;} if(val==="="){try{expressao=safeMathEval(expressao);display.textContent=expressao;}catch{display.textContent="Erro";expressao="";}}',
         solution: `<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -940,7 +954,7 @@ if (val === '=') {
           if (['+', '-', '*', '/'].includes(val)) { expressao += val; display.textContent = expressao; return }
           if (val === '%') { expressao = String(parseFloat(expressao) / 100); display.textContent = expressao; return }
           if (val === '+/-') { expressao = String(parseFloat(expressao) * -1); display.textContent = expressao; return }
-          if (val === '=') { try { expressao = String(eval(expressao)); display.textContent = expressao } catch { display.textContent = 'Erro'; expressao = '' } }
+          if (val === '=') { try { expressao = safeMathEval(expressao); display.textContent = expressao } catch { display.textContent = 'Erro'; expressao = '' } }
         })
       })
     </script>
@@ -1025,7 +1039,7 @@ Isso mapeia cada tecla do teclado para um bot√£o e o "clica" programaticamente ‚
           if (['+', '-', '*', '/'].includes(val)) { expressao += val; display.textContent = expressao; return }
           if (val === '%') { expressao = String(parseFloat(expressao) / 100); display.textContent = expressao; return }
           if (val === '+/-') { expressao = String(parseFloat(expressao) * -1); display.textContent = expressao; return }
-          if (val === '=') { try { expressao = String(eval(expressao)); display.textContent = expressao } catch { display.textContent = 'Erro'; expressao = '' } }
+          if (val === '=') { try { expressao = safeMathEval(expressao); display.textContent = expressao } catch { display.textContent = 'Erro'; expressao = '' } }
         })
       })
 
@@ -1091,7 +1105,7 @@ Isso mapeia cada tecla do teclado para um bot√£o e o "clica" programaticamente ‚
           if (['+', '-', '*', '/'].includes(val)) { expressao += val; display.textContent = expressao; return }
           if (val === '%') { expressao = String(parseFloat(expressao) / 100); display.textContent = expressao; return }
           if (val === '+/-') { expressao = String(parseFloat(expressao) * -1); display.textContent = expressao; return }
-          if (val === '=') { try { expressao = String(eval(expressao)); display.textContent = expressao } catch { display.textContent = 'Erro'; expressao = '' } }
+          if (val === '=') { try { expressao = safeMathEval(expressao); display.textContent = expressao } catch { display.textContent = 'Erro'; expressao = '' } }
         })
       })
       document.addEventListener('keydown', function(e) {

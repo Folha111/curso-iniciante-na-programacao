@@ -121,7 +121,8 @@ function QuizForm({ onSave, onCancel }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!question.trim() || options.some((o) => !o.trim())) return
+    if (!question.trim() || question.trim().length > 1000) { alert('Pergunta inválida.'); return }
+    if (options.some((o) => !o.trim() || o.trim().length > 500)) { alert('Opções inválidas.'); return }
     onSave({
       id: 'extra-task-' + Date.now(),
       type: 'quiz',
@@ -182,6 +183,9 @@ function ModuleEditForm({ mod, onSave, onCancel }) {
 
   function handleSubmit(e) {
     e.preventDefault()
+    if (!fields.title.trim() || fields.title.trim().length > 500) { alert('Título inválido.'); return }
+    if (fields.description.length > 1000) { alert('Descrição muito longa.'); return }
+    if (fields.color && !/^#[0-9A-Fa-f]{6}$/.test(fields.color)) { alert('Cor inválida.'); return }
     onSave(fields)
   }
 
@@ -224,7 +228,9 @@ function NewModuleForm({ onSave, onCancel }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!fields.title.trim()) return
+    if (!fields.title.trim() || fields.title.trim().length > 500) { alert('Título inválido.'); return }
+    if (fields.description.length > 1000) { alert('Descrição muito longa.'); return }
+    if (fields.color && !/^#[0-9A-Fa-f]{6}$/.test(fields.color)) { alert('Cor inválida.'); return }
     onSave({
       id: 'modulo-custom-' + Date.now(),
       tasks: [],
@@ -396,7 +402,10 @@ function NewUserForm({ onSave, onCancel }) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!fields.name.trim() || !fields.email.trim() || !fields.password.trim()) return
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!fields.name.trim() || fields.name.trim().length > 200) { alert('Nome inválido.'); return }
+    if (!emailRegex.test(fields.email)) { alert('E-mail inválido.'); return }
+    if (fields.password.length < 6) { alert('A senha deve ter pelo menos 6 caracteres.'); return }
     onSave(fields)
   }
 

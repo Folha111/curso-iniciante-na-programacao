@@ -10,21 +10,22 @@ const DEFAULT_XP = 10
 
 // ─── Badge Definitions ────────────────────────────────────────────────────────
 export const BADGE_DEFS = [
-  { id: 'first-task',     name: 'Primeiros Passos', desc: 'Complete sua primeira tarefa',           icon: '🌱' },
-  { id: 'fifty-xp',       name: 'Em Progresso',     desc: 'Acumule 50 XP',                          icon: '⚡' },
-  { id: 'hundred-xp',     name: 'Dedicado',          desc: 'Acumule 100 XP',                         icon: '🔥' },
-  { id: 'two-hundred-xp', name: 'Especialista',      desc: 'Acumule 200 XP',                         icon: '💎' },
-  { id: 'five-hundred-xp',name: 'Lenda',             desc: 'Acumule 500 XP',                         icon: '👑' },
-  { id: 'streak-3',       name: 'Sequência de 3',    desc: '3 dias consecutivos de estudo',          icon: '📅' },
-  { id: 'streak-7',       name: 'Sequência de 7',    desc: '7 dias consecutivos de estudo',          icon: '🗓' },
-  { id: 'all-modules',    name: 'Mestre HTML',       desc: 'Conclua todos os módulos',               icon: '🏆' },
-  { id: 'bug-hunter',     name: 'Caçador de Bugs',   desc: 'Complete uma tarefa de Bug',             icon: '🐛' },
-  { id: 'speed-typer',    name: 'Velocista',         desc: 'Complete uma tarefa de Digitação',       icon: '⌨️' },
-  { id: 'drag-master',    name: 'Ordenador',         desc: 'Complete uma tarefa de Arrastar',        icon: '🧩' },
-  { id: 'week-goal',      name: 'Meta Semanal',      desc: 'Atinja sua meta de XP em uma semana',   icon: '🎯' },
+  { id: 'first-task',     name: 'Primeiros Passos', desc: 'Complete sua primeira tarefa',               icon: '🌱' },
+  { id: 'fifty-xp',       name: 'Em Progresso',     desc: 'Acumule 50 XP',                              icon: '⚡' },
+  { id: 'hundred-xp',     name: 'Dedicado',          desc: 'Acumule 100 XP',                             icon: '🔥' },
+  { id: 'two-hundred-xp', name: 'Especialista',      desc: 'Acumule 200 XP',                             icon: '💎' },
+  { id: 'five-hundred-xp',name: 'Lenda',             desc: 'Acumule 500 XP',                             icon: '👑' },
+  { id: 'streak-3',       name: 'Sequência de 3',    desc: '3 dias consecutivos de estudo',              icon: '📅' },
+  { id: 'streak-7',       name: 'Sequência de 7',    desc: '7 dias consecutivos de estudo',              icon: '🗓' },
+  { id: 'all-modules',    name: 'Mestre HTML',       desc: 'Conclua todos os módulos',                   icon: '🏆' },
+  { id: 'bug-hunter',     name: 'Caçador de Bugs',   desc: 'Complete uma tarefa de Bug',                 icon: '🐛' },
+  { id: 'speed-typer',    name: 'Velocista',         desc: 'Complete uma tarefa de Digitação',           icon: '⌨️' },
+  { id: 'drag-master',    name: 'Ordenador',         desc: 'Complete uma tarefa de Arrastar',            icon: '🧩' },
+  { id: 'week-goal',      name: 'Meta Semanal',      desc: 'Atinja sua meta de XP em uma semana',       icon: '🎯' },
+  { id: 'daily-hero',     name: 'Herói do Dia',      desc: 'Complete todas as missões diárias',         icon: '📋' },
 ]
 
-function checkBadge(id, { xp, streak, doneModules, totalModules, types, weeklyXp, weeklyGoal }) {
+function checkBadge(id, { xp, streak, doneModules, totalModules, types, weeklyXp, weeklyGoal, missionsDone }) {
   switch (id) {
     case 'first-task':      return xp >= DEFAULT_XP
     case 'fifty-xp':        return xp >= 50
@@ -38,6 +39,7 @@ function checkBadge(id, { xp, streak, doneModules, totalModules, types, weeklyXp
     case 'speed-typer':     return types.has('type')
     case 'drag-master':     return types.has('drag')
     case 'week-goal':       return weeklyGoal > 0 && weeklyXp >= weeklyGoal
+    case 'daily-hero':      return missionsDone >= 1
     default:                return false
   }
 }
@@ -59,9 +61,10 @@ function loadFromStorage() {
     const raw = localStorage.getItem('course_progress')
     if (!raw) return {}
     const parsed = JSON.parse(raw)
+    if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) throw new Error('invalid')
     const result = {}
     for (const [moduleId, tasks] of Object.entries(parsed)) {
-      result[moduleId] = new Set(tasks)
+      result[moduleId] = new Set(Array.isArray(tasks) ? tasks : [])
     }
     return result
   } catch {
@@ -84,8 +87,9 @@ function saveToStorage(completed) {
 function loadGamification() {
   try {
     const raw = localStorage.getItem('gamification')
-    if (!raw) return { xp: 0, streak: 0, lastActiveDate: null, weeklyXp: 0, weekStart: null, weeklyGoal: 100 }
+    if (!raw) return { xp: 0, streak: 0, lastActiveDate: null, weeklyXp: 0, weekStart: null, weeklyGoal: 100, todayDate: null, todayXp: 0, todayTaskCount: 0, todayTaskTypes: [], missionsDone: 0 }
     const parsed = JSON.parse(raw)
+    if (typeof parsed !== 'object' || parsed === null) throw new Error('invalid')
     return {
       xp: parsed.xp ?? 0,
       streak: parsed.streak ?? 0,
@@ -93,9 +97,14 @@ function loadGamification() {
       weeklyXp: parsed.weeklyXp ?? 0,
       weekStart: parsed.weekStart ?? null,
       weeklyGoal: parsed.weeklyGoal ?? 100,
+      todayDate: parsed.todayDate ?? null,
+      todayXp: parsed.todayXp ?? 0,
+      todayTaskCount: parsed.todayTaskCount ?? 0,
+      todayTaskTypes: parsed.todayTaskTypes ?? [],
+      missionsDone: parsed.missionsDone ?? 0,
     }
   } catch {
-    return { xp: 0, streak: 0, lastActiveDate: null, weeklyXp: 0, weekStart: null, weeklyGoal: 100 }
+    return { xp: 0, streak: 0, lastActiveDate: null, weeklyXp: 0, weekStart: null, weeklyGoal: 100, todayDate: null, todayXp: 0, todayTaskCount: 0, todayTaskTypes: [], missionsDone: 0 }
   }
 }
 
@@ -106,7 +115,10 @@ function saveGamification(data) {
 function loadWrongAnswers() {
   try {
     const raw = localStorage.getItem('wrong_answers')
-    return raw ? new Set(JSON.parse(raw)) : new Set()
+    if (!raw) return new Set()
+    const parsed = JSON.parse(raw)
+    if (!Array.isArray(parsed)) throw new Error('invalid')
+    return new Set(parsed)
   } catch {
     return new Set()
   }
@@ -132,7 +144,13 @@ export function ProgressProvider({ children }) {
     if (!user) return
     try {
       const raw = localStorage.getItem('leaderboard_data')
-      const data = raw ? JSON.parse(raw) : {}
+      let data = {}
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        if (typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)) {
+          data = parsed
+        }
+      }
       data[user.email] = { name: user.name, xp: gamification.xp }
       localStorage.setItem('leaderboard_data', JSON.stringify(data))
     } catch {}
@@ -165,6 +183,13 @@ export function ProgressProvider({ children }) {
       }
       const weekStart = getWeekStart()
       const newWeeklyXp = prev.weekStart === weekStart ? prev.weeklyXp + xpEarned : xpEarned
+      // Daily tracking (resets when date changes)
+      const isNewDay = prev.todayDate !== today
+      const newTodayXp = isNewDay ? xpEarned : (prev.todayXp ?? 0) + xpEarned
+      const newTodayTaskCount = isNewDay ? 1 : (prev.todayTaskCount ?? 0) + 1
+      const baseTypes = isNewDay ? [] : (prev.todayTaskTypes ?? [])
+      const taskType = task?.type
+      const newTodayTaskTypes = taskType && !baseTypes.includes(taskType) ? [...baseTypes, taskType] : baseTypes
       const next = {
         xp: prev.xp + xpEarned,
         streak: newStreak,
@@ -172,6 +197,11 @@ export function ProgressProvider({ children }) {
         weeklyXp: newWeeklyXp,
         weekStart,
         weeklyGoal: prev.weeklyGoal,
+        todayDate: today,
+        todayXp: newTodayXp,
+        todayTaskCount: newTodayTaskCount,
+        todayTaskTypes: newTodayTaskTypes,
+        missionsDone: prev.missionsDone ?? 0,
       }
       saveGamification(next)
       return next
@@ -217,6 +247,24 @@ export function ProgressProvider({ children }) {
     })
   }, [])
 
+  const addBonusXp = useCallback((amount) => {
+    setGamification((prev) => {
+      const weekStart = getWeekStart()
+      const newWeeklyXp = prev.weekStart === weekStart ? prev.weeklyXp + amount : amount
+      const next = { ...prev, xp: prev.xp + amount, weeklyXp: newWeeklyXp, weekStart }
+      saveGamification(next)
+      return next
+    })
+  }, [])
+
+  const incrementMissionsDone = useCallback(() => {
+    setGamification((prev) => {
+      const next = { ...prev, missionsDone: (prev.missionsDone ?? 0) + 1 }
+      saveGamification(next)
+      return next
+    })
+  }, [])
+
   const isTaskDone = useCallback(
     (moduleId, taskId) => completed[moduleId]?.has(taskId) ?? false,
     [completed]
@@ -255,6 +303,7 @@ export function ProgressProvider({ children }) {
       types,
       weeklyXp: gamification.weeklyXp,
       weeklyGoal: gamification.weeklyGoal,
+      missionsDone: gamification.missionsDone ?? 0,
     }
     return BADGE_DEFS.map((b) => ({ ...b, unlocked: checkBadge(b.id, checkData) }))
   }, [completed, gamification, modules, isModuleDone])
@@ -291,6 +340,12 @@ export function ProgressProvider({ children }) {
       weeklyXp: gamification.weeklyXp,
       weeklyGoal: gamification.weeklyGoal,
       setWeeklyGoal,
+      addBonusXp,
+      incrementMissionsDone,
+      todayXp: gamification.todayDate === new Date().toDateString() ? (gamification.todayXp ?? 0) : 0,
+      todayTaskCount: gamification.todayDate === new Date().toDateString() ? (gamification.todayTaskCount ?? 0) : 0,
+      todayTaskTypes: gamification.todayDate === new Date().toDateString() ? (gamification.todayTaskTypes ?? []) : [],
+      missionsDone: gamification.missionsDone ?? 0,
       badges,
       reviewQueue,
       trackWrong,

@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
+import DOMPurify from 'dompurify'
 import { useProgress } from '../../context/ProgressContext'
 import './DragTask.css'
 
@@ -89,7 +90,7 @@ export default function DragTask({ task, moduleId, index }) {
       </div>
 
       <h3 className="drag-task__title">{task.title}</h3>
-      <p className="drag-task__desc" dangerouslySetInnerHTML={{ __html: task.description }} />
+      <p className="drag-task__desc" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(task.description) }} />
       <p className="drag-task__instruction">Arraste os blocos para colocá-los na ordem correta:</p>
 
       <div className="drag-task__list">

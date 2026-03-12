@@ -4,6 +4,7 @@ import { useProgress } from '../context/ProgressContext'
 import { useModules } from '../context/ModulesContext'
 import { useLang } from '../context/LangContext'
 import translations from '../data/translations'
+import Missoes from '../components/Missoes'
 import './Dashboard.css'
 
 function groupByStage(modules, stages) {
@@ -116,6 +117,9 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
+
+      {/* Daily Missions */}
+      <Missoes />
 
       {/* Review queue */}
       {reviewQueue.length > 0 && (

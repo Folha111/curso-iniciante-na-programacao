@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import DOMPurify from 'dompurify'
 import { useProgress } from '../../context/ProgressContext'
 import './FillTask.css'
 
@@ -83,7 +84,7 @@ export default function FillTask({ task, moduleId, index }) {
       </div>
 
       <h3 className="fill-task__title">{task.title}</h3>
-      <p className="fill-task__desc" dangerouslySetInnerHTML={{ __html: task.description }} />
+      <p className="fill-task__desc" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(task.description) }} />
 
       <div className="fill-task__code-wrap">
         <div className="fill-task__code-bar">
