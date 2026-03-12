@@ -63,18 +63,30 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = useCallback(async (email, password) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) throw new Error(error.message)
+    await fetchAndSetUser(data.user)
   }, [])
 
   const register = useCallback(async (email, password, name) => {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { name, role: 'aluno', plan: 'free' } },
+      options: {
+        data: { name, role: 'aluno', plan: 'free' },
+        emailRedirectTo: `${window.location.origin}/dashboard`,
+      },
     })
     if (error) throw new Error(error.message)
     return data // { user, session }
+  }, [])
+
+  const loginWithGoogle = useCallback(async (redirectTo) => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: redirectTo || `${window.location.origin}/dashboard` },
+    })
+    if (error) throw new Error(error.message)
   }, [])
 
   const logout = useCallback(async () => {
@@ -163,6 +175,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider value={{
       user,
       login,
+      loginWithGoogle,
       register,
       logout,
       updateUser,

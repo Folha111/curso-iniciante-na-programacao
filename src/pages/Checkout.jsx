@@ -58,9 +58,9 @@ const INCLUDES = [
 ]
 
 export default function Checkout() {
-  const { user, register, login, forceSetPlan } = useAuth()
+  const { user, register, login, loginWithGoogle, forceSetPlan } = useAuth()
   const navigate = useNavigate()
-  const [status, setStatus] = useState('idle') // idle | loading | pix | success | error
+  const [status, setStatus] = useState('idle') // idle | loading | pix | success | verify_email | error
   const [pixData, setPixData] = useState(null)
   const [errorMsg, setErrorMsg] = useState('')
   const [form, setForm] = useState({ name: '', email: '', password: '' })
@@ -144,7 +144,12 @@ export default function Checkout() {
           userId = session?.user?.id
           userEmail = form.email
           userName = form.name
-        } catch {
+        } catch (loginErr) {
+          if (loginErr.message?.includes('Email not confirmed')) {
+            setErrorMsg('E-mail ainda não confirmado. Verifique sua caixa de entrada e clique no link antes de continuar.')
+            setStatus('error')
+            return
+          }
           setErrorMsg('E-mail ou senha incorretos. Se já tem conta, acesse /login primeiro.')
           setStatus('error')
           return
@@ -176,14 +181,19 @@ export default function Checkout() {
       if (error) throw new Error(error.message)
 
       if (data.status === 'approved') {
-        await forceSetPlan('paid')
-        setStatus('success')
-        setTimeout(() => navigate('/dashboard'), 2500)
+        if (user) {
+          await forceSetPlan('paid')
+          setStatus('success')
+          setTimeout(() => navigate('/dashboard'), 2500)
+        } else {
+          // Novo usuário: e-mail ainda não confirmado — pede verificação antes de liberar acesso
+          setStatus('verify_email')
+        }
       } else if (data.status === 'pending' && data.pixQrCode) {
         setPixData({ qrCode: data.pixQrCode, qrCodeBase64: data.pixQrCodeBase64 })
         setStatus('pix')
       } else if (data.status === 'pending') {
-        await forceSetPlan('paid')
+        if (user) await forceSetPlan('paid')
         setStatus('success')
         setTimeout(() => navigate('/dashboard'), 2500)
       } else {
@@ -322,6 +332,20 @@ export default function Checkout() {
             </div>
           )}
 
+          {status === 'verify_email' && (
+            <div className="checkout__feedback checkout__feedback--verify">
+              <div className="checkout__feedback-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <h2>Pagamento aprovado!</h2>
+              <p>Enviamos um e-mail de confirmação para <strong>{form.email}</strong>.</p>
+              <p>Clique no link do e-mail para liberar o acesso ao curso.</p>
+              <p className="checkout__verify-note">Não recebeu? Verifique a pasta de spam.</p>
+            </div>
+          )}
+
           {status === 'pix' && pixData && (
             <div className="checkout__pix">
               <h2 className="checkout__pix-title">Pague com PIX</h2>
@@ -351,6 +375,20 @@ export default function Checkout() {
 
             {!user && (
               <div className="checkout__account-fields">
+                <button
+                  type="button"
+                  className="checkout__google-btn"
+                  onClick={() => loginWithGoogle(`${window.location.origin}/checkout`)}
+                >
+                  <svg width="18" height="18" viewBox="0 0 48 48">
+                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                  </svg>
+                  Continuar com Google
+                </button>
+                <div className="checkout__divider"><span>ou cadastre com e-mail</span></div>
                 <p className="checkout__section-label">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
@@ -410,7 +448,6 @@ export default function Checkout() {
                   creditCard: 'all',
                   debitCard: 'all',
                   bankTransfer: 'all',
-                  ticket: 'all',
                 },
               }}
               onSubmit={onSubmit}
