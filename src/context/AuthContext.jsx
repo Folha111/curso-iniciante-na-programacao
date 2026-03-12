@@ -123,12 +123,14 @@ export function AuthProvider({ children }) {
   const forceSetPlan = useCallback(async (plan) => {
     setUser((prev) => prev ? { ...prev, plan } : prev)
     try {
-      // Persiste no auth metadata para sobreviver a re-fetches
-      await supabase.auth.updateUser({ data: { plan } })
+      await Promise.all([
+        supabase.auth.updateUser({ data: { plan } }),
+        user?.id ? supabase.from('profiles').update({ plan }).eq('id', user.id) : Promise.resolve(),
+      ])
     } catch (err) {
       console.error('forceSetPlan error:', err)
     }
-  }, [])
+  }, [user])
 
   // Admin: list all users from profiles table
   const [users, setUsers] = useState([])
